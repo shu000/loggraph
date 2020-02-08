@@ -1,0 +1,11 @@
+{
+  "css.validate": true,
+  "editor.formatOnSave": true,
+  "eslint.enable": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.codeActionsOnSaveTimeout": 3000,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

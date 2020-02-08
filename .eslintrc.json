@@ -1,0 +1,29 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "airbnb-base",
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "comma-dangle": "off", // if "error", it conflicts with prettier's "trailingComma"
+    "arrow-parens": [
+      "error",
+      "as-needed" // if "always", it conflicts with prettier
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "bracketSpacing": true,
+        "printWidth": 80,
+        "semi": true,
+        "doubleQuote": false,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "useTabs": false
+      }
+    ]
+  }
+}
