@@ -7,16 +7,16 @@ module.exports = {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
   },
+  resolve: {
+    extensions: ['.ts'],
+  },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use: 'babel-loader',
+        exclude: /node_modules/,
       },
     ],
-  },
-  // import 文で .ts ファイルを解決するため
-  resolve: {
-    extensions: ['.ts'],
   },
 };

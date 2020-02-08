@@ -91,10 +91,9 @@
   !*** ./src/app.ts ***!
   \********************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\nvar hello = function (s) {\n    console.log(s);\n    return 0;\n};\nhello(\"hello, world\");\n\n\n//# sourceURL=webpack:///./src/app.ts?");
+eval("var hello = function hello(s) {\n  console.log(s);\n  return 0;\n};\n\nhello(\"hello, world\");\n\n//# sourceURL=webpack:///./src/app.ts?");
 
 /***/ })
 
