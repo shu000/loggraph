@@ -1,0 +1,11 @@
+FROM node:12.14.1
+
+ENV APP_PORT 80
+ENV MONGO_ENDPOINT="mongodb://tkg-mongo:27017/"
+ENV MONGO_USER user
+ENV MONGO_PASSWORD pass
+
+VOLUME ["/loggraph"]
+WORKDIR /loggraph
+
+EXPOSE 80
