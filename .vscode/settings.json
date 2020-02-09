@@ -1,5 +1,13 @@
 {
-  "css.validate": true,
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.autoFixOnSave": true,
+  "[css]": {
+    "editor.formatOnSave": false
+  },
+  "[scss]": {
+    "editor.formatOnSave": false
+  },
   "editor.formatOnSave": true,
   "eslint.enable": true,
   "files.insertFinalNewline": true,

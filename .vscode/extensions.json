@@ -6,7 +6,8 @@
     "msjsdiag.debugger-for-chrome",
     "oderwat.indent-rainbow",
     "VisualStudioExptTeam.vscodeintellicode",
-    "vscode-icons-team.vscode-icons"
+    "vscode-icons-team.vscode-icons",
+    "hex-ci.stylelint-plus"
   ],
   "unwantedRecommendations": []
-  }
+}
