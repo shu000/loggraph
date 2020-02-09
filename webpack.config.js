@@ -1,11 +1,12 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
   mode: 'development',
   entry: './src/index.tsx',
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.js?[hash]',
     path: path.join(__dirname, 'dist'),
   },
   resolve: {
@@ -13,6 +14,11 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.scss', '.css'],
   },
   devtool: 'source-map',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    })
+  ],
   module: {
     rules: [
       {
