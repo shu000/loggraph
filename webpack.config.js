@@ -8,7 +8,8 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    // .jsもreactをwebpackするために必要
+    extensions: ['.ts', '.tsx', '.js'],
   },
   module: {
     rules: [
