@@ -16,6 +16,7 @@
   "typescript.format.enable": false,
   "editor.codeActionsOnSaveTimeout": 3000,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   }
 }
