@@ -1,4 +1,5 @@
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   mode: 'development',
@@ -11,7 +12,7 @@ module.exports = {
     // .jsもreactをwebpackするために必要
     extensions: ['.ts', '.tsx', '.js', '.scss', '.css'],
   },
-  // devtool: 'source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -31,14 +32,26 @@ module.exports = {
               // url()を使わない
               url: false,
               // css-loaderの前に読むloaderの数
-              importLoaders: 1,
-              // sourceMap: true
+              importLoaders: 2,
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              plugins: [
+                // Autoprefixerを有効
+                autoprefixer({
+                  grid: true,
+                }),
+              ],
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              // sourceMap: true,
+              sourceMap: true,
             },
           },
         ],
