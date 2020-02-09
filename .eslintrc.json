@@ -3,7 +3,23 @@
     "es6": true,
     "node": true
   },
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
   "plugins": [
     "prettier",
     "react",
@@ -26,6 +42,15 @@
         "singleQuote": true,
         "trailingComma": "es5",
         "useTabs": false
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          "jsx",
+          "tsx"
+        ]
       }
     ]
   }

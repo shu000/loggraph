@@ -4,6 +4,8 @@
   "eslint.enable": true,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
   "editor.codeActionsOnSaveTimeout": 3000,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
