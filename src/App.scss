@@ -1,0 +1,9 @@
+@charset 'UTF-8';
+
+.App {
+  @at-root {
+    & {
+      display: flex;
+    }
+  }
+}
