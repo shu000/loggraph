@@ -14,7 +14,8 @@
     "prettier/react"
   ],
   "globals": {
-    "document": "readonly"
+    "document": "readonly",
+    "FileReader": true
   },
   "parserOptions": {
     "ecmaFeatures": {
@@ -42,6 +43,10 @@
       "error",
       "as-needed" // if "always", it conflicts with prettier
     ],
+    // typescript
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    // prettier
     "prettier/prettier": [
       "error",
       {
@@ -54,6 +59,8 @@
         "useTabs": false
       }
     ],
+    // react
+    "react/prop-types": "off",
     "react/jsx-filename-extension": [
       "error",
       {
@@ -63,6 +70,7 @@
         ]
       }
     ],
+    // import
     "import/extensions": [
       "error",
       "always",
