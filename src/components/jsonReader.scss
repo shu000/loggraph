@@ -1,0 +1,22 @@
+@charset 'UTF-8';
+
+.JsonReader {
+  @at-root {
+    & {
+      .JsonReader__droppable {
+        border: 1px solid #000;
+        color: #666;
+        height: 100px;
+        width: 100px;
+
+        :hover {
+          color: #fff;
+        }
+      }
+
+      .jsonReader__message {
+        color: #c50;
+      }
+    }
+  }
+}

@@ -97,7 +97,25 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, ".App {\n  display: flex;\n  transform: scale(1); }\n", "",{"version":3,"sources":["/loggraph/src/App.scss"],"names":[],"mappings":"AAEA;EAGM,aAAa;EACb,mBAAmB,EAAA","file":"App.scss","sourcesContent":["@charset 'UTF-8';\n\n.App {\n  @at-root {\n    & {\n      display: flex;\n      transform: scale(1);\n    }\n  }\n}\n"]}]);
+exports.push([module.i, ".App {\n  display: flex;\n  transform: scale(1);\n  width: auto; }\n", "",{"version":3,"sources":["/loggraph/src/App.scss"],"names":[],"mappings":"AAEA;EAGM,aAAa;EACb,mBAAmB;EACnB,WAAW,EAAA","file":"App.scss","sourcesContent":["@charset 'UTF-8';\n\n.App {\n  @at-root {\n    & {\n      display: flex;\n      transform: scale(1);\n      width: auto;\n    }\n  }\n}\n"]}]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./src/components/jsonReader.scss":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./node_modules/postcss-loader/src??ref--5-2!./node_modules/sass-loader/dist/cjs.js??ref--5-3!./src/components/jsonReader.scss ***!
+  \*************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(true);
+// Module
+exports.push([module.i, ".JsonReader .JsonReader__droppable {\n  border: 1px solid #000;\n  color: #666;\n  height: 100px;\n  width: 100px; }\n  .JsonReader .JsonReader__droppable :hover {\n    color: #fff; }\n\n.JsonReader .jsonReader__message {\n  color: #c50; }\n", "",{"version":3,"sources":["/loggraph/src/components/jsonReader.scss"],"names":[],"mappings":"AAEA;EAIQ,sBAAsB;EACtB,WAAW;EACX,aAAa;EACb,YAAY,EAAA;EAPpB;IAUU,WAAW,EAAA;;AAVrB;EAeQ,WAAW,EAAA","file":"jsonReader.scss","sourcesContent":["@charset 'UTF-8';\n\n.JsonReader {\n  @at-root {\n    & {\n      .JsonReader__droppable {\n        border: 1px solid #000;\n        color: #666;\n        height: 100px;\n        width: 100px;\n\n        :hover {\n          color: #fff;\n        }\n      }\n\n      .jsonReader__message {\n        color: #c50;\n      }\n    }\n  }\n}\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -32357,18 +32375,145 @@ module.exports = exported;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.scss */ "./src/App.scss");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_jsonReader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/jsonReader */ "./src/components/jsonReader.tsx");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.scss */ "./src/App.scss");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "App"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "hello"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "hello"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_jsonReader__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./src/components/jsonReader.scss":
+/*!****************************************!*\
+  !*** ./src/components/jsonReader.scss ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js??ref--5-1!../../node_modules/postcss-loader/src??ref--5-2!../../node_modules/sass-loader/dist/cjs.js??ref--5-3!./jsonReader.scss */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./src/components/jsonReader.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/components/jsonReader.tsx":
+/*!***************************************!*\
+  !*** ./src/components/jsonReader.tsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsonReader_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./jsonReader.scss */ "./src/components/jsonReader.scss");
+/* harmony import */ var _jsonReader_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jsonReader_scss__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+var cancelEvent = function cancelEvent(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+};
+
+var asyncReadFile = function asyncReadFile(file) {
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      if (!e.target || !e.target.result || e.target.result instanceof ArrayBuffer) {
+        reject(new Error('ファイル読み込みに失敗しました'));
+      } else {
+        // TypeScriptが reject を解さないので(?)
+        // else で括らないと e.target.result が nullable エラーになる
+        try {
+          var _data = JSON.parse(e.target.result);
+
+          resolve(_data);
+        } catch (error) {
+          // JSON.parse() が失敗ならばjsonでない
+          reject(new Error('jsonファイルを読ませてください'));
+        }
+      }
+    };
+
+    reader.readAsText(file);
+  });
+};
+
+var _onDrop = function onDrop(event) {
+  event.preventDefault(); // TODO: 複数ファイルの制御
+
+  var file = event.dataTransfer.files[0];
+  return asyncReadFile(file);
+};
+
+var JsonReader = function JsonReader(_ref) {
+  var _ref$onRead = _ref.onRead,
+      onRead = _ref$onRead === void 0 ? function () {} : _ref$onRead;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      message = _useState2[0],
+      setMessage = _useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "JsonReader"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "JsonReader__droppable",
+    onDragEnter: cancelEvent,
+    onDragOver: cancelEvent,
+    onDrop: function onDrop(event) {
+      _onDrop(event).then(function (data) {
+        setMessage('');
+        onRead(data);
+      })["catch"](function (error) {
+        setMessage(error.message);
+      });
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Drop file here!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "JsonReader__message"
+  }, message));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (JsonReader);
 
 /***/ }),
 
@@ -32390,9 +32535,9 @@ __webpack_require__.r(__webpack_exports__);
 
  // const store = createStore(rootReducer, applyMiddleware(thunk));
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("root")); //  <Provider store={store}></Provider>
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root')); //  <Provider store={store}></Provider>
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?0a12455bfe57b56eb57d
+//# sourceMappingURL=bundle.js.map?6eeffd2fd00ba0756a9c
