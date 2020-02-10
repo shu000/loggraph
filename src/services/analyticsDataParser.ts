@@ -67,6 +67,7 @@ const parseActivity = (activity: AnalyticsActivity): ParsedActivity => {
 };
 
 export const parseAnalyticsData = (data: AnalyticsData): ParsedData => {
+  console.log(data);
   const parsed: ParsedData = {
     sessions: [],
   };

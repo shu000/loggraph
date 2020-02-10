@@ -1,9 +1,9 @@
-export default interface Template {
+export default interface DisplayRules {
   customerName: string;
-  styles: Style[];
+  rules: DisplayRule[];
 }
 
-export interface Style {
+export interface DisplayRule {
   pattern: string;
   title: string;
   text: string;
