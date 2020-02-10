@@ -19,6 +19,13 @@ module.exports = {
       template: './index.html'
     })
   ],
+  devServer: {
+    // localhost/webpack-dev-server/ではなくlocalhost/でアクセスできるようになる。
+    inline: true,
+    port: 80,
+    // dockerのコンテナで立てたサーバが他のホストからアクセスできるように全てのネットワークインターフェースに接続
+    host: "0.0.0.0"
+  },
   module: {
     rules: [
       {
