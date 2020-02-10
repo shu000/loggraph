@@ -11,7 +11,7 @@ module.exports = {
   },
   resolve: {
     // .jsもreactをwebpackするために必要
-    extensions: ['.ts', '.tsx', '.js', '.scss', '.css'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.css'],
   },
   devtool: 'source-map',
   plugins: [

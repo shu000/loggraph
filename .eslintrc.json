@@ -13,6 +13,9 @@
     "prettier/@typescript-eslint",
     "prettier/react"
   ],
+  "globals": {
+    "document": "readonly"
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -26,6 +29,13 @@
     "jsx-a11y",
     "import"
   ],
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
+  },
   "rules": {
     "comma-dangle": "off", // if "error", it conflicts with prettier's "trailingComma"
     "arrow-parens": [
@@ -52,6 +62,17 @@
           "tsx"
         ]
       }
-    ]
+    ],
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/prefer-default-export": "off"
   }
 }
