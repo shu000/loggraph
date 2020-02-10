@@ -13,7 +13,8 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
     rules: [],
   },
 }) => {
-  if (rules.rules.length === 0) return <div className="DisplayRuleForm" />;
+  if (rules.rules.length === 0 || index >= rules.rules.length)
+    return <div className="DisplayRuleForm" />;
 
   const rule = rules.rules[index];
   // backgroundColor という変数名を避ける（stylelintエラーの臨時対策）
