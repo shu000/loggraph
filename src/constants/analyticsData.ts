@@ -2,7 +2,7 @@ export default interface AnalyticsData {
   dates: AnalyticsDate[];
 }
 
-interface AnalyticsDate {
+export interface AnalyticsDate {
   date: string;
   hasGoal: boolean;
   hasRevenue: boolean;
@@ -10,7 +10,7 @@ interface AnalyticsDate {
   sessions: AnalyticsSession[];
 }
 
-interface AnalyticsSession {
+export interface AnalyticsSession {
   duration: string;
   deviceCategory: string;
   channel: string;
@@ -18,13 +18,13 @@ interface AnalyticsSession {
   activities: AnalyticsActivity[];
 }
 
-interface AnalyticsActivity {
+export interface AnalyticsActivity {
   time: string;
   type: string;
   repeatActivityTimes: any; // []
   details: {
     ページのタイトル: string[];
     'ページの URL': string[];
-  };
+  }[];
   pageTitle: string;
 }
