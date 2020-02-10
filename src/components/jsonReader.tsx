@@ -1,10 +1,8 @@
 import React, { FC, useState } from 'react';
 import AnalyticsData from '../constants/analyticsData';
-import ParsedData from '../constants/parsedData';
 import './jsonReader.scss';
 
 export interface JsonReaderProps {
-  parsed?: ParsedData;
   onRead?: (data: AnalyticsData) => void;
 }
 
@@ -53,10 +51,7 @@ const onDrop = (
   return asyncReadFile(file);
 };
 
-const JsonReader: FC<JsonReaderProps> = ({
-  parsed = [],
-  onRead = () => {},
-}) => {
+const JsonReader: FC<JsonReaderProps> = ({ onRead = () => {} }) => {
   const [message, setMessage] = useState('');
 
   return (
@@ -79,7 +74,6 @@ const JsonReader: FC<JsonReaderProps> = ({
         <p>Drop file here!</p>
       </div>
       <p className="JsonReader__message">{message}</p>
-      <code>{JSON.stringify(parsed)}</code>
     </div>
   );
 };
