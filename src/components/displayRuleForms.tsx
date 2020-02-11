@@ -9,7 +9,8 @@ export interface DisplayRuleFormsProps {
 const DisplayRuleForms: FC<DisplayRuleFormsProps> = ({ rulesCount = 0 }) => (
   <div className="DisplayRuleForms">
     {Util.range(rulesCount).map(i => (
-      <DisplayRuleForm index={i} />
+      // TODO: range(i + 1) new line
+      <DisplayRuleForm key={i.toString()} index={i} />
     ))}
   </div>
 );

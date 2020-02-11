@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import DisplayRules from '../constants/displayRules';
+import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
 export interface DisplayRuleFormProps {
   index?: number;
   rules?: DisplayRules;
+  onChange?: (index: number, rule: DisplayRule) => void;
 }
 
 const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
@@ -12,6 +13,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
     customerName: '',
     rules: [],
   },
+  onChange = () => {},
 }) => {
   if (rules.rules.length === 0 || index >= rules.rules.length)
     return <div className="DisplayRuleForm" />;
@@ -29,6 +31,9 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             name="pattern"
             type="text"
             defaultValue={rule.pattern}
+            onChange={event => {
+              onChange(index, { ...rule, pattern: event.target.value });
+            }}
           />
         </div>
         <div className="DisplayRuleForm__group">
@@ -37,16 +42,28 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
               className="DisplayRuleForm__matching"
               name="matching"
               type="radio"
+              defaultChecked={rule.matching === 'match'}
+              onChange={() => {
+                onChange(index, { ...rule, matching: 'match' });
+              }}
             />
             <input
               className="DisplayRuleForm__matching"
               name="matching"
               type="radio"
+              defaultChecked={rule.matching === 'startsWith'}
+              onChange={() => {
+                onChange(index, { ...rule, matching: 'startsWith' });
+              }}
             />
             <input
               className="DisplayRuleForm__matching"
               name="matching"
               type="radio"
+              defaultChecked={rule.matching === 'includes'}
+              onChange={() => {
+                onChange(index, { ...rule, matching: 'includes' });
+              }}
             />
           </fieldset>
         </div>
@@ -56,6 +73,9 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             name="title"
             type="text"
             defaultValue={rule.title}
+            onChange={event => {
+              onChange(index, { ...rule, title: event.target.value });
+            }}
           />
         </div>
         <div className="DisplayRuleForm__group">
@@ -64,6 +84,9 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             name="text"
             type="text"
             defaultValue={rule.text}
+            onChange={event => {
+              onChange(index, { ...rule, text: event.target.value });
+            }}
           />
         </div>
         <div className="DisplayRuleForm__group">
@@ -71,7 +94,11 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             className="DisplayRuleForm__backgroundColor"
             name="backgroundColor"
             type="text"
+            defaultValue={background}
             style={{ backgroundColor: background }}
+            onChange={event => {
+              onChange(index, { ...rule, backgroundColor: event.target.value });
+            }}
           />
         </div>
       </form>

@@ -34,15 +34,14 @@ const analyticsDataReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
 ): DisplayRulesState => {
   switch (action.type) {
     case ON_CHANGE:
-      // debug
-      // eslint-disable-next-line
-      const newRules = [...state.rules.rules];
-      newRules[action.payload.index] = action.payload.rule;
       return {
         ...state,
         rules: {
-          customerName: 'サンプルくん',
-          rules: newRules,
+          customerName: state.rules.customerName,
+          rules: state.rules.rules.map((rule, index) => {
+            if (index === action.payload.index) return action.payload.rule;
+            return rule;
+          }),
         },
       };
     default:
