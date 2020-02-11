@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
+import Util from '../util/util';
 
 export interface DisplayRuleFormProps {
   index?: number;
@@ -19,8 +20,10 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
     return <div className="DisplayRuleForm" />;
 
   const rule = rules.rules[index];
-  // backgroundColor という変数名を避ける（stylelintエラーの臨時対策）
+  // TODO: off stylelint on .tsx
+  // 以下、臨時対策でcammelCaseを避けてる
   const background = rule.backgroundColor;
+  const seeable = Util.seeableColor;
 
   return (
     <div className="DisplayRuleForm">
@@ -95,7 +98,10 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             name="backgroundColor"
             type="text"
             defaultValue={background}
-            style={{ backgroundColor: background }}
+            style={{
+              backgroundColor: background,
+              color: seeable(background),
+            }}
             onChange={event => {
               onChange(index, { ...rule, backgroundColor: event.target.value });
             }}
