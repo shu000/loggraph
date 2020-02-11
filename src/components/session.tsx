@@ -19,9 +19,8 @@ const Session: FC<SessionProps> = ({
     <span>{`${session.device} `}</span>
     <span>{session.channel}</span>
     <div className="Session__activities">
-      {session.activities.map((activity, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Activity key={`${session.date}${index}`} activity={activity} />
+      {session.activities.map((activity, i) => (
+        <Activity key={i.toString()} activity={activity} />
       ))}
     </div>
   </div>

@@ -9,8 +9,8 @@ export interface GraphProps {
 const Graph: FC<GraphProps> = ({ parsed = { sessions: [] } }) => (
   <div className="Graph">
     <div className="Graph__sessions">
-      {parsed.sessions.map(session => (
-        <Session key={session.date} session={session} />
+      {parsed.sessions.map((session, i) => (
+        <Session key={i.toString()} session={session} />
       ))}
     </div>
   </div>
