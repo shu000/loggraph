@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { AnalyticsDataAction, ON_READ } from '../actions/analyticsData';
 import ParsedData from '../constants/parsedData';
-import { parseAnalyticsData } from '../services/analyticsDataParser';
+import { parseAnalyticsData } from '../modules/analyticsDataParser';
 
 export interface AnalyticsDataState {
   parsed: ParsedData;

@@ -7,11 +7,7 @@ import ParsedData, {
   ParsedActivity,
 } from '../constants/parsedData';
 
-/**
- * "mm dd, yyyy" => "mm/dd(day)"
- * @param  {String} dateString "mm dd, yyyy"
- * @return {String}            "mm/dd(day)"
- */
+// "mm dd, yyyy" => "mm/dd(day)"
 const parseDateString = (dateString: string): string => {
   const splitted = dateString.replace(',', '').split(' ');
   const year = parseInt(splitted[2], 10);
