@@ -1,7 +1,7 @@
 const { DB } = require('./db');
 const sanitize = require('mongo-sanitize');
 
-const Templates = {
+const Rules = {
   getCustomers: async () => {
     try {
       const result = await DB.find({}, { customerName: 1 });
@@ -15,7 +15,7 @@ const Templates = {
       return returnError(error);
     }
   },
-  getTemplate: async customerName => {
+  getRules: async customerName => {
     try {
       const result = await DB.find({ customerName: sanitize(customerName) }, {});
 
@@ -33,11 +33,11 @@ const Templates = {
   /**
    * Overwrite `styles` property in a record.
    * @param  {String}  customerName record.customeName
-   * @param  {Array}   styles       Overwrite record.styles by this.
+   * @param  {Array}   rules       Overwrite record.styles by this.
    * @return {Promise}              [description]
    */
-  updateTemplate: async (customerName, styles) => {
-    const sanitizedStyles = styles.map(obj => {
+  updateRules: async (customerName, rules) => {
+    const sanitizedRules = rules.map(obj => {
       Object.keys(obj).map(key => { obj[key] = sanitize(obj[key]) });
       return obj;
     });
@@ -45,7 +45,7 @@ const Templates = {
     try {
       const result = await DB.update(
         { customerName: sanitize(customerName) },
-        { styles: sanitizedStyles }
+        { styles: sanitizedRules }
       );
 
       return JSON.stringify({
@@ -107,4 +107,4 @@ function returnError(error) {
   });
 }
 
-module.exports.Templates = Templates;
+module.exports.Rules = Rules;

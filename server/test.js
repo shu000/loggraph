@@ -1,9 +1,9 @@
-const { Templates } = require('./rules');
+const { Rules } = require('./rules');
 (async () => {
-  console.log( await Templates.getCustomers() );
+  console.log( await Rules.getCustomers() );
 
   console.log("==add====================")
-  console.log( await Templates.addCustomer('sample', [
+  console.log( await Rules.addCustomer('sample', [
     {
       "pattern" : "/",
       "matching" : "match",
@@ -13,7 +13,7 @@ const { Templates } = require('./rules');
     }
   ]));
 
-  console.log( await Templates.updateTemplate('sample', [
+  console.log( await Rules.updateRules('sample', [
     {
       "pattern" : "/",
       "matching" : "startsWith",
@@ -31,9 +31,9 @@ const { Templates } = require('./rules');
   ]));
 
   console.log("==get=====================")
-  console.log( await Templates.getTemplate('わし') );
+  console.log( await Rules.getRules('sample') );
 
   console.log("==remove==================")
-  console.log( await Templates.deleteCustomer('sample'));
+  console.log( await Rules.deleteCustomer('sample'));
 
 })();
