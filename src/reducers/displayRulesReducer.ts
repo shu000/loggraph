@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { DisplayRulesAction, ON_CHANGE } from '../actions/displayRules';
-import DisplayRules from '../constants/displayRules';
+import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
 export interface DisplayRulesState {
   rules: DisplayRules;
@@ -24,8 +24,36 @@ const initialState: DisplayRulesState = {
         text: 'L',
         backgroundColor: '#c0c',
       },
+      {
+        pattern: '',
+        matching: 'match',
+        title: '',
+        text: '',
+        backgroundColor: '',
+      },
     ],
   },
+};
+
+const emptyRule: DisplayRule = {
+  pattern: '',
+  matching: 'match',
+  title: '',
+  text: '',
+  backgroundColor: '',
+};
+
+const mergedRules = (
+  rules: DisplayRule[],
+  index: number,
+  newRule: DisplayRule
+): DisplayRule[] => {
+  const merged = rules.map((rule, i) => {
+    if (i === index) return newRule;
+    return rule;
+  });
+
+  return index === merged.length - 1 ? [...merged, emptyRule] : merged;
 };
 
 const analyticsDataReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
@@ -38,10 +66,11 @@ const analyticsDataReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
         ...state,
         rules: {
           customerName: state.rules.customerName,
-          rules: state.rules.rules.map((rule, index) => {
-            if (index === action.payload.index) return action.payload.rule;
-            return rule;
-          }),
+          rules: mergedRules(
+            state.rules.rules,
+            action.payload.index,
+            action.payload.rule
+          ),
         },
       };
     default:
