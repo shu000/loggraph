@@ -4,7 +4,7 @@ const autoprefixer = require('autoprefixer');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.tsx',
+  entry: './client/index.tsx',
   output: {
     filename: 'bundle.js?[hash]',
     path: path.join(__dirname, 'dist'),
