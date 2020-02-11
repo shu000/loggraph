@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ParsedSession } from '../constants/parsedData';
-import Activity from './activity';
+import Activity from '../containers/activity';
 
 export interface SessionProps {
   session?: ParsedSession;
