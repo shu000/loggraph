@@ -14,6 +14,9 @@ export const getCustomers = async (): Promise<string[]> => {
     throw new Error('データを取得できませんでした');
   }
 
+  console.log('customer');
+  console.log(response.data.result);
+
   return response.data.result;
 };
 
@@ -29,6 +32,9 @@ export const getRules = async (customerName: string): Promise<DisplayRules> => {
   if (response.status !== 200) {
     throw new Error('データを取得できませんでした');
   }
+
+  console.log('rules');
+  console.log(response.data.result);
 
   return response.data.result;
 };

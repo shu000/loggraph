@@ -26,12 +26,10 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
         selectingCustomerName: action.payload.customerName,
       };
     case SUCCEED_CUSTOMERS:
+      if (action.payload.result.length === 0) return state;
       return {
         ...state,
-        /*
-        selectingCustomerName:
-          action.payload.result.length > 0 ? action.payload.result[0] : '',
-        */
+        selectingCustomerName: action.payload.result[0],
         customerNames: action.payload.result,
       };
     default:

@@ -2,7 +2,6 @@ import { Reducer } from 'redux';
 import {
   DisplayRulesAction,
   ON_CHANGE,
-  SUCCEED_CUSTOMERS,
   SUCCEED_RULES,
 } from '../actions/displayRules';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
@@ -56,8 +55,6 @@ const displayRulesReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
           ),
         },
       };
-    case SUCCEED_CUSTOMERS:
-      return state;
     case SUCCEED_RULES:
       return {
         ...state,

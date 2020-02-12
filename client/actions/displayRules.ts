@@ -1,16 +1,13 @@
 import { Dispatch } from 'redux';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
-import { getCustomers, getRules } from '../api/rules';
+import { getRules } from '../api/rules';
 
 export const ON_CHANGE = 'ON_CHANGE';
-export const FETCHING_CUSTOMERS = 'FETCHING_CUSTOMERS';
-export const SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
-export const FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
-export const FETCHING_RULES = 'FETCHING_RULES';
+export const PROGRESS_RULES = 'PROGRESS_RULES';
 export const SUCCEED_RULES = 'SUCCEED_RULES';
 export const FAILURE_RULES = 'FAULURE_RULES';
 
-export const onChange = (index: number, rule: DisplayRule) => ({
+export const onChangeSingleRule = (index: number, rule: DisplayRule) => ({
   type: ON_CHANGE as typeof ON_CHANGE,
   payload: {
     index,
@@ -18,23 +15,8 @@ export const onChange = (index: number, rule: DisplayRule) => ({
   },
 });
 
-export const startFetchCustomers = () => ({
-  type: FETCHING_CUSTOMERS as typeof FETCHING_CUSTOMERS,
-});
-
-export const succeedFetchCustomers = (result: string[]) => ({
-  type: SUCCEED_CUSTOMERS as typeof SUCCEED_CUSTOMERS,
-  payload: { result },
-});
-
-export const failureFetchCustomers = (message: string) => ({
-  type: FAILURE_CUSTOMERS as typeof FAILURE_CUSTOMERS,
-  payload: { message },
-  error: true,
-});
-
-export const startFetchRules = () => ({
-  type: FETCHING_RULES as typeof FETCHING_RULES,
+export const progressFetchRules = () => ({
+  type: PROGRESS_RULES as typeof PROGRESS_RULES,
 });
 
 export const succeedFetchRules = (result: DisplayRules) => ({
@@ -48,21 +30,9 @@ export const failureFetchRules = (message: string) => ({
   error: true,
 });
 
-export const fetchCustomers = () => {
-  return async (dispatch: Dispatch) => {
-    dispatch(startFetchCustomers());
-    try {
-      const result = await getCustomers();
-      dispatch(succeedFetchCustomers(result));
-    } catch (error) {
-      dispatch(failureFetchCustomers(error.message));
-    }
-  };
-};
-
 export const fetchRules = (customerName: string) => {
   return async (dispatch: Dispatch) => {
-    dispatch(startFetchRules());
+    dispatch(progressFetchRules());
     try {
       const result = await getRules(customerName);
       dispatch(succeedFetchRules(result));
@@ -73,10 +43,7 @@ export const fetchRules = (customerName: string) => {
 };
 
 export type DisplayRulesAction =
-  | ReturnType<typeof onChange>
-  | ReturnType<typeof startFetchCustomers>
-  | ReturnType<typeof succeedFetchCustomers>
-  | ReturnType<typeof failureFetchCustomers>
-  | ReturnType<typeof startFetchRules>
+  | ReturnType<typeof onChangeSingleRule>
+  | ReturnType<typeof progressFetchRules>
   | ReturnType<typeof succeedFetchRules>
   | ReturnType<typeof failureFetchRules>;

@@ -3,17 +3,19 @@ import DisplayRuleForm from '../containers/displayRuleForm';
 import Util from '../util/util';
 
 export interface DisplayRuleFormsProps {
+  selectingCustomerName?: string;
   rulesCount?: number;
   fetchRules?: (customerName: string) => void;
 }
 
 const DisplayRuleForms: FC<DisplayRuleFormsProps> = ({
+  selectingCustomerName = '',
   rulesCount = 0,
   fetchRules = () => {},
 }) => {
   useEffect(() => {
-    fetchRules('もりぞう様');
-  }, []);
+    if (selectingCustomerName !== '') fetchRules(selectingCustomerName);
+  }, [selectingCustomerName]);
 
   return (
     <div className="DisplayRuleForms">

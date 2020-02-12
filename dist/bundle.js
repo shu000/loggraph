@@ -178,17 +178,17 @@ var onRead = function onRead(data) {
 /*!*************************************!*\
   !*** ./client/actions/customers.ts ***!
   \*************************************/
-/*! exports provided: ON_CHANGE_CUSTOMER_NAME, FETCHING_CUSTOMERS, SUCCEED_CUSTOMERS, FAILURE_CUSTOMERS, onChangeCustomerName, startFetchCustomers, succeedFetchCustomers, failureFetchCustomers, fetchCustomers */
+/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_CUSTOMERS, SUCCEED_CUSTOMERS, FAILURE_CUSTOMERS, onChangeCustomerName, progressFetchCustomers, succeedFetchCustomers, failureFetchCustomers, fetchCustomers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CHANGE_CUSTOMER_NAME", function() { return ON_CHANGE_CUSTOMER_NAME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCHING_CUSTOMERS", function() { return FETCHING_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_CUSTOMERS", function() { return PROGRESS_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_CUSTOMERS", function() { return SUCCEED_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_CUSTOMERS", function() { return FAILURE_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeCustomerName", function() { return onChangeCustomerName; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startFetchCustomers", function() { return startFetchCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressFetchCustomers", function() { return progressFetchCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchCustomers", function() { return succeedFetchCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchCustomers", function() { return failureFetchCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCustomers", function() { return fetchCustomers; });
@@ -199,7 +199,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
-var FETCHING_CUSTOMERS = 'FETCHING_CUSTOMERS';
+var PROGRESS_CUSTOMERS = 'PROGRESS_CUSTOMERS';
 var SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
 var FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
 var onChangeCustomerName = function onChangeCustomerName(customerName) {
@@ -210,9 +210,9 @@ var onChangeCustomerName = function onChangeCustomerName(customerName) {
     }
   };
 };
-var startFetchCustomers = function startFetchCustomers() {
+var progressFetchCustomers = function progressFetchCustomers() {
   return {
-    type: FETCHING_CUSTOMERS
+    type: PROGRESS_CUSTOMERS
   };
 };
 var succeedFetchCustomers = function succeedFetchCustomers(result) {
@@ -244,7 +244,7 @@ var fetchCustomers = function fetchCustomers() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                dispatch(startFetchCustomers());
+                dispatch(progressFetchCustomers());
                 _context.prev = 1;
                 _context.next = 4;
                 return Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getCustomers"])();
@@ -281,26 +281,19 @@ var fetchCustomers = function fetchCustomers() {
 /*!****************************************!*\
   !*** ./client/actions/displayRules.ts ***!
   \****************************************/
-/*! exports provided: ON_CHANGE, FETCHING_CUSTOMERS, SUCCEED_CUSTOMERS, FAILURE_CUSTOMERS, FETCHING_RULES, SUCCEED_RULES, FAILURE_RULES, onChange, startFetchCustomers, succeedFetchCustomers, failureFetchCustomers, startFetchRules, succeedFetchRules, failureFetchRules, fetchCustomers, fetchRules */
+/*! exports provided: ON_CHANGE, PROGRESS_RULES, SUCCEED_RULES, FAILURE_RULES, onChangeSingleRule, progressFetchRules, succeedFetchRules, failureFetchRules, fetchRules */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CHANGE", function() { return ON_CHANGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCHING_CUSTOMERS", function() { return FETCHING_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_CUSTOMERS", function() { return SUCCEED_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_CUSTOMERS", function() { return FAILURE_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCHING_RULES", function() { return FETCHING_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_RULES", function() { return PROGRESS_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_RULES", function() { return SUCCEED_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_RULES", function() { return FAILURE_RULES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChange", function() { return onChange; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startFetchCustomers", function() { return startFetchCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchCustomers", function() { return succeedFetchCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchCustomers", function() { return failureFetchCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startFetchRules", function() { return startFetchRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeSingleRule", function() { return onChangeSingleRule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressFetchRules", function() { return progressFetchRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchRules", function() { return succeedFetchRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchRules", function() { return failureFetchRules; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCustomers", function() { return fetchCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchRules", function() { return fetchRules; });
 /* harmony import */ var _api_rules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rules */ "./client/api/rules.ts");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -309,13 +302,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ON_CHANGE = 'ON_CHANGE';
-var FETCHING_CUSTOMERS = 'FETCHING_CUSTOMERS';
-var SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
-var FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
-var FETCHING_RULES = 'FETCHING_RULES';
+var PROGRESS_RULES = 'PROGRESS_RULES';
 var SUCCEED_RULES = 'SUCCEED_RULES';
 var FAILURE_RULES = 'FAULURE_RULES';
-var onChange = function onChange(index, rule) {
+var onChangeSingleRule = function onChangeSingleRule(index, rule) {
   return {
     type: ON_CHANGE,
     payload: {
@@ -324,31 +314,9 @@ var onChange = function onChange(index, rule) {
     }
   };
 };
-var startFetchCustomers = function startFetchCustomers() {
+var progressFetchRules = function progressFetchRules() {
   return {
-    type: FETCHING_CUSTOMERS
-  };
-};
-var succeedFetchCustomers = function succeedFetchCustomers(result) {
-  return {
-    type: SUCCEED_CUSTOMERS,
-    payload: {
-      result: result
-    }
-  };
-};
-var failureFetchCustomers = function failureFetchCustomers(message) {
-  return {
-    type: FAILURE_CUSTOMERS,
-    payload: {
-      message: message
-    },
-    error: true
-  };
-};
-var startFetchRules = function startFetchRules() {
-  return {
-    type: FETCHING_RULES
+    type: PROGRESS_RULES
   };
 };
 var succeedFetchRules = function succeedFetchRules(result) {
@@ -368,7 +336,7 @@ var failureFetchRules = function failureFetchRules(message) {
     error: true
   };
 };
-var fetchCustomers = function fetchCustomers() {
+var fetchRules = function fetchRules(customerName) {
   return (
     /*#__PURE__*/
     function () {
@@ -380,21 +348,21 @@ var fetchCustomers = function fetchCustomers() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                dispatch(startFetchCustomers());
+                dispatch(progressFetchRules());
                 _context.prev = 1;
                 _context.next = 4;
-                return Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getCustomers"])();
+                return Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getRules"])(customerName);
 
               case 4:
                 result = _context.sent;
-                dispatch(succeedFetchCustomers(result));
+                dispatch(succeedFetchRules(result));
                 _context.next = 11;
                 break;
 
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](1);
-                dispatch(failureFetchCustomers(_context.t0.message));
+                dispatch(failureFetchRules(_context.t0.message));
 
               case 11:
               case "end":
@@ -406,48 +374,6 @@ var fetchCustomers = function fetchCustomers() {
 
       return function (_x) {
         return _ref.apply(this, arguments);
-      };
-    }()
-  );
-};
-var fetchRules = function fetchRules(customerName) {
-  return (
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(dispatch) {
-        var result;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                dispatch(startFetchRules());
-                _context2.prev = 1;
-                _context2.next = 4;
-                return Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getRules"])(customerName);
-
-              case 4:
-                result = _context2.sent;
-                dispatch(succeedFetchRules(result));
-                _context2.next = 11;
-                break;
-
-              case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](1);
-                dispatch(failureFetchRules(_context2.t0.message));
-
-              case 11:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[1, 8]]);
-      }));
-
-      return function (_x2) {
-        return _ref2.apply(this, arguments);
       };
     }()
   );
@@ -521,9 +447,11 @@ function () {
             throw new Error('データを取得できませんでした');
 
           case 6:
+            console.log('customer');
+            console.log(response.data.result);
             return _context.abrupt("return", response.data.result);
 
-          case 7:
+          case 9:
           case "end":
             return _context.stop();
         }
@@ -572,9 +500,11 @@ function () {
             throw new Error('データを取得できませんでした');
 
           case 8:
+            console.log('rules');
+            console.log(response.data.result);
             return _context2.abrupt("return", response.data.result);
 
-          case 9:
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -845,13 +775,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DisplayRuleForms = function DisplayRuleForms(_ref) {
-  var _ref$rulesCount = _ref.rulesCount,
+  var _ref$selectingCustome = _ref.selectingCustomerName,
+      selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
+      _ref$rulesCount = _ref.rulesCount,
       rulesCount = _ref$rulesCount === void 0 ? 0 : _ref$rulesCount,
       _ref$fetchRules = _ref.fetchRules,
       fetchRules = _ref$fetchRules === void 0 ? function () {} : _ref$fetchRules;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    fetchRules('もりぞう様');
-  }, []);
+    if (selectingCustomerName !== '') fetchRules(selectingCustomerName);
+  }, [selectingCustomerName]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "DisplayRuleForms"
   }, _util_util__WEBPACK_IMPORTED_MODULE_2__["default"].range(rulesCount).map(function (i) {
@@ -1103,7 +1035,7 @@ var mapStateToProps = function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_customersForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/customersForm */ "./client/components/customersForm.tsx");
-/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
+/* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
 
 
 
@@ -1118,7 +1050,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchCustomers: function fetchCustomers() {
-      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["fetchCustomers"])());
+      return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["fetchCustomers"])());
     }
   };
 };
@@ -1152,7 +1084,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onChange: function onChange(index, rule) {
-      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["onChange"])(index, rule));
+      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["onChangeSingleRule"])(index, rule));
     }
   };
 };
@@ -1179,15 +1111,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    selectingCustomerName: state.customers.selectingCustomerName,
     rulesCount: state.displayRules.rules.rules.length
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchCustomers: function fetchCustomers() {
-      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["fetchCustomers"])());
-    },
     fetchRules: function fetchRules(customerName) {
       return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["fetchRules"])(customerName));
     }
@@ -2117,11 +2047,9 @@ var customersReducer = function customersReducer() {
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
+      if (action.payload.result.length === 0) return state;
       return _objectSpread({}, state, {
-        /*
-        selectingCustomerName:
-          action.payload.result.length > 0 ? action.payload.result[0] : '',
-        */
+        selectingCustomerName: action.payload.result[0],
         customerNames: action.payload.result
       });
 
@@ -2193,9 +2121,6 @@ var displayRulesReducer = function displayRulesReducer() {
           rules: mergedRules(state.rules.rules, action.payload.index, action.payload.rule)
         }
       });
-
-    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
-      return state;
 
     case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_RULES"]:
       return _objectSpread({}, state, {
@@ -54786,4 +54711,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?bd9fc7ea07b99467ed6a
+//# sourceMappingURL=bundle.js.map?38a1ad4b2e03e4da5dc3

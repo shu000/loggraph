@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { getCustomers } from '../api/rules';
 
 export const ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
-export const FETCHING_CUSTOMERS = 'FETCHING_CUSTOMERS';
+export const PROGRESS_CUSTOMERS = 'PROGRESS_CUSTOMERS';
 export const SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
 export const FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
 
@@ -11,8 +11,8 @@ export const onChangeCustomerName = (customerName: string) => ({
   payload: { customerName },
 });
 
-export const startFetchCustomers = () => ({
-  type: FETCHING_CUSTOMERS as typeof FETCHING_CUSTOMERS,
+export const progressFetchCustomers = () => ({
+  type: PROGRESS_CUSTOMERS as typeof PROGRESS_CUSTOMERS,
 });
 
 export const succeedFetchCustomers = (result: string[]) => ({
@@ -25,9 +25,10 @@ export const failureFetchCustomers = (message: string) => ({
   payload: { message },
   error: true,
 });
+
 export const fetchCustomers = () => {
   return async (dispatch: Dispatch) => {
-    dispatch(startFetchCustomers());
+    dispatch(progressFetchCustomers());
     try {
       const result = await getCustomers();
       dispatch(succeedFetchCustomers(result));
@@ -39,6 +40,6 @@ export const fetchCustomers = () => {
 
 export type CustomersAction =
   | ReturnType<typeof onChangeCustomerName>
-  | ReturnType<typeof startFetchCustomers>
+  | ReturnType<typeof progressFetchCustomers>
   | ReturnType<typeof succeedFetchCustomers>
   | ReturnType<typeof failureFetchCustomers>;
