@@ -30,12 +30,6 @@ const Rules = {
       return returnError(error);
     }
   },
-  /**
-   * Overwrite `styles` property in a record.
-   * @param  {String}  customerName record.customeName
-   * @param  {Array}   rules       Overwrite record.styles by this.
-   * @return {Promise}              [description]
-   */
   updateRules: async (customerName, rules) => {
     const sanitizedRules = rules.map(obj => {
       Object.keys(obj).map(key => { obj[key] = sanitize(obj[key]) });
@@ -45,7 +39,7 @@ const Rules = {
     try {
       const result = await DB.update(
         { customerName: sanitize(customerName) },
-        { styles: sanitizedRules }
+        { rules: sanitizedRules }
       );
 
       return JSON.stringify({
@@ -55,11 +49,6 @@ const Rules = {
       return returnError(error);
     }
   },
-  /**
-   * Delete a record
-   * @param  {[type]}  customerName removing record's customerName
-   * @return {Promise}              [description]
-   */
   deleteCustomer: async customerName => {
     try {
       const result = await DB.delete(
@@ -73,21 +62,11 @@ const Rules = {
       return returnError(error);
     }
   },
-  /**
-   * Add a record, like following
-   *   {
-   *     customerName: request.body,
-   *     styles: []
-   *   }
-   * @param  {String}  customerName record.customerName
-   * @param  {Array}   styles       Overwrite record.styles by this.
-   * @return {Promise}              [description]
-   */
   addCustomer: async (customerName) => {
     try {
       const result = await DB.insert({
         customerName: sanitize(customerName),
-        styles: []
+        rules: []
       });
 
       return JSON.stringify({

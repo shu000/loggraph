@@ -16,7 +16,7 @@ const DB = {
     const client = MongoClient(url, options);
     try {
       await client.connect();
-      const db = client.db('templates');
+      const db = client.db('rules');
 
       return await db.collection('customers').find(
         condition,
@@ -30,7 +30,7 @@ const DB = {
     const client = MongoClient(url, options);
     try {
       await client.connect();
-      const db = client.db('templates');
+      const db = client.db('rules');
 
       return await db.collection('customers').updateOne(
         condition,
@@ -44,7 +44,7 @@ const DB = {
     const client = MongoClient(url, options);
     try {
       await client.connect();
-      const db = client.db('templates');
+      const db = client.db('rules');
 
       return await db.collection('customers').insertOne(adding);
     } finally {
@@ -55,7 +55,7 @@ const DB = {
     const client = MongoClient(url, options);
     try {
       await client.connect();
-      const db = client.db('templates');
+      const db = client.db('rules');
 
       return await db.collection('customers').deleteOne(condition);
     } finally {
