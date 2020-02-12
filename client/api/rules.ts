@@ -18,6 +18,12 @@ export const getCustomers = async (): Promise<string[]> => {
 };
 
 export const getRules = async (customerName: string): Promise<DisplayRules> => {
+  if (customerName === '')
+    return {
+      customerName: '',
+      rules: [],
+    };
+
   const instance = axios.create(usersConfig);
   const response = await instance.get(`/rules/${customerName}`);
   if (response.status !== 200) {

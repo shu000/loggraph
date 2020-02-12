@@ -174,6 +174,109 @@ var onRead = function onRead(data) {
 
 /***/ }),
 
+/***/ "./client/actions/customers.ts":
+/*!*************************************!*\
+  !*** ./client/actions/customers.ts ***!
+  \*************************************/
+/*! exports provided: ON_CHANGE_CUSTOMER_NAME, FETCHING_CUSTOMERS, SUCCEED_CUSTOMERS, FAILURE_CUSTOMERS, onChangeCustomerName, startFetchCustomers, succeedFetchCustomers, failureFetchCustomers, fetchCustomers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CHANGE_CUSTOMER_NAME", function() { return ON_CHANGE_CUSTOMER_NAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCHING_CUSTOMERS", function() { return FETCHING_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_CUSTOMERS", function() { return SUCCEED_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_CUSTOMERS", function() { return FAILURE_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeCustomerName", function() { return onChangeCustomerName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startFetchCustomers", function() { return startFetchCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchCustomers", function() { return succeedFetchCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchCustomers", function() { return failureFetchCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCustomers", function() { return fetchCustomers; });
+/* harmony import */ var _api_rules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rules */ "./client/api/rules.ts");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
+var FETCHING_CUSTOMERS = 'FETCHING_CUSTOMERS';
+var SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
+var FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
+var onChangeCustomerName = function onChangeCustomerName(customerName) {
+  return {
+    type: ON_CHANGE_CUSTOMER_NAME,
+    payload: {
+      customerName: customerName
+    }
+  };
+};
+var startFetchCustomers = function startFetchCustomers() {
+  return {
+    type: FETCHING_CUSTOMERS
+  };
+};
+var succeedFetchCustomers = function succeedFetchCustomers(result) {
+  return {
+    type: SUCCEED_CUSTOMERS,
+    payload: {
+      result: result
+    }
+  };
+};
+var failureFetchCustomers = function failureFetchCustomers(message) {
+  return {
+    type: FAILURE_CUSTOMERS,
+    payload: {
+      message: message
+    },
+    error: true
+  };
+};
+var fetchCustomers = function fetchCustomers() {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(dispatch) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                dispatch(startFetchCustomers());
+                _context.prev = 1;
+                _context.next = 4;
+                return Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getCustomers"])();
+
+              case 4:
+                result = _context.sent;
+                dispatch(succeedFetchCustomers(result));
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](1);
+                dispatch(failureFetchCustomers(_context.t0.message));
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[1, 8]]);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+/***/ }),
+
 /***/ "./client/actions/displayRules.ts":
 /*!****************************************!*\
   !*** ./client/actions/displayRules.ts ***!
@@ -443,24 +546,35 @@ function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
+            if (!(customerName === '')) {
+              _context2.next = 2;
+              break;
+            }
+
+            return _context2.abrupt("return", {
+              customerName: '',
+              rules: []
+            });
+
+          case 2:
             instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context2.next = 3;
+            _context2.next = 5;
             return instance.get("/rules/".concat(customerName));
 
-          case 3:
+          case 5:
             response = _context2.sent;
 
             if (!(response.status !== 200)) {
-              _context2.next = 6;
+              _context2.next = 8;
               break;
             }
 
             throw new Error('データを取得できませんでした');
 
-          case 6:
+          case 8:
             return _context2.abrupt("return", response.data.result);
 
-          case 7:
+          case 9:
           case "end":
             return _context2.stop();
         }
@@ -554,8 +668,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CustomersForm = function CustomersForm(_ref) {
-  var _ref$customerNames = _ref.customerNames,
+  var _ref$selectingCustome = _ref.selectingCustomerName,
+      selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
+      _ref$customerNames = _ref.customerNames,
       customerNames = _ref$customerNames === void 0 ? [] : _ref$customerNames,
+      _ref$onChange = _ref.onChange,
+      onChange = _ref$onChange === void 0 ? function () {} : _ref$onChange,
       _ref$fetchCustomers = _ref.fetchCustomers,
       fetchCustomers = _ref$fetchCustomers === void 0 ? function () {} : _ref$fetchCustomers;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -563,7 +681,9 @@ var CustomersForm = function CustomersForm(_ref) {
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CustomersForm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, customerNames.map(function (customerName, i) {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "selecting: ".concat(selectingCustomerName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    defaultValue: selectingCustomerName
+  }, customerNames.map(function (customerName, i) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
       key: i.toString()
     }, customerName);
@@ -727,12 +847,9 @@ __webpack_require__.r(__webpack_exports__);
 var DisplayRuleForms = function DisplayRuleForms(_ref) {
   var _ref$rulesCount = _ref.rulesCount,
       rulesCount = _ref$rulesCount === void 0 ? 0 : _ref$rulesCount,
-      _ref$fetchCustomers = _ref.fetchCustomers,
-      fetchCustomers = _ref$fetchCustomers === void 0 ? function () {} : _ref$fetchCustomers,
       _ref$fetchRules = _ref.fetchRules,
       fetchRules = _ref$fetchRules === void 0 ? function () {} : _ref$fetchRules;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    fetchCustomers();
     fetchRules('もりぞう様');
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -986,24 +1103,27 @@ var mapStateToProps = function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_customersForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/customersForm */ "./client/components/customersForm.tsx");
+/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
+
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    selectingCustomerName: state.customers.selectingCustomerName,
     customerNames: state.customers.customerNames
   };
 };
-/*
-const mapDispatchToProps = (
-  dispatch: Dispatch<DisplayRulesAction>
-): DispatchProps => ({
-  onChange: (customerName) => dispatch(onChange(customerName)),
-});
-*/
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchCustomers: function fetchCustomers() {
+      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["fetchCustomers"])());
+    }
+  };
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(_components_customersForm__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_customersForm__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1973,7 +2093,7 @@ var analyticsDataReducer = function analyticsDataReducer() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
+/* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1982,6 +2102,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
+  selectingCustomerName: '',
   customerNames: []
 };
 
@@ -1990,8 +2111,17 @@ var customersReducer = function customersReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["ON_CHANGE_CUSTOMER_NAME"]:
       return _objectSpread({}, state, {
+        selectingCustomerName: action.payload.customerName
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
+      return _objectSpread({}, state, {
+        /*
+        selectingCustomerName:
+          action.payload.result.length > 0 ? action.payload.result[0] : '',
+        */
         customerNames: action.payload.result
       });
 
@@ -54656,4 +54786,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?67d208e63f212191637e
+//# sourceMappingURL=bundle.js.map?bd9fc7ea07b99467ed6a
