@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import CustomersForm from '../components/customersForm';
-import { CustomersAction, fetchCustomers } from '../actions/customers';
+import {
+  CustomersAction,
+  onChangeCustomerName,
+  fetchCustomers,
+} from '../actions/customers';
 import { AppState } from '../reducer';
 
 interface StateProps {
@@ -10,6 +14,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
+  onChangeCustomerName: (customerName: string) => void;
   fetchCustomers: () => void;
 }
 
@@ -21,6 +26,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<AppState, undefined, CustomersAction>
 ): DispatchProps => ({
+  onChangeCustomerName: customerName =>
+    dispatch(onChangeCustomerName(customerName)),
   fetchCustomers: () => dispatch(fetchCustomers()),
 });
 

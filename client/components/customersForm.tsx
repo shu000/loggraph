@@ -3,14 +3,14 @@ import React, { FC, useEffect } from 'react';
 export interface CustomersFormProps {
   selectingCustomerName?: string;
   customerNames?: string[];
-  onChange?: (customerName: string) => void;
+  onChangeCustomerName?: (customerName: string) => void;
   fetchCustomers?: () => void;
 }
 
 const CustomersForm: FC<CustomersFormProps> = ({
   selectingCustomerName = '',
   customerNames = [],
-  onChange = () => {},
+  onChangeCustomerName = () => {},
   fetchCustomers = () => {},
 }) => {
   useEffect(() => {
@@ -21,7 +21,12 @@ const CustomersForm: FC<CustomersFormProps> = ({
     <div className="CustomersForm">
       <p>{`selecting: ${selectingCustomerName}`}</p>
       <form>
-        <select defaultValue={selectingCustomerName}>
+        <select
+          defaultValue={selectingCustomerName}
+          onChange={event => {
+            onChangeCustomerName(event.target.value);
+          }}
+        >
           {customerNames.map((customerName, i) => {
             return <option key={i.toString()}>{customerName}</option>;
           })}

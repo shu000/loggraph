@@ -602,8 +602,8 @@ var CustomersForm = function CustomersForm(_ref) {
       selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
       _ref$customerNames = _ref.customerNames,
       customerNames = _ref$customerNames === void 0 ? [] : _ref$customerNames,
-      _ref$onChange = _ref.onChange,
-      onChange = _ref$onChange === void 0 ? function () {} : _ref$onChange,
+      _ref$onChangeCustomer = _ref.onChangeCustomerName,
+      onChangeCustomerName = _ref$onChangeCustomer === void 0 ? function () {} : _ref$onChangeCustomer,
       _ref$fetchCustomers = _ref.fetchCustomers,
       fetchCustomers = _ref$fetchCustomers === void 0 ? function () {} : _ref$fetchCustomers;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -612,7 +612,10 @@ var CustomersForm = function CustomersForm(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CustomersForm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "selecting: ".concat(selectingCustomerName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-    defaultValue: selectingCustomerName
+    defaultValue: selectingCustomerName,
+    onChange: function onChange(event) {
+      onChangeCustomerName(event.target.value);
+    }
   }, customerNames.map(function (customerName, i) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
       key: i.toString()
@@ -1049,6 +1052,9 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    onChangeCustomerName: function onChangeCustomerName(customerName) {
+      return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["onChangeCustomerName"])(customerName));
+    },
     fetchCustomers: function fetchCustomers() {
       return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["fetchCustomers"])());
     }
@@ -54711,4 +54717,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?38a1ad4b2e03e4da5dc3
+//# sourceMappingURL=bundle.js.map?1e87e2771014405d20ca
