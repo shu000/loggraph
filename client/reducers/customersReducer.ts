@@ -2,11 +2,11 @@ import { Reducer } from 'redux';
 import { DisplayRulesAction, SUCCEED_CUSTOMERS } from '../actions/displayRules';
 
 export interface CustomersState {
-  customers: string[];
+  customerNames: string[];
 }
 
 const initialState: CustomersState = {
-  customers: [],
+  customerNames: [],
 };
 
 const customersReducer: Reducer<CustomersState, DisplayRulesAction> = (
@@ -17,7 +17,7 @@ const customersReducer: Reducer<CustomersState, DisplayRulesAction> = (
     case SUCCEED_CUSTOMERS:
       return {
         ...state,
-        customers: action.payload.result,
+        customerNames: action.payload.result,
       };
     default:
       return state;

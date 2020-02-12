@@ -130,9 +130,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _containers_jsonReader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./containers/jsonReader */ "./client/containers/jsonReader.tsx");
 /* harmony import */ var _containers_graph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/graph */ "./client/containers/graph.tsx");
-/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _containers_customersForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./containers/customersForm */ "./client/containers/customersForm.tsx");
+/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -142,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "App"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_jsonReader__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_jsonReader__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_customersForm__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -411,6 +413,40 @@ var Activity = function Activity(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Activity);
+
+/***/ }),
+
+/***/ "./client/components/customersForm.tsx":
+/*!*********************************************!*\
+  !*** ./client/components/customersForm.tsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var CustomersForm = function CustomersForm(_ref) {
+  var _ref$customerNames = _ref.customerNames,
+      customerNames = _ref$customerNames === void 0 ? [] : _ref$customerNames,
+      _ref$onChange = _ref.onChange,
+      onChange = _ref$onChange === void 0 ? function () {} : _ref$onChange,
+      _ref$fetchCustomers = _ref.fetchCustomers,
+      fetchCustomers = _ref$fetchCustomers === void 0 ? function () {} : _ref$fetchCustomers;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    fetchCustomers();
+  }, []);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "CustomersForm"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, customerNames.map(function (customerName) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, customerName);
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CustomersForm);
 
 /***/ }),
 
@@ -815,6 +851,38 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./client/containers/customersForm.tsx":
+/*!*********************************************!*\
+  !*** ./client/containers/customersForm.tsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_customersForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/customersForm */ "./client/components/customersForm.tsx");
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    customerNames: state.customers.customerNames
+  };
+};
+/*
+const mapDispatchToProps = (
+  dispatch: Dispatch<DisplayRulesAction>
+): DispatchProps => ({
+  onChange: (customerName) => dispatch(onChange(customerName)),
+});
+*/
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(_components_customersForm__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./client/containers/displayRuleForm.tsx":
 /*!***********************************************!*\
   !*** ./client/containers/displayRuleForm.tsx ***!
@@ -1163,7 +1231,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
-  customers: []
+  customerNames: []
 };
 
 var customersReducer = function customersReducer() {
@@ -1173,7 +1241,7 @@ var customersReducer = function customersReducer() {
   switch (action.type) {
     case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
       return _objectSpread({}, state, {
-        customers: action.payload.result
+        customerNames: action.payload.result
       });
 
     default:
@@ -39134,4 +39202,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?e8b4ad5c35d8f25a3828
+//# sourceMappingURL=bundle.js.map?07c4f05787c00cb91b75
