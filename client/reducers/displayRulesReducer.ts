@@ -1,5 +1,10 @@
 import { Reducer } from 'redux';
-import { DisplayRulesAction, ON_CHANGE } from '../actions/displayRules';
+import {
+  DisplayRulesAction,
+  ON_CHANGE,
+  SUCCEED_CUSTOMERS,
+  SUCCEED_RULES,
+} from '../actions/displayRules';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
 export interface DisplayRulesState {
@@ -8,30 +13,8 @@ export interface DisplayRulesState {
 
 const initialState: DisplayRulesState = {
   rules: {
-    customerName: 'サンプルくん',
-    rules: [
-      {
-        pattern: '/',
-        matching: 'match',
-        title: 'root',
-        text: 'R',
-        backgroundColor: '#ccc',
-      },
-      {
-        pattern: '/life/',
-        matching: 'startsWith',
-        title: 'life',
-        text: 'L',
-        backgroundColor: '#c0c',
-      },
-      {
-        pattern: '',
-        matching: 'match',
-        title: '',
-        text: '',
-        backgroundColor: '',
-      },
-    ],
+    customerName: '',
+    rules: [],
   },
 };
 
@@ -56,7 +39,7 @@ const mergedRules = (
   return index === merged.length - 1 ? [...merged, emptyRule] : merged;
 };
 
-const analyticsDataReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
+const displayRulesReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
   state: DisplayRulesState = initialState,
   action: DisplayRulesAction
 ): DisplayRulesState => {
@@ -73,9 +56,16 @@ const analyticsDataReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
           ),
         },
       };
+    case SUCCEED_CUSTOMERS:
+      return state;
+    case SUCCEED_RULES:
+      return {
+        ...state,
+        rules: action.payload.result,
+      };
     default:
       return state;
   }
 };
 
-export default analyticsDataReducer;
+export default displayRulesReducer;

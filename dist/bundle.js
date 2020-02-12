@@ -176,7 +176,7 @@ var onRead = function onRead(data) {
 /*!****************************************!*\
   !*** ./client/actions/displayRules.ts ***!
   \****************************************/
-/*! exports provided: ON_CHANGE, FETCHING_CUSTOMERS, SUCCEED_CUSTOMERS, FAILURE_CUSTOMERS, onChange, startFetchCustomers, succeedFetchCustomers, failureFetchCustomers, fetchCustomers */
+/*! exports provided: ON_CHANGE, FETCHING_CUSTOMERS, SUCCEED_CUSTOMERS, FAILURE_CUSTOMERS, FETCHING_RULES, SUCCEED_RULES, FAILURE_RULES, onChange, startFetchCustomers, succeedFetchCustomers, failureFetchCustomers, startFetchRules, succeedFetchRules, failureFetchRules, fetchCustomers, fetchRules */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,17 +185,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCHING_CUSTOMERS", function() { return FETCHING_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_CUSTOMERS", function() { return SUCCEED_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_CUSTOMERS", function() { return FAILURE_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCHING_RULES", function() { return FETCHING_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_RULES", function() { return SUCCEED_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_RULES", function() { return FAILURE_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChange", function() { return onChange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startFetchCustomers", function() { return startFetchCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchCustomers", function() { return succeedFetchCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchCustomers", function() { return failureFetchCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startFetchRules", function() { return startFetchRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchRules", function() { return succeedFetchRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchRules", function() { return failureFetchRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCustomers", function() { return fetchCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchRules", function() { return fetchRules; });
 /* harmony import */ var _api_rules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rules */ "./client/api/rules.ts");
 
 var ON_CHANGE = 'ON_CHANGE';
 var FETCHING_CUSTOMERS = 'FETCHING_CUSTOMERS';
 var SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
 var FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
+var FETCHING_RULES = 'FETCHING_RULES';
+var SUCCEED_RULES = 'SUCCEED_RULES';
+var FAILURE_RULES = 'FAULURE_RULES';
 var onChange = function onChange(index, rule) {
   return {
     type: ON_CHANGE,
@@ -227,6 +237,28 @@ var failureFetchCustomers = function failureFetchCustomers(message) {
     error: true
   };
 };
+var startFetchRules = function startFetchRules() {
+  return {
+    type: FETCHING_RULES
+  };
+};
+var succeedFetchRules = function succeedFetchRules(result) {
+  return {
+    type: SUCCEED_RULES,
+    payload: {
+      result: result
+    }
+  };
+};
+var failureFetchRules = function failureFetchRules(message) {
+  return {
+    type: FAILURE_RULES,
+    payload: {
+      message: message
+    },
+    error: true
+  };
+};
 var fetchCustomers = function fetchCustomers() {
   return function (dispatch) {
     dispatch(startFetchCustomers());
@@ -234,6 +266,16 @@ var fetchCustomers = function fetchCustomers() {
       dispatch(succeedFetchCustomers(result));
     })["catch"](function (error) {
       dispatch(failureFetchCustomers(error.message));
+    });
+  };
+};
+var fetchRules = function fetchRules(customerName) {
+  return function (dispatch) {
+    dispatch(startFetchRules());
+    Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getRules"])(customerName).then(function (result) {
+      dispatch(succeedFetchRules(result));
+    })["catch"](function (error) {
+      dispatch(failureFetchRules(error.message));
     });
   };
 };
@@ -260,12 +302,13 @@ var API_TIMEOUT = 7000;
 /*!*****************************!*\
   !*** ./client/api/rules.ts ***!
   \*****************************/
-/*! exports provided: getCustomers */
+/*! exports provided: getCustomers, getRules */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustomers", function() { return getCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRules", function() { return getRules; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config */ "./client/api/config.ts");
@@ -279,6 +322,20 @@ var getCustomers = function getCustomers() {
   return new Promise(function (resolve, reject) {
     var instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
     instance.get("/customers").then(function (response) {
+      if (response.status !== 200) {
+        reject(new Error('データを取得できませんでした'));
+      }
+
+      resolve(response.data.result);
+    })["catch"](function (error) {
+      return reject(error);
+    });
+  });
+};
+var getRules = function getRules(customerName) {
+  return new Promise(function (resolve, reject) {
+    var instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+    instance.get("/rules/".concat(customerName)).then(function (response) {
       if (response.status !== 200) {
         reject(new Error('データを取得できませんでした'));
       }
@@ -511,9 +568,12 @@ var DisplayRuleForms = function DisplayRuleForms(_ref) {
   var _ref$rulesCount = _ref.rulesCount,
       rulesCount = _ref$rulesCount === void 0 ? 0 : _ref$rulesCount,
       _ref$fetchCustomers = _ref.fetchCustomers,
-      fetchCustomers = _ref$fetchCustomers === void 0 ? function () {} : _ref$fetchCustomers;
+      fetchCustomers = _ref$fetchCustomers === void 0 ? function () {} : _ref$fetchCustomers,
+      _ref$fetchRules = _ref.fetchRules,
+      fetchRules = _ref$fetchRules === void 0 ? function () {} : _ref$fetchRules;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     fetchCustomers();
+    fetchRules('もりぞう様');
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "DisplayRuleForms"
@@ -815,6 +875,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchCustomers: function fetchCustomers() {
       return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["fetchCustomers"])());
+    },
+    fetchRules: function fetchRules(customerName) {
+      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["fetchRules"])(customerName));
     }
   };
 };
@@ -1030,13 +1093,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rootReducer", function() { return rootReducer; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _reducers_analyticsDataReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/analyticsDataReducer */ "./client/reducers/analyticsDataReducer.ts");
-/* harmony import */ var _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/displayRulesReducer */ "./client/reducers/displayRulesReducer.ts");
+/* harmony import */ var _reducers_customersReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/customersReducer */ "./client/reducers/customersReducer.ts");
+/* harmony import */ var _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/displayRulesReducer */ "./client/reducers/displayRulesReducer.ts");
+
 
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   analyticsData: _reducers_analyticsDataReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  displayRules: _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  customers: _reducers_customersReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  displayRules: _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 
 /***/ }),
@@ -1079,6 +1145,46 @@ var analyticsDataReducer = function analyticsDataReducer() {
 
 /***/ }),
 
+/***/ "./client/reducers/customersReducer.ts":
+/*!*********************************************!*\
+  !*** ./client/reducers/customersReducer.ts ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  customers: []
+};
+
+var customersReducer = function customersReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
+      return _objectSpread({}, state, {
+        customers: action.payload.result
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (customersReducer);
+
+/***/ }),
+
 /***/ "./client/reducers/displayRulesReducer.ts":
 /*!************************************************!*\
   !*** ./client/reducers/displayRulesReducer.ts ***!
@@ -1106,26 +1212,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var initialState = {
   rules: {
-    customerName: 'サンプルくん',
-    rules: [{
-      pattern: '/',
-      matching: 'match',
-      title: 'root',
-      text: 'R',
-      backgroundColor: '#ccc'
-    }, {
-      pattern: '/life/',
-      matching: 'startsWith',
-      title: 'life',
-      text: 'L',
-      backgroundColor: '#c0c'
-    }, {
-      pattern: '',
-      matching: 'match',
-      title: '',
-      text: '',
-      backgroundColor: ''
-    }]
+    customerName: '',
+    rules: []
   }
 };
 var emptyRule = {
@@ -1144,7 +1232,7 @@ var mergedRules = function mergedRules(rules, index, newRule) {
   return index === merged.length - 1 ? [].concat(_toConsumableArray(merged), [emptyRule]) : merged;
 };
 
-var analyticsDataReducer = function analyticsDataReducer() {
+var displayRulesReducer = function displayRulesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -1157,12 +1245,20 @@ var analyticsDataReducer = function analyticsDataReducer() {
         }
       });
 
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
+      return state;
+
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_RULES"]:
+      return _objectSpread({}, state, {
+        rules: action.payload.result
+      });
+
     default:
       return state;
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (analyticsDataReducer);
+/* harmony default export */ __webpack_exports__["default"] = (displayRulesReducer);
 
 /***/ }),
 
@@ -39038,4 +39134,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?4060d93bcb7c23f122c6
+//# sourceMappingURL=bundle.js.map?e8b4ad5c35d8f25a3828

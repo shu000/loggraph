@@ -5,14 +5,17 @@ import Util from '../util/util';
 export interface DisplayRuleFormsProps {
   rulesCount?: number;
   fetchCustomers?: () => void;
+  fetchRules?: (customerName: string) => void;
 }
 
 const DisplayRuleForms: FC<DisplayRuleFormsProps> = ({
   rulesCount = 0,
   fetchCustomers = () => {},
+  fetchRules = () => {},
 }) => {
   useEffect(() => {
     fetchCustomers();
+    fetchRules('もりぞう様');
   }, []);
 
   return (
