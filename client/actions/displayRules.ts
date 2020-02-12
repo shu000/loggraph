@@ -49,28 +49,26 @@ export const failureFetchRules = (message: string) => ({
 });
 
 export const fetchCustomers = () => {
-  return (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch) => {
     dispatch(startFetchCustomers());
-    getCustomers()
-      .then(result => {
-        dispatch(succeedFetchCustomers(result));
-      })
-      .catch(error => {
-        dispatch(failureFetchCustomers(error.message));
-      });
+    try {
+      const result = await getCustomers();
+      dispatch(succeedFetchCustomers(result));
+    } catch (error) {
+      dispatch(failureFetchCustomers(error.message));
+    }
   };
 };
 
 export const fetchRules = (customerName: string) => {
-  return (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch) => {
     dispatch(startFetchRules());
-    getRules(customerName)
-      .then(result => {
-        dispatch(succeedFetchRules(result));
-      })
-      .catch(error => {
-        dispatch(failureFetchRules(error.message));
-      });
+    try {
+      const result = await getRules(customerName);
+      dispatch(succeedFetchRules(result));
+    } catch (error) {
+      dispatch(failureFetchRules(error.message));
+    }
   };
 };
 
