@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 80;
+const port = process.env.APP_PORT;
 const { Rules } = require('./server/rules');
 
 app.get('/api/customers', async (req, res) => {
