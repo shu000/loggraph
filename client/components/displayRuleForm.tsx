@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
+import { TextField } from '@material-ui/core';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
+import './displayRuleForm.scss';
 
 export interface DisplayRuleFormProps {
   index?: number;
@@ -29,8 +31,10 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
     <div className="DisplayRuleForm">
       <form>
         <div className="DisplayRuleForm__group">
-          <input
+          <TextField
             className="DisplayRuleForm__pattern"
+            variant="outlined"
+            size="small"
             name="pattern"
             type="text"
             value={rule.pattern}
@@ -71,7 +75,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           </fieldset>
         </div>
         <div className="DisplayRuleForm__group">
-          <input
+          <TextField
             className="DisplayRuleForm__title"
             name="title"
             type="text"
@@ -82,7 +86,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           />
         </div>
         <div className="DisplayRuleForm__group">
-          <input
+          <TextField
             className="DisplayRuleForm__text"
             name="text"
             type="text"
@@ -93,7 +97,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           />
         </div>
         <div className="DisplayRuleForm__group">
-          <input
+          <TextField
             className="DisplayRuleForm__backgroundColor"
             name="backgroundColor"
             type="text"

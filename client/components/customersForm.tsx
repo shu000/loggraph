@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react';
+import { Button, Select, MenuItem } from '@material-ui/core';
 
 export interface CustomersFormProps {
   selectingCustomerName?: string;
@@ -19,18 +20,20 @@ const CustomersForm: FC<CustomersFormProps> = ({
 
   return (
     <div className="CustomersForm">
-      <p>{`selecting: ${selectingCustomerName}`}</p>
       <form>
-        <select
+        <Select
           value={selectingCustomerName}
           onChange={event => {
-            onChangeCustomerName(event.target.value);
+            onChangeCustomerName(event.target.value as string);
           }}
         >
-          {customerNames.map((customerName, i) => {
-            return <option key={i.toString()}>{customerName}</option>;
+          {customerNames.map(customerName => {
+            return <MenuItem value={customerName}>{customerName}</MenuItem>;
           })}
-        </select>
+        </Select>
+        <Button variant="contained" color="primary">
+          保存
+        </Button>
       </form>
     </div>
   );
