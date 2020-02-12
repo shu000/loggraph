@@ -6,24 +6,16 @@ const usersConfig = {
   timeout: API_TIMEOUT,
 };
 
-export const getCustomers = async (): Promise<any> => {
-  const instance = axios.create(usersConfig);
-  const response = await instance.get(`/customers`);
-
-  if (response.status !== 200) {
-    throw new Error('サーバーエラーです');
-  }
-
-  return response;
-};
-
-export const getRules = async (customerName: string): Promise<any> => {
-  const instance = axios.create(usersConfig);
-  const response = await instance.get(`/rules/${customerName}`);
-
-  if (response.status !== 200) {
-    throw new Error('サーバーエラーです');
-  }
-
-  return response;
-};
+export const getCustomers = (): Promise<string[]> =>
+  new Promise((resolve, reject) => {
+    const instance = axios.create(usersConfig);
+    instance
+      .get(`/customers`)
+      .then(response => {
+        if (response.status !== 200) {
+          reject(new Error('データを取得できませんでした'));
+        }
+        resolve(response.data.result);
+      })
+      .catch(error => reject(error));
+  });

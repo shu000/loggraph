@@ -5,7 +5,7 @@ const app = express();
 const port = 80;
 const { Rules } = require('./server/rules');
 
-app.get('api/customers', async (req, res) => {
+app.get('/api/customers', async (req, res) => {
   res.send(await Rules.getCustomers());
 })
 
