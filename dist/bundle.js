@@ -612,7 +612,7 @@ var CustomersForm = function CustomersForm(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CustomersForm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "selecting: ".concat(selectingCustomerName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-    defaultValue: selectingCustomerName,
+    value: selectingCustomerName,
     onChange: function onChange(event) {
       onChangeCustomerName(event.target.value);
     }
@@ -675,7 +675,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: "DisplayRuleForm__pattern",
     name: "pattern",
     type: "text",
-    defaultValue: rule.pattern,
+    value: rule.pattern,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
         pattern: event.target.value
@@ -687,7 +687,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: "DisplayRuleForm__matching",
     name: "matching",
     type: "radio",
-    defaultChecked: rule.matching === 'match',
+    checked: rule.matching === 'match',
     onChange: function onChange() {
       _onChange(index, _objectSpread({}, rule, {
         matching: 'match'
@@ -697,7 +697,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: "DisplayRuleForm__matching",
     name: "matching",
     type: "radio",
-    defaultChecked: rule.matching === 'startsWith',
+    checked: rule.matching === 'startsWith',
     onChange: function onChange() {
       _onChange(index, _objectSpread({}, rule, {
         matching: 'startsWith'
@@ -707,7 +707,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: "DisplayRuleForm__matching",
     name: "matching",
     type: "radio",
-    defaultChecked: rule.matching === 'includes',
+    checked: rule.matching === 'includes',
     onChange: function onChange() {
       _onChange(index, _objectSpread({}, rule, {
         matching: 'includes'
@@ -719,7 +719,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: "DisplayRuleForm__title",
     name: "title",
     type: "text",
-    defaultValue: rule.title,
+    value: rule.title,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
         title: event.target.value
@@ -731,7 +731,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: "DisplayRuleForm__text",
     name: "text",
     type: "text",
-    defaultValue: rule.text,
+    value: rule.text,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
         text: event.target.value
@@ -743,7 +743,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: "DisplayRuleForm__backgroundColor",
     name: "backgroundColor",
     type: "text",
-    defaultValue: background,
+    value: background,
     style: {
       backgroundColor: background,
       color: seeable(background)
@@ -54717,4 +54717,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?1e87e2771014405d20ca
+//# sourceMappingURL=bundle.js.map?844055cdc9e65bbbcae1

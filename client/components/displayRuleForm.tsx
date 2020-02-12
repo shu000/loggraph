@@ -33,7 +33,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             className="DisplayRuleForm__pattern"
             name="pattern"
             type="text"
-            defaultValue={rule.pattern}
+            value={rule.pattern}
             onChange={event => {
               onChange(index, { ...rule, pattern: event.target.value });
             }}
@@ -45,7 +45,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
               className="DisplayRuleForm__matching"
               name="matching"
               type="radio"
-              defaultChecked={rule.matching === 'match'}
+              checked={rule.matching === 'match'}
               onChange={() => {
                 onChange(index, { ...rule, matching: 'match' });
               }}
@@ -54,7 +54,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
               className="DisplayRuleForm__matching"
               name="matching"
               type="radio"
-              defaultChecked={rule.matching === 'startsWith'}
+              checked={rule.matching === 'startsWith'}
               onChange={() => {
                 onChange(index, { ...rule, matching: 'startsWith' });
               }}
@@ -63,7 +63,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
               className="DisplayRuleForm__matching"
               name="matching"
               type="radio"
-              defaultChecked={rule.matching === 'includes'}
+              checked={rule.matching === 'includes'}
               onChange={() => {
                 onChange(index, { ...rule, matching: 'includes' });
               }}
@@ -75,7 +75,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             className="DisplayRuleForm__title"
             name="title"
             type="text"
-            defaultValue={rule.title}
+            value={rule.title}
             onChange={event => {
               onChange(index, { ...rule, title: event.target.value });
             }}
@@ -86,7 +86,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             className="DisplayRuleForm__text"
             name="text"
             type="text"
-            defaultValue={rule.text}
+            value={rule.text}
             onChange={event => {
               onChange(index, { ...rule, text: event.target.value });
             }}
@@ -97,7 +97,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             className="DisplayRuleForm__backgroundColor"
             name="backgroundColor"
             type="text"
-            defaultValue={background}
+            value={background}
             style={{
               backgroundColor: background,
               color: seeable(background),

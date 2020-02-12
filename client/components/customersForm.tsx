@@ -22,7 +22,7 @@ const CustomersForm: FC<CustomersFormProps> = ({
       <p>{`selecting: ${selectingCustomerName}`}</p>
       <form>
         <select
-          defaultValue={selectingCustomerName}
+          value={selectingCustomerName}
           onChange={event => {
             onChangeCustomerName(event.target.value);
           }}
