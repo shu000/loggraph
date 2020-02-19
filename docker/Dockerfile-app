@@ -5,7 +5,15 @@ ENV MONGO_ENDPOINT="mongodb://tkg-mongo:27017/"
 ENV MONGO_USER user
 ENV MONGO_PASSWORD pass
 
-VOLUME ["/loggraph"]
-WORKDIR /loggraph
+COPY id_rsa /root/.ssh/
+RUN chmod 400 /root/.ssh/
+
+# ssh returns WARN, so pipe true
+RUN ssh -o StrictHostKeyChecking=no -T git@github.com || true \
+ && git clone git@github.com:shu000/loggraph.git /root/loggraph
+
+WORKDIR /root/loggraph
+
+RUN yarn
 
 EXPOSE 80
