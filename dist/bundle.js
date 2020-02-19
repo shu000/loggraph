@@ -632,37 +632,6 @@ var CustomersForm = function CustomersForm(_ref) {
 
 /***/ }),
 
-/***/ "./client/components/displayRuleForm.scss":
-/*!************************************************!*\
-  !*** ./client/components/displayRuleForm.scss ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js??ref--5-1!../../node_modules/postcss-loader/src??ref--5-2!../../node_modules/sass-loader/dist/cjs.js??ref--5-3!./displayRuleForm.scss */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./client/components/displayRuleForm.scss");
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-var exported = content.locals ? content.locals : {};
-
-
-
-module.exports = exported;
-
-/***/ }),
-
 /***/ "./client/components/displayRuleForm.tsx":
 /*!***********************************************!*\
   !*** ./client/components/displayRuleForm.tsx ***!
@@ -676,14 +645,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 /* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
-/* harmony import */ var _displayRuleForm_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./displayRuleForm.scss */ "./client/components/displayRuleForm.scss");
-/* harmony import */ var _displayRuleForm_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_displayRuleForm_scss__WEBPACK_IMPORTED_MODULE_3__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -710,12 +676,10 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
   var seeable = _util_util__WEBPACK_IMPORTED_MODULE_2__["default"].seeableColor;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "DisplayRuleForm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "DisplayRuleForm__group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+    row: true
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
     className: "DisplayRuleForm__pattern",
-    variant: "outlined",
-    size: "small",
     name: "pattern",
     type: "text",
     value: rule.pattern,
@@ -724,41 +688,34 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         pattern: event.target.value
       }));
     }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "DisplayRuleForm__group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Radio"], {
     className: "DisplayRuleForm__matching",
     name: "matching",
-    type: "radio",
     checked: rule.matching === 'match',
     onChange: function onChange() {
       _onChange(index, _objectSpread({}, rule, {
         matching: 'match'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Radio"], {
     className: "DisplayRuleForm__matching",
     name: "matching",
-    type: "radio",
     checked: rule.matching === 'startsWith',
     onChange: function onChange() {
       _onChange(index, _objectSpread({}, rule, {
         matching: 'startsWith'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Radio"], {
     className: "DisplayRuleForm__matching",
     name: "matching",
-    type: "radio",
     checked: rule.matching === 'includes',
     onChange: function onChange() {
       _onChange(index, _objectSpread({}, rule, {
         matching: 'includes'
       }));
     }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "DisplayRuleForm__group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
     className: "DisplayRuleForm__title",
     name: "title",
     type: "text",
@@ -768,9 +725,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         title: event.target.value
       }));
     }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "DisplayRuleForm__group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
     className: "DisplayRuleForm__text",
     name: "text",
     type: "text",
@@ -780,23 +735,22 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         text: event.target.value
       }));
     }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "DisplayRuleForm__group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
     className: "DisplayRuleForm__backgroundColor",
     name: "backgroundColor",
     type: "text",
     value: background,
     style: {
       backgroundColor: background,
-      color: seeable(background)
+      color: seeable(background) // TODO: need custom style
+
     },
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
         backgroundColor: event.target.value
       }));
     }
-  }))));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DisplayRuleForm);
@@ -56752,17 +56706,6 @@ module.exports = exports;
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./client/components/displayRuleForm.scss":
-/*!*********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./node_modules/postcss-loader/src??ref--5-2!./node_modules/sass-loader/dist/cjs.js??ref--5-3!./client/components/displayRuleForm.scss ***!
-  \*********************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nError: ENOENT: no such file or directory, open '/loggraph/client/components/displayRuleForm.scss'");
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./client/components/jsonReader.scss":
 /*!****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./node_modules/postcss-loader/src??ref--5-2!./node_modules/sass-loader/dist/cjs.js??ref--5-3!./client/components/jsonReader.scss ***!
@@ -101848,4 +101791,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?b62a59fcdfd167fab259
+//# sourceMappingURL=bundle.js.map?fd758a6d0f0946a93ca8
