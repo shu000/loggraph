@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { TextField } from '@material-ui/core';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
-import './displayRuleForm.scss';
 
 export interface DisplayRuleFormProps {
   index?: number;
