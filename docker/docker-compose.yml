@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile-app
     ports:
       - 80:80
-    volumes:
-      - ../../loggraph:/loggraph
     init: true
     tty: true
 
@@ -21,4 +19,7 @@ services:
       - 27017:27017
     volumes:
       - ../data/db:/data/db
-      - ../data/configdb:/data/configdb
+
+networks:
+  default:
+    name: loggraph_network
