@@ -128,12 +128,14 @@ module.exports = exported;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _containers_jsonReader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./containers/jsonReader */ "./client/containers/jsonReader.tsx");
-/* harmony import */ var _containers_graph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/graph */ "./client/containers/graph.tsx");
-/* harmony import */ var _containers_customersForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./containers/customersForm */ "./client/containers/customersForm.tsx");
-/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var _containers_jsonReader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/jsonReader */ "./client/containers/jsonReader.tsx");
+/* harmony import */ var _containers_graph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./containers/graph */ "./client/containers/graph.tsx");
+/* harmony import */ var _containers_customersForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./containers/customersForm */ "./client/containers/customersForm.tsx");
+/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -144,7 +146,28 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "App"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_jsonReader__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_customersForm__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    container: true,
+    spacing: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    item: true,
+    md: 7,
+    lg: 8
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    item: true,
+    md: 5,
+    lg: 4
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    container: true,
+    direction: "column",
+    spacing: 3
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    item: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_jsonReader__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    item: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_customersForm__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    item: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_5__["default"], null))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -643,8 +666,9 @@ var CustomersForm = function CustomersForm(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -654,6 +678,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  pattern: {
+    width: '7rem'
+  },
+  title: {
+    width: '8rem'
+  },
+  text: {
+    width: '3rem'
+  },
+  backgroundColor: function backgroundColor(props) {
+    return {
+      width: "6rem",
+      backgroundcolor: props.backgroundcolor,
+      color: props.color
+    };
+  }
+});
 
 var DisplayRuleForm = function DisplayRuleForm(_ref) {
   var _ref$index = _ref.index,
@@ -671,15 +714,20 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
   });
   var rule = rules.rules[index]; // TODO: off stylelint on .tsx
   // 以下、臨時対策でcammelCaseを避けてる
+  // const background = rule.backgroundColor;
+  // const seeable = Util.seeableColor;
 
-  var background = rule.backgroundColor;
-  var seeable = _util_util__WEBPACK_IMPORTED_MODULE_2__["default"].seeableColor;
+  var props = {
+    backgroundColor: rule.backgroundColor,
+    color: _util_util__WEBPACK_IMPORTED_MODULE_3__["default"].seeableColor(rule.backgroundColor)
+  };
+  var classes = useStyles(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "DisplayRuleForm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
     row: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-    className: "DisplayRuleForm__pattern",
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
+    className: classes.pattern,
     name: "pattern",
     type: "text",
     value: rule.pattern,
@@ -688,8 +736,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         pattern: event.target.value
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Radio"], {
-    className: "DisplayRuleForm__matching",
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
     name: "matching",
     checked: rule.matching === 'match',
     onChange: function onChange() {
@@ -697,8 +744,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         matching: 'match'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Radio"], {
-    className: "DisplayRuleForm__matching",
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
     name: "matching",
     checked: rule.matching === 'startsWith',
     onChange: function onChange() {
@@ -706,8 +752,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         matching: 'startsWith'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Radio"], {
-    className: "DisplayRuleForm__matching",
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
     name: "matching",
     checked: rule.matching === 'includes',
     onChange: function onChange() {
@@ -715,8 +760,8 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         matching: 'includes'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-    className: "DisplayRuleForm__title",
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
+    className: classes.title,
     name: "title",
     type: "text",
     value: rule.title,
@@ -725,8 +770,8 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         title: event.target.value
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-    className: "DisplayRuleForm__text",
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
+    className: classes.text,
     name: "text",
     type: "text",
     value: rule.text,
@@ -735,16 +780,11 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         text: event.target.value
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-    className: "DisplayRuleForm__backgroundColor",
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
+    className: classes.backgroundColor,
     name: "backgroundColor",
     type: "text",
-    value: background,
-    style: {
-      backgroundColor: background,
-      color: seeable(background) // TODO: need custom style
-
-    },
+    value: rule.backgroundColor,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
         backgroundColor: event.target.value
@@ -56699,7 +56739,7 @@ var ___CSS_LOADER_AT_RULE_IMPORT_0___ = __webpack_require__(/*! -!../node_module
 exports = ___CSS_LOADER_API_IMPORT___(true);
 exports.i(___CSS_LOADER_AT_RULE_IMPORT_0___);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n  font-size: 62.5%; }\n\n* {\n  box-sizing: border-box; }\n", "",{"version":3,"sources":["App.scss","/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;;EAEE,6GAAa;EAEb,gBAAgB,EAAA;;AAGlB;EACE,sBAAsB,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n  font-size: 62.5%; }\n\n* {\n  box-sizing: border-box; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n  font-size: 62.5%;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n.App {\n  @at-root {\n    & {\n    }\n  }\n}\n"]}]);
+exports.push([module.i, "@charset \"UTF-8\";\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n", "",{"version":3,"sources":["App.scss","/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;EACE,gBAAgB,EAAA;;AAGlB;;EAEE,6GAAa,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nhtml {\n  font-size: 62.5%;\n}\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n}\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -101791,4 +101831,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?fd758a6d0f0946a93ca8
+//# sourceMappingURL=bundle.js.map?b1919a32422eb5bb99a4

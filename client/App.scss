@@ -1,20 +1,12 @@
 @charset 'UTF-8';
 @import "./reset.css";
 
+html {
+  font-size: 62.5%;
+}
+
 body,
 input {
   font-family: "Roboto", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN",
     "メイリオ", "Meiryo", "verdana", sans-serif;
-  font-size: 62.5%;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.App {
-  @at-root {
-    & {
-    }
-  }
 }

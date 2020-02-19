@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { FormGroup, TextField, Radio } from '@material-ui/core';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
@@ -8,6 +9,27 @@ export interface DisplayRuleFormProps {
   rules?: DisplayRules;
   onChange?: (index: number, rule: DisplayRule) => void;
 }
+
+const useStyles = makeStyles({
+  pattern: {
+    width: '7rem',
+  },
+  title: {
+    width: '8rem',
+  },
+  text: {
+    width: '3rem',
+  },
+
+  backgroundColor: (props: {
+    backgroundColor: string;
+    color: '#ffffff' | '#000000';
+  }) => ({
+    width: '6rem',
+    backgroundColor: props.backgroundColor,
+    color: props.color,
+  }),
+});
 
 const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
   index = 0,
@@ -23,14 +45,21 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
   const rule = rules.rules[index];
   // TODO: off stylelint on .tsx
   // 以下、臨時対策でcammelCaseを避けてる
-  const background = rule.backgroundColor;
-  const seeable = Util.seeableColor;
+  // const background = rule.backgroundColor;
+  // const seeable = Util.seeableColor;
+
+  const props = {
+    backgroundColor: rule.backgroundColor,
+    color: Util.seeableColor(rule.backgroundColor),
+  };
+
+  const classes = useStyles(props);
 
   return (
     <div className="DisplayRuleForm">
       <FormGroup row>
         <TextField
-          className="DisplayRuleForm__pattern"
+          className={classes.pattern}
           name="pattern"
           type="text"
           value={rule.pattern}
@@ -39,7 +68,6 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           }}
         />
         <Radio
-          className="DisplayRuleForm__matching"
           name="matching"
           checked={rule.matching === 'match'}
           onChange={() => {
@@ -47,7 +75,6 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           }}
         />
         <Radio
-          className="DisplayRuleForm__matching"
           name="matching"
           checked={rule.matching === 'startsWith'}
           onChange={() => {
@@ -55,7 +82,6 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           }}
         />
         <Radio
-          className="DisplayRuleForm__matching"
           name="matching"
           checked={rule.matching === 'includes'}
           onChange={() => {
@@ -63,7 +89,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           }}
         />
         <TextField
-          className="DisplayRuleForm__title"
+          className={classes.title}
           name="title"
           type="text"
           value={rule.title}
@@ -72,7 +98,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           }}
         />
         <TextField
-          className="DisplayRuleForm__text"
+          className={classes.text}
           name="text"
           type="text"
           value={rule.text}
@@ -81,14 +107,10 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           }}
         />
         <TextField
-          className="DisplayRuleForm__backgroundColor"
+          className={classes.backgroundColor}
           name="backgroundColor"
           type="text"
-          value={background}
-          style={{
-            backgroundColor: background,
-            color: seeable(background) // TODO: need custom style
-          }}
+          value={rule.backgroundColor}
           onChange={event => {
             onChange(index, { ...rule, backgroundColor: event.target.value });
           }}
