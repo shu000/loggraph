@@ -27,8 +27,12 @@ const CustomersForm: FC<CustomersFormProps> = ({
             onChangeCustomerName(event.target.value as string);
           }}
         >
-          {customerNames.map(customerName => {
-            return <MenuItem value={customerName}>{customerName}</MenuItem>;
+          {customerNames.map((customerName, i) => {
+            return (
+              <MenuItem key={i.toString()} value={customerName}>
+                {customerName}
+              </MenuItem>
+            );
           })}
         </Select>
         <Button variant="contained" color="primary">
