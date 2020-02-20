@@ -128,29 +128,11 @@ module.exports = exported;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/ChevronLeft */ "./node_modules/@material-ui/icons/ChevronLeft.js");
-/* harmony import */ var _material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _containers_jsonReader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./containers/jsonReader */ "./client/containers/jsonReader.tsx");
-/* harmony import */ var _containers_graph__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./containers/graph */ "./client/containers/graph.tsx");
-/* harmony import */ var _containers_customersForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./containers/customersForm */ "./client/containers/customersForm.tsx");
-/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_8__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
+/* harmony import */ var _containers_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./containers/header */ "./client/containers/header.tsx");
+/* harmony import */ var _containers_graph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/graph */ "./client/containers/graph.tsx");
+/* harmony import */ var _containers_sideMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./containers/sideMenu */ "./client/containers/sideMenu.tsx");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -158,37 +140,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var App = function App() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      _useState2 = _slicedToArray(_useState, 2),
-      isOpen = _useState2[0],
-      setIsOpen = _useState2[1];
-
-  var closeMenu = function closeMenu() {
-    setIsOpen(false);
-  };
-
-  var openMenu = function openMenu() {
-    setIsOpen(true);
-  };
-
-  var drawerWidth = 420;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "App"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Drawer"], {
-    variant: "persistent",
-    anchor: "right",
-    open: isOpen
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      width: '420px'
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], {
-    edge: "start",
-    onClick: closeMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_jsonReader__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_customersForm__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_7__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], {
-    edge: "start",
-    onClick: openMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_2___default.a, null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_header__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_sideMenu__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -421,6 +375,34 @@ var fetchRules = function fetchRules(customerName) {
       };
     }()
   );
+};
+
+/***/ }),
+
+/***/ "./client/actions/ui.ts":
+/*!******************************!*\
+  !*** ./client/actions/ui.ts ***!
+  \******************************/
+/*! exports provided: OPEN_SIDE_MENU, CLOSE_SIDE_MENU, openSideMenu, closeSideMenu */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OPEN_SIDE_MENU", function() { return OPEN_SIDE_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLOSE_SIDE_MENU", function() { return CLOSE_SIDE_MENU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openSideMenu", function() { return openSideMenu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeSideMenu", function() { return closeSideMenu; });
+var OPEN_SIDE_MENU = 'OPEN_SIDE_MENU';
+var CLOSE_SIDE_MENU = 'CLOSE_SIDE_MENU';
+var openSideMenu = function openSideMenu() {
+  return {
+    type: OPEN_SIDE_MENU
+  };
+};
+var closeSideMenu = function closeSideMenu() {
+  return {
+    type: CLOSE_SIDE_MENU
+  };
 };
 
 /***/ }),
@@ -659,9 +641,17 @@ var Activity = function Activity(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 
 
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  select: {
+    paddingLeft: 12,
+    color: 'inherit'
+  }
+});
 
 var CustomersForm = function CustomersForm(_ref) {
   var _ref$selectingCustome = _ref.selectingCustomerName,
@@ -675,22 +665,19 @@ var CustomersForm = function CustomersForm(_ref) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     fetchCustomers();
   }, []);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CustomersForm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Select"], {
+  var classes = useStyles();
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+    className: classes.select,
     value: selectingCustomerName,
     onChange: function onChange(event) {
       onChangeCustomerName(event.target.value);
     }
   }, customerNames.map(function (customerName, i) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["MenuItem"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["MenuItem"], {
       key: i.toString(),
       value: customerName
     }, customerName);
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    variant: "contained",
-    color: "primary"
-  }, "\u4FDD\u5B58")));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CustomersForm);
@@ -907,28 +894,93 @@ var DisplayRuleForms = function DisplayRuleForms(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _session__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session */ "./client/components/session.tsx");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session */ "./client/components/session.tsx");
 
 
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  graph: {
+    width: '100%',
+    height: '100%'
+  }
+});
 
 var Graph = function Graph(_ref) {
   var _ref$parsed = _ref.parsed,
       parsed = _ref$parsed === void 0 ? {
     sessions: []
   } : _ref$parsed;
+  var classes = useStyles();
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "Graph"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "Graph__sessions"
+    className: classes.graph
   }, parsed.sessions.map(function (session, i) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: i.toString(),
       session: session
     });
-  })));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Graph);
+
+/***/ }),
+
+/***/ "./client/components/header.tsx":
+/*!**************************************!*\
+  !*** ./client/components/header.tsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/Menu */ "./node_modules/@material-ui/icons/Menu.js");
+/* harmony import */ var _material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _containers_customersForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/customersForm */ "./client/containers/customersForm.tsx");
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  customers: {
+    paddingLeft: 30
+  },
+  space: {
+    flexGrow: 1
+  },
+  button: {
+    color: 'inherit'
+  }
+});
+
+var Header = function Header(_ref) {
+  var _ref$isOpeningSideMen = _ref.isOpeningSideMenu,
+      isOpeningSideMenu = _ref$isOpeningSideMen === void 0 ? false : _ref$isOpeningSideMen,
+      _ref$openSideMenu = _ref.openSideMenu,
+      openSideMenu = _ref$openSideMenu === void 0 ? function () {} : _ref$openSideMenu;
+  var classes = useStyles();
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["AppBar"], {
+    position: "static"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+    variant: "h6"
+  }, "User Movement Viewer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.customers
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_customersForm__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: classes.space
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
+    className: classes.button,
+    edge: "end",
+    onClick: openSideMenu
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_3___default.a, null))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
 
 /***/ }),
 
@@ -1100,6 +1152,57 @@ var Session = function Session(_ref) {
 
 /***/ }),
 
+/***/ "./client/components/sideMenu.tsx":
+/*!****************************************!*\
+  !*** ./client/components/sideMenu.tsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
+/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _containers_jsonReader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/jsonReader */ "./client/containers/jsonReader.tsx");
+/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  sideMenu: {
+    width: 420
+  }
+});
+
+var Header = function Header(_ref) {
+  var _ref$isOpeningSideMen = _ref.isOpeningSideMenu,
+      isOpeningSideMenu = _ref$isOpeningSideMen === void 0 ? false : _ref$isOpeningSideMen,
+      _ref$closeSideMenu = _ref.closeSideMenu,
+      closeSideMenu = _ref$closeSideMenu === void 0 ? function () {} : _ref$closeSideMenu;
+  var classes = useStyles();
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Drawer"], {
+    variant: "persistent",
+    anchor: "right",
+    open: isOpeningSideMenu
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.sideMenu
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
+    edge: "start",
+    onClick: closeSideMenu
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_jsonReader__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
 /***/ "./client/containers/activity.tsx":
 /*!****************************************!*\
   !*** ./client/containers/activity.tsx ***!
@@ -1255,6 +1358,40 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./client/containers/header.tsx":
+/*!**************************************!*\
+  !*** ./client/containers/header.tsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
+/* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/header */ "./client/components/header.tsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isOpeningSideMenu: state.ui.isOpeningSideMenu
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    openSideMenu: function openSideMenu() {
+      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_1__["openSideMenu"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_header__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
 /***/ "./client/containers/jsonReader.tsx":
 /*!******************************************!*\
   !*** ./client/containers/jsonReader.tsx ***!
@@ -1284,6 +1421,40 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_jsonReader__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./client/containers/sideMenu.tsx":
+/*!****************************************!*\
+  !*** ./client/containers/sideMenu.tsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
+/* harmony import */ var _components_sideMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/sideMenu */ "./client/components/sideMenu.tsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isOpeningSideMenu: state.ui.isOpeningSideMenu
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    closeSideMenu: function closeSideMenu() {
+      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_1__["closeSideMenu"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_sideMenu__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -2067,6 +2238,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_analyticsDataReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/analyticsDataReducer */ "./client/reducers/analyticsDataReducer.ts");
 /* harmony import */ var _reducers_customersReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/customersReducer */ "./client/reducers/customersReducer.ts");
 /* harmony import */ var _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/displayRulesReducer */ "./client/reducers/displayRulesReducer.ts");
+/* harmony import */ var _reducers_uiReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducers/uiReducer */ "./client/reducers/uiReducer.ts");
+
 
 
 
@@ -2074,7 +2247,8 @@ __webpack_require__.r(__webpack_exports__);
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   analyticsData: _reducers_analyticsDataReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   customers: _reducers_customersReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  displayRules: _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  displayRules: _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  ui: _reducers_uiReducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
 /***/ }),
@@ -2236,6 +2410,51 @@ var displayRulesReducer = function displayRulesReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (displayRulesReducer);
+
+/***/ }),
+
+/***/ "./client/reducers/uiReducer.ts":
+/*!**************************************!*\
+  !*** ./client/reducers/uiReducer.ts ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  isOpeningSideMenu: false
+};
+
+var uiReducer = function uiReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_ui__WEBPACK_IMPORTED_MODULE_0__["OPEN_SIDE_MENU"]:
+      return _objectSpread({}, state, {
+        isOpeningSideMenu: true
+      });
+
+    case _actions_ui__WEBPACK_IMPORTED_MODULE_0__["CLOSE_SIDE_MENU"]:
+      return _objectSpread({}, state, {
+        isOpeningSideMenu: false
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (uiReducer);
 
 /***/ }),
 
@@ -37657,35 +37876,6 @@ var withWidth = function withWidth() {
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/icons/ChevronLeft.js":
-/*!********************************************************!*\
-  !*** ./node_modules/@material-ui/icons/ChevronLeft.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
-
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
-  d: "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-}), 'ChevronLeft');
-
-exports.default = _default;
-
-/***/ }),
-
 /***/ "./node_modules/@material-ui/icons/ChevronRight.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@material-ui/icons/ChevronRight.js ***!
@@ -37710,6 +37900,35 @@ var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/crea
 var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
   d: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
 }), 'ChevronRight');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Menu.js":
+/*!*************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Menu.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+  d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+}), 'Menu');
 
 exports.default = _default;
 
@@ -102035,4 +102254,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?0f8e02b54f3e9a7465de
+//# sourceMappingURL=bundle.js.map?10b11e6f08c238c02bd2

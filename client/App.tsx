@@ -1,43 +1,15 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Drawer, Slide, Fade, IconButton } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
-import JsonReader from './containers/jsonReader';
+import React from 'react';
+import Header from './containers/header';
 import Graph from './containers/graph';
-import CustomersForm from './containers/customersForm';
-import DisplayRuleForms from './containers/displayRuleForms';
+import SideMenu from './containers/sideMenu';
 import './App.scss';
 
 const App: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-  const openMenu = () => {
-    setIsOpen(true);
-  };
-
-  const drawerWidth = 420;
-
   return (
     <div className="App">
+      <Header />
       <Graph />
-      <Drawer variant="persistent" anchor="right" open={isOpen}>
-        <div style={{ width: '420px' }}>
-          <IconButton edge="start" onClick={closeMenu}>
-            <ChevronRightIcon />
-          </IconButton>
-          <JsonReader />
-          <CustomersForm />
-          <DisplayRuleForms />
-        </div>
-      </Drawer>
-      <IconButton edge="start" onClick={openMenu}>
-        <ChevronLeftIcon />
-      </IconButton>
+      <SideMenu />
     </div>
   );
 };

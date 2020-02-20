@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
-import { Button, Select, MenuItem } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Select, MenuItem } from '@material-ui/core';
 
 export interface CustomersFormProps {
   selectingCustomerName?: string;
@@ -7,6 +8,13 @@ export interface CustomersFormProps {
   onChangeCustomerName?: (customerName: string) => void;
   fetchCustomers?: () => void;
 }
+
+const useStyles = makeStyles({
+  select: {
+    paddingLeft: 12,
+    color: 'inherit',
+  },
+});
 
 const CustomersForm: FC<CustomersFormProps> = ({
   selectingCustomerName = '',
@@ -18,28 +26,26 @@ const CustomersForm: FC<CustomersFormProps> = ({
     fetchCustomers();
   }, []);
 
+  const classes = useStyles();
+
   return (
-    <div className="CustomersForm">
-      <form>
-        <Select
-          value={selectingCustomerName}
-          onChange={event => {
-            onChangeCustomerName(event.target.value as string);
-          }}
-        >
-          {customerNames.map((customerName, i) => {
-            return (
-              <MenuItem key={i.toString()} value={customerName}>
-                {customerName}
-              </MenuItem>
-            );
-          })}
-        </Select>
-        <Button variant="contained" color="primary">
-          保存
-        </Button>
-      </form>
-    </div>
+    <form>
+      <Select
+        className={classes.select}
+        value={selectingCustomerName}
+        onChange={event => {
+          onChangeCustomerName(event.target.value as string);
+        }}
+      >
+        {customerNames.map((customerName, i) => {
+          return (
+            <MenuItem key={i.toString()} value={customerName}>
+              {customerName}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </form>
   );
 };
 
