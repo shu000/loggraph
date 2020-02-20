@@ -1108,7 +1108,7 @@ var Header = function Header(_ref) {
     position: "static"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
     variant: "h6"
-  }, "User Movement Viewer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "\u30E6\u30FC\u30B6\u884C\u52D5\u30D5\u30ED\u30FC\u8868\u793A\u30C4\u30FC\u30EB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.customers
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_customersForm__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: classes.space
@@ -102896,4 +102896,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?7faa4b22559934063b4a
+//# sourceMappingURL=bundle.js.map?bfb65df9311dd753055d

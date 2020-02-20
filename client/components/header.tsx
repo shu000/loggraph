@@ -30,7 +30,7 @@ const Header: FC<HeaderProps> = ({
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6">User Movement Viewer</Typography>
+        <Typography variant="h6">ユーザ行動フロー表示ツール</Typography>
         <div className={classes.customers}>
           <CustomersForm />
         </div>
