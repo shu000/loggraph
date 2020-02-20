@@ -11,6 +11,14 @@ export interface ActivityProps {
 
 const useStyles = makeStyles({
   activity: (props: DisplayRule) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: '10px',
+    marginBottom: '10px',
+    width: '25px',
+    height: '25px',
+    borderRadius: '1px',
     backgroundColor: props.backgroundColor,
     color: Util.seeableColor(props.backgroundColor),
   }),
@@ -20,6 +28,15 @@ const matchedRule = (
   activity: ParsedActivity,
   rules: DisplayRule[]
 ): DisplayRule => {
+  if (activity.pageURL === 'arrow')
+    return {
+      pattern: 'arrow',
+      matching: 'match',
+      title: '',
+      text: '→',
+      backgroundColor: '#ffffff',
+    };
+
   const matches = rules.filter(rule => {
     switch (rule.matching) {
       case 'match':
@@ -58,7 +75,6 @@ const Activity: FC<ActivityProps> = ({
   return (
     <div className={classes.activity}>
       <span>{matched.text}</span>
-      <span>{activity.pageURL}</span>
     </div>
   );
 };

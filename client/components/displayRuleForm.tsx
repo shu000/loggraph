@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, FormGroup, TextField, Radio } from '@material-ui/core';
+import { Grid, TextField, Radio } from '@material-ui/core';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
 
@@ -11,19 +11,14 @@ export interface DisplayRuleFormProps {
 }
 
 const useStyles = makeStyles({
-  pattern: {
-    width: '7rem',
+  radio: {
+    padding: '0 2px',
   },
-  title: {
-    width: '8rem',
-  },
-  text: {
-    width: '3rem',
-  },
-  backgroundColor: (props: DisplayRule) => ({
-    width: '6rem',
+  backgroundColorField: (props: DisplayRule) => ({
     backgroundColor: props.backgroundColor,
-    color: Util.seeableColor(props.backgroundColor),
+    '& input': {
+      color: Util.seeableColor(props.backgroundColor),
+    },
   }),
 });
 
@@ -42,10 +37,15 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
   const classes = useStyles(rule);
 
   return (
-    <div className="DisplayRuleForm">
-      <FormGroup row>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      <Grid item xs={3}>
         <TextField
-          className={classes.pattern}
           name="pattern"
           type="text"
           value={rule.pattern}
@@ -53,29 +53,42 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             onChange(index, { ...rule, pattern: event.target.value });
           }}
         />
-        <Radio
-          name="matching"
-          checked={rule.matching === 'match'}
-          onChange={() => {
-            onChange(index, { ...rule, matching: 'match' });
-          }}
-        />
-        <Radio
-          name="matching"
-          checked={rule.matching === 'startsWith'}
-          onChange={() => {
-            onChange(index, { ...rule, matching: 'startsWith' });
-          }}
-        />
-        <Radio
-          name="matching"
-          checked={rule.matching === 'includes'}
-          onChange={() => {
-            onChange(index, { ...rule, matching: 'includes' });
-          }}
-        />
+      </Grid>
+      <Grid item xs={2} container justify="center" alignItems="center">
+        <Grid item>
+          <Radio
+            className={classes.radio}
+            name="matching"
+            checked={rule.matching === 'match'}
+            onChange={() => {
+              onChange(index, { ...rule, matching: 'match' });
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <Radio
+            className={classes.radio}
+            name="matching"
+            checked={rule.matching === 'startsWith'}
+            onChange={() => {
+              onChange(index, { ...rule, matching: 'startsWith' });
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <Radio
+            className={classes.radio}
+            name="matching"
+            checked={rule.matching === 'includes'}
+            onChange={() => {
+              onChange(index, { ...rule, matching: 'includes' });
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Grid item xs={3}>
         <TextField
-          className={classes.title}
+          fullWidth
           name="title"
           type="text"
           value={rule.title}
@@ -83,8 +96,9 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             onChange(index, { ...rule, title: event.target.value });
           }}
         />
+      </Grid>
+      <Grid item xs={1}>
         <TextField
-          className={classes.text}
           name="text"
           type="text"
           value={rule.text}
@@ -92,8 +106,10 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             onChange(index, { ...rule, text: event.target.value });
           }}
         />
+      </Grid>
+      <Grid item xs={2}>
         <TextField
-          className={classes.backgroundColor}
+          className={classes.backgroundColorField}
           name="backgroundColor"
           type="text"
           value={rule.backgroundColor}
@@ -101,8 +117,8 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
             onChange(index, { ...rule, backgroundColor: event.target.value });
           }}
         />
-      </FormGroup>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

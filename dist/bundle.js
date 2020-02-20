@@ -561,6 +561,14 @@ __webpack_require__.r(__webpack_exports__);
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
   activity: function activity(props) {
     return {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: '10px',
+      marginBottom: '10px',
+      width: '25px',
+      height: '25px',
+      borderRadius: '1px',
       backgroundColor: props.backgroundColor,
       color: _util_util__WEBPACK_IMPORTED_MODULE_2__["default"].seeableColor(props.backgroundColor)
     };
@@ -568,6 +576,13 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
 });
 
 var matchedRule = function matchedRule(activity, rules) {
+  if (activity.pageURL === 'arrow') return {
+    pattern: 'arrow',
+    matching: 'match',
+    title: '',
+    text: '→',
+    backgroundColor: '#ffffff'
+  };
   var matches = rules.filter(function (rule) {
     switch (rule.matching) {
       case 'match':
@@ -605,7 +620,7 @@ var Activity = function Activity(_ref) {
   var classes = useStyles(matched);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.activity
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, matched.text), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, activity.pageURL));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, matched.text));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Activity);
@@ -685,20 +700,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
-  pattern: {
-    width: '7rem'
+  radio: {
+    padding: '0 2px'
   },
-  title: {
-    width: '8rem'
-  },
-  text: {
-    width: '3rem'
-  },
-  backgroundColor: function backgroundColor(props) {
+  backgroundColorField: function backgroundColorField(props) {
     return {
-      width: '6rem',
       backgroundColor: props.backgroundColor,
-      color: _util_util__WEBPACK_IMPORTED_MODULE_3__["default"].seeableColor(props.backgroundColor)
+      '& input': {
+        color: _util_util__WEBPACK_IMPORTED_MODULE_3__["default"].seeableColor(props.backgroundColor)
+      }
     };
   }
 });
@@ -719,12 +729,16 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
   });
   var rule = rules.rules[index];
   var classes = useStyles(rule);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "DisplayRuleForm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
-    row: true
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    container: true,
+    direction: "row",
+    justify: "center",
+    alignItems: "center",
+    spacing: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true,
+    xs: 3
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-    className: classes.pattern,
     name: "pattern",
     type: "text",
     value: rule.pattern,
@@ -733,7 +747,16 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         pattern: event.target.value
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true,
+    xs: 2,
+    container: true,
+    justify: "center",
+    alignItems: "center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
+    className: classes.radio,
     name: "matching",
     checked: rule.matching === 'match',
     onChange: function onChange() {
@@ -741,7 +764,10 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         matching: 'match'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
+    className: classes.radio,
     name: "matching",
     checked: rule.matching === 'startsWith',
     onChange: function onChange() {
@@ -749,7 +775,10 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         matching: 'startsWith'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Radio"], {
+    className: classes.radio,
     name: "matching",
     checked: rule.matching === 'includes',
     onChange: function onChange() {
@@ -757,8 +786,11 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         matching: 'includes'
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-    className: classes.title,
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true,
+    xs: 3
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
+    fullWidth: true,
     name: "title",
     type: "text",
     value: rule.title,
@@ -767,8 +799,10 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         title: event.target.value
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-    className: classes.text,
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true,
+    xs: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
     name: "text",
     type: "text",
     value: rule.text,
@@ -777,8 +811,11 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
         text: event.target.value
       }));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-    className: classes.backgroundColor,
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    item: true,
+    xs: 2
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
+    className: classes.backgroundColorField,
     name: "backgroundColor",
     type: "text",
     value: rule.backgroundColor,
@@ -1009,7 +1046,9 @@ var JsonReader = function JsonReader(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _containers_activity__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../containers/activity */ "./client/containers/activity.tsx");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _containers_activity__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../containers/activity */ "./client/containers/activity.tsx");
+
 
 
 
@@ -1023,10 +1062,12 @@ var Session = function Session(_ref) {
   } : _ref$session;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Session"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(session.date, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(session.device, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, session.channel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "Session__activities"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(session.date, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(session.device, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, session.channel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap"
   }, session.activities.map(function (activity, i) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_activity__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_activity__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: i.toString(),
       activity: activity
     });
@@ -101828,4 +101869,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?45744e45d90a90e6fb63
+//# sourceMappingURL=bundle.js.map?fdd0827f180533397876
