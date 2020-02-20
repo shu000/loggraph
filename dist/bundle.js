@@ -553,9 +553,19 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
 
 
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  activity: function activity(props) {
+    return {
+      backgroundColor: props.backgroundColor,
+      color: _util_util__WEBPACK_IMPORTED_MODULE_2__["default"].seeableColor(props.backgroundColor)
+    };
+  }
+});
 
 var matchedRule = function matchedRule(activity, rules) {
   var matches = rules.filter(function (rule) {
@@ -571,7 +581,8 @@ var matchedRule = function matchedRule(activity, rules) {
     }
   }); // 末尾寄りのルールを優先
 
-  if (matches.length > 0) return matches[matches.length - 1];
+  if (matches.length > 0) return matches[matches.length - 1]; // 一致するパターンがない場合
+
   return {
     pattern: '',
     matching: 'match',
@@ -590,16 +601,10 @@ var Activity = function Activity(_ref) {
   } : _ref$activity,
       _ref$rules = _ref.rules,
       rules = _ref$rules === void 0 ? [] : _ref$rules;
-  var matched = matchedRule(activity, rules); // TODO: stylelint
-
-  var bk = matched.backgroundColor;
-  var fc = _util_util__WEBPACK_IMPORTED_MODULE_1__["default"].seeableColor(matched.backgroundColor);
+  var matched = matchedRule(activity, rules);
+  var classes = useStyles(matched);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "Activity",
-    style: {
-      backgroundColor: bk,
-      color: fc
-    }
+    className: classes.activity
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, matched.text), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, activity.pageURL));
 };
 
@@ -691,9 +696,9 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
   },
   backgroundColor: function backgroundColor(props) {
     return {
-      width: "6rem",
-      backgroundcolor: props.backgroundcolor,
-      color: props.color
+      width: '6rem',
+      backgroundColor: props.backgroundColor,
+      color: _util_util__WEBPACK_IMPORTED_MODULE_3__["default"].seeableColor(props.backgroundColor)
     };
   }
 });
@@ -712,16 +717,8 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
   if (rules.rules.length === 0 || index >= rules.rules.length) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "DisplayRuleForm"
   });
-  var rule = rules.rules[index]; // TODO: off stylelint on .tsx
-  // 以下、臨時対策でcammelCaseを避けてる
-  // const background = rule.backgroundColor;
-  // const seeable = Util.seeableColor;
-
-  var props = {
-    backgroundColor: rule.backgroundColor,
-    color: _util_util__WEBPACK_IMPORTED_MODULE_3__["default"].seeableColor(rule.backgroundColor)
-  };
-  var classes = useStyles(props);
+  var rule = rules.rules[index];
+  var classes = useStyles(rule);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "DisplayRuleForm"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
@@ -56739,7 +56736,7 @@ var ___CSS_LOADER_AT_RULE_IMPORT_0___ = __webpack_require__(/*! -!../node_module
 exports = ___CSS_LOADER_API_IMPORT___(true);
 exports.i(___CSS_LOADER_AT_RULE_IMPORT_0___);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n", "",{"version":3,"sources":["App.scss","/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;EACE,gBAAgB,EAAA;;AAGlB;;EAEE,6GAAa,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nhtml {\n  font-size: 62.5%;\n}\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n}\n"]}]);
+exports.push([module.i, "@charset \"UTF-8\";\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n", "",{"version":3,"sources":["App.scss","/root/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;EACE,gBAAgB,EAAA;;AAGlB;;EAEE,6GAAa,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nhtml {\n  font-size: 62.5%;\n}\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n}\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -56757,7 +56754,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, ".JsonReader .JsonReader__droppable {\n  border: 1px solid #000;\n  color: #666;\n  height: 100px;\n  width: 100px; }\n  .JsonReader .JsonReader__droppable :hover {\n    color: #fff; }\n\n.JsonReader .jsonReader__message {\n  color: #c50; }\n", "",{"version":3,"sources":["/loggraph/client/components/jsonReader.scss"],"names":[],"mappings":"AAEA;EAIQ,sBAAsB;EACtB,WAAW;EACX,aAAa;EACb,YAAY,EAAA;EAPpB;IAUU,WAAW,EAAA;;AAVrB;EAeQ,WAAW,EAAA","file":"jsonReader.scss","sourcesContent":["@charset 'UTF-8';\n\n.JsonReader {\n  @at-root {\n    & {\n      .JsonReader__droppable {\n        border: 1px solid #000;\n        color: #666;\n        height: 100px;\n        width: 100px;\n\n        :hover {\n          color: #fff;\n        }\n      }\n\n      .jsonReader__message {\n        color: #c50;\n      }\n    }\n  }\n}\n"]}]);
+exports.push([module.i, ".JsonReader .JsonReader__droppable {\n  border: 1px solid #000;\n  color: #666;\n  height: 100px;\n  width: 100px; }\n  .JsonReader .JsonReader__droppable :hover {\n    color: #fff; }\n\n.JsonReader .jsonReader__message {\n  color: #c50; }\n", "",{"version":3,"sources":["/root/loggraph/client/components/jsonReader.scss"],"names":[],"mappings":"AAEA;EAIQ,sBAAsB;EACtB,WAAW;EACX,aAAa;EACb,YAAY,EAAA;EAPpB;IAUU,WAAW,EAAA;;AAVrB;EAeQ,WAAW,EAAA","file":"jsonReader.scss","sourcesContent":["@charset 'UTF-8';\n\n.JsonReader {\n  @at-root {\n    & {\n      .JsonReader__droppable {\n        border: 1px solid #000;\n        color: #666;\n        height: 100px;\n        width: 100px;\n\n        :hover {\n          color: #fff;\n        }\n      }\n\n      .jsonReader__message {\n        color: #c50;\n      }\n    }\n  }\n}\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -56775,7 +56772,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n", "",{"version":3,"sources":["/loggraph/client/reset.css","reset.css"],"names":[],"mappings":"AAAA;;;;;;CCMC;ADED;;;;;;;;;;;;EAYI,SAAQ;EACR,UAAS;EACT,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B;EACI,cAAa,EAAA;;AAGjB;;EAEI,cAAa,EAAA;;AAGjB;EACI,gBAAe,EAAA;;AAGnB;EACI,YAAW,EAAA;;AAGf;;EAEI,WAAU;EACV,aAAY,EAAA;;AAGhB;EACI,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,qBAAoB,EAAA;;AAGxB,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,kBAAiB;EACjB,iBAAgB,EAAA;;AAGpB;EACI,6BAA6B,EAAA;;AAGjC;EACI,yBAAwB;EACxB,YAAW,EAAA;;AAGf;EACI,yBAAwB;EACxB,iBAAgB,EAAA;;AAGpB,4CAAA;AACA;EACI,cAAa;EACb,WAAU;EACV,SAAQ;EACR,6BAA4B;EAC5B,aAAY;EACZ,UAAS,EAAA;;AAGb;EACI,sBAAqB,EAAA","file":"reset.css","sourcesContent":["/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n    margin:0;\n    padding:0;\n    border:0;\n    outline:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\nbody {\n    line-height:1;\n}\n\narticle,aside,details,figcaption,figure,\nfooter,header,hgroup,menu,nav,section {\n    display:block;\n}\n\nnav ul {\n    list-style:none;\n}\n\nblockquote, q {\n    quotes:none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content:'';\n    content:none;\n}\n\na {\n    margin:0;\n    padding:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\n/* change colours to suit your needs */\nins {\n    background-color:#ff9;\n    color:#000;\n    text-decoration:none;\n}\n\n/* change colours to suit your needs */\nmark {\n    background-color:#ff9;\n    color:#000;\n    font-style:italic;\n    font-weight:bold;\n}\n\ndel {\n    text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n    border-bottom:1px dotted;\n    cursor:help;\n}\n\ntable {\n    border-collapse:collapse;\n    border-spacing:0;\n}\n\n/* change border colour to suit your needs */\nhr {\n    display:block;\n    height:1px;\n    border:0;  \n    border-top:1px solid #cccccc;\n    margin:1em 0;\n    padding:0;\n}\n\ninput, select {\n    vertical-align:middle;\n}\n","/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n"]}]);
+exports.push([module.i, "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n", "",{"version":3,"sources":["/root/loggraph/client/reset.css","reset.css"],"names":[],"mappings":"AAAA;;;;;;CCMC;ADED;;;;;;;;;;;;EAYI,SAAQ;EACR,UAAS;EACT,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B;EACI,cAAa,EAAA;;AAGjB;;EAEI,cAAa,EAAA;;AAGjB;EACI,gBAAe,EAAA;;AAGnB;EACI,YAAW,EAAA;;AAGf;;EAEI,WAAU;EACV,aAAY,EAAA;;AAGhB;EACI,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,qBAAoB,EAAA;;AAGxB,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,kBAAiB;EACjB,iBAAgB,EAAA;;AAGpB;EACI,6BAA6B,EAAA;;AAGjC;EACI,yBAAwB;EACxB,YAAW,EAAA;;AAGf;EACI,yBAAwB;EACxB,iBAAgB,EAAA;;AAGpB,4CAAA;AACA;EACI,cAAa;EACb,WAAU;EACV,SAAQ;EACR,6BAA4B;EAC5B,aAAY;EACZ,UAAS,EAAA;;AAGb;EACI,sBAAqB,EAAA","file":"reset.css","sourcesContent":["/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n    margin:0;\n    padding:0;\n    border:0;\n    outline:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\nbody {\n    line-height:1;\n}\n\narticle,aside,details,figcaption,figure,\nfooter,header,hgroup,menu,nav,section {\n    display:block;\n}\n\nnav ul {\n    list-style:none;\n}\n\nblockquote, q {\n    quotes:none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content:'';\n    content:none;\n}\n\na {\n    margin:0;\n    padding:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\n/* change colours to suit your needs */\nins {\n    background-color:#ff9;\n    color:#000;\n    text-decoration:none;\n}\n\n/* change colours to suit your needs */\nmark {\n    background-color:#ff9;\n    color:#000;\n    font-style:italic;\n    font-weight:bold;\n}\n\ndel {\n    text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n    border-bottom:1px dotted;\n    cursor:help;\n}\n\ntable {\n    border-collapse:collapse;\n    border-spacing:0;\n}\n\n/* change border colour to suit your needs */\nhr {\n    display:block;\n    height:1px;\n    border:0;  \n    border-top:1px solid #cccccc;\n    margin:1em 0;\n    padding:0;\n}\n\ninput, select {\n    vertical-align:middle;\n}\n","/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -101831,4 +101828,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?b1919a32422eb5bb99a4
+//# sourceMappingURL=bundle.js.map?45744e45d90a90e6fb63

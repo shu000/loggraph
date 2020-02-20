@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormGroup, TextField, Radio } from '@material-ui/core';
+import { Grid, FormGroup, TextField, Radio } from '@material-ui/core';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
 
@@ -20,14 +20,10 @@ const useStyles = makeStyles({
   text: {
     width: '3rem',
   },
-
-  backgroundColor: (props: {
-    backgroundColor: string;
-    color: '#ffffff' | '#000000';
-  }) => ({
+  backgroundColor: (props: DisplayRule) => ({
     width: '6rem',
     backgroundColor: props.backgroundColor,
-    color: props.color,
+    color: Util.seeableColor(props.backgroundColor),
   }),
 });
 
@@ -43,17 +39,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
     return <div className="DisplayRuleForm" />;
 
   const rule = rules.rules[index];
-  // TODO: off stylelint on .tsx
-  // 以下、臨時対策でcammelCaseを避けてる
-  // const background = rule.backgroundColor;
-  // const seeable = Util.seeableColor;
-
-  const props = {
-    backgroundColor: rule.backgroundColor,
-    color: Util.seeableColor(rule.backgroundColor),
-  };
-
-  const classes = useStyles(props);
+  const classes = useStyles(rule);
 
   return (
     <div className="DisplayRuleForm">

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { ParsedActivity } from '../constants/parsedData';
 import { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
@@ -7,6 +8,13 @@ export interface ActivityProps {
   activity?: ParsedActivity;
   rules?: DisplayRule[];
 }
+
+const useStyles = makeStyles({
+  activity: (props: DisplayRule) => ({
+    backgroundColor: props.backgroundColor,
+    color: Util.seeableColor(props.backgroundColor),
+  }),
+});
 
 const matchedRule = (
   activity: ParsedActivity,
@@ -25,6 +33,8 @@ const matchedRule = (
 
   // 末尾寄りのルールを優先
   if (matches.length > 0) return matches[matches.length - 1];
+
+  // 一致するパターンがない場合
   return {
     pattern: '',
     matching: 'match',
@@ -43,12 +53,10 @@ const Activity: FC<ActivityProps> = ({
   rules = [],
 }) => {
   const matched = matchedRule(activity, rules);
-  // TODO: stylelint
-  const bk = matched.backgroundColor;
-  const fc = Util.seeableColor(matched.backgroundColor);
+  const classes = useStyles(matched);
 
   return (
-    <div className="Activity" style={{ backgroundColor: bk, color: fc }}>
+    <div className={classes.activity}>
       <span>{matched.text}</span>
       <span>{activity.pageURL}</span>
     </div>
