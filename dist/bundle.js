@@ -895,7 +895,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session */ "./client/components/session.tsx");
+/* harmony import */ var _material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Snackbar */ "./node_modules/@material-ui/core/esm/Snackbar/index.js");
+/* harmony import */ var _material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/lab/Alert */ "./node_modules/@material-ui/lab/esm/Alert/index.js");
+/* harmony import */ var _session__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session */ "./client/components/session.tsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 
@@ -903,23 +915,102 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
   graph: {
     width: '100%',
     height: '100%'
+  },
+  dragOver: {
+    backgroundColor: '#c0c0c0'
   }
 });
+
+var cancelEvent = function cancelEvent(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+};
+
+var asyncReadFile = function asyncReadFile(file) {
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      if (!e.target || !e.target.result || e.target.result instanceof ArrayBuffer) {
+        reject(new Error('ファイル読み込みに失敗しました'));
+      } else {
+        // TypeScriptが reject を解さないので(?)
+        // else で括らないと e.target.result が nullable エラーになる
+        try {
+          var _data = JSON.parse(e.target.result);
+
+          resolve(_data);
+        } catch (error) {
+          // JSON.parse() が失敗ならばjsonでない
+          reject(new Error('jsonファイルではないようです'));
+        }
+      }
+    };
+
+    reader.readAsText(file);
+  });
+};
+
+var _onDrop = function onDrop(event) {
+  event.preventDefault(); // TODO: 複数ファイルの制御
+
+  var file = event.dataTransfer.files[0];
+  return asyncReadFile(file);
+};
 
 var Graph = function Graph(_ref) {
   var _ref$parsed = _ref.parsed,
       parsed = _ref$parsed === void 0 ? {
     sessions: []
-  } : _ref$parsed;
+  } : _ref$parsed,
+      _ref$onReadJson = _ref.onReadJson,
+      onReadJson = _ref$onReadJson === void 0 ? function () {} : _ref$onReadJson;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isDragOver = _useState2[0],
+      setIsDragOver = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      errorMessage = _useState4[0],
+      setErrorMessage = _useState4[1];
+
   var classes = useStyles();
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classes.graph
+    className: "".concat(classes.graph, " ").concat(isDragOver ? classes.dragOver : ''),
+    onDragEnter: cancelEvent,
+    onDragOver: function onDragOver(event) {
+      cancelEvent(event);
+      if (!isDragOver) setIsDragOver(true);
+    },
+    onDragLeave: function onDragLeave() {
+      return setIsDragOver(false);
+    },
+    onDrop: function onDrop(event) {
+      setIsDragOver(false);
+
+      _onDrop(event).then(function (data) {
+        onReadJson(data);
+      })["catch"](function (error) {
+        setErrorMessage(error.message);
+      });
+    }
   }, parsed.sessions.map(function (session, i) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: i.toString(),
       session: session
     });
-  }));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    open: errorMessage !== '',
+    autoHideDuration: 2000,
+    onClose: function onClose() {
+      return setErrorMessage('');
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    severity: "error"
+  }, errorMessage)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Graph);
@@ -984,131 +1075,6 @@ var Header = function Header(_ref) {
 
 /***/ }),
 
-/***/ "./client/components/jsonReader.scss":
-/*!*******************************************!*\
-  !*** ./client/components/jsonReader.scss ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js??ref--5-1!../../node_modules/postcss-loader/src??ref--5-2!../../node_modules/sass-loader/dist/cjs.js??ref--5-3!./jsonReader.scss */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./client/components/jsonReader.scss");
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-var exported = content.locals ? content.locals : {};
-
-
-
-module.exports = exported;
-
-/***/ }),
-
-/***/ "./client/components/jsonReader.tsx":
-/*!******************************************!*\
-  !*** ./client/components/jsonReader.tsx ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jsonReader_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./jsonReader.scss */ "./client/components/jsonReader.scss");
-/* harmony import */ var _jsonReader_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jsonReader_scss__WEBPACK_IMPORTED_MODULE_1__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-var cancelEvent = function cancelEvent(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  return false;
-};
-
-var asyncReadFile = function asyncReadFile(file) {
-  return new Promise(function (resolve, reject) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      if (!e.target || !e.target.result || e.target.result instanceof ArrayBuffer) {
-        reject(new Error('ファイル読み込みに失敗しました'));
-      } else {
-        // TypeScriptが reject を解さないので(?)
-        // else で括らないと e.target.result が nullable エラーになる
-        try {
-          var _data = JSON.parse(e.target.result);
-
-          resolve(_data);
-        } catch (error) {
-          // JSON.parse() が失敗ならばjsonでない
-          reject(new Error('jsonファイルを読ませてください'));
-        }
-      }
-    };
-
-    reader.readAsText(file);
-  });
-};
-
-var _onDrop = function onDrop(event) {
-  event.preventDefault(); // TODO: 複数ファイルの制御
-
-  var file = event.dataTransfer.files[0];
-  return asyncReadFile(file);
-};
-
-var JsonReader = function JsonReader(_ref) {
-  var _ref$onRead = _ref.onRead,
-      onRead = _ref$onRead === void 0 ? function () {} : _ref$onRead;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      message = _useState2[0],
-      setMessage = _useState2[1];
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "JsonReader"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "JsonReader__droppable",
-    onDragEnter: cancelEvent,
-    onDragOver: cancelEvent,
-    onDrop: function onDrop(event) {
-      _onDrop(event).then(function (data) {
-        setMessage('');
-        onRead(data);
-      })["catch"](function (error) {
-        setMessage(error.message);
-      });
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Drop file here!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "JsonReader__message"
-  }, message));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (JsonReader);
-
-/***/ }),
-
 /***/ "./client/components/session.tsx":
 /*!***************************************!*\
   !*** ./client/components/session.tsx ***!
@@ -1167,9 +1133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 /* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
 /* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _containers_jsonReader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/jsonReader */ "./client/containers/jsonReader.tsx");
-/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
-
+/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
 
 
 
@@ -1196,7 +1160,7 @@ var Header = function Header(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
     edge: "start",
     onClick: closeSideMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_jsonReader__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
@@ -1345,6 +1309,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_graph__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/graph */ "./client/components/graph.tsx");
+/* harmony import */ var _actions_analyticsData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/analyticsData */ "./client/actions/analyticsData.ts");
+
 
 
 
@@ -1354,7 +1320,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(_components_graph__WEBPACK_IMPORTED_MODULE_1__["default"]));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onReadJson: function onReadJson(data) {
+      return dispatch(Object(_actions_analyticsData__WEBPACK_IMPORTED_MODULE_2__["onRead"])(data));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_graph__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1389,38 +1363,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_header__WEBPACK_IMPORTED_MODULE_2__["default"]));
-
-/***/ }),
-
-/***/ "./client/containers/jsonReader.tsx":
-/*!******************************************!*\
-  !*** ./client/containers/jsonReader.tsx ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _components_jsonReader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/jsonReader */ "./client/components/jsonReader.tsx");
-/* harmony import */ var _actions_analyticsData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/analyticsData */ "./client/actions/analyticsData.ts");
-
-
-
-
-var mapStateToProps = function mapStateToProps() {
-  return {};
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onRead: function onRead(data) {
-      return dispatch(Object(_actions_analyticsData__WEBPACK_IMPORTED_MODULE_2__["onRead"])(data));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_jsonReader__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -37189,6 +37131,33 @@ function debounce(func) {
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/esm/utils/deprecatedPropType.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/utils/deprecatedPropType.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return deprecatedPropType; });
+function deprecatedPropType(validator, reason) {
+  if (false) {}
+
+  return function (props, propName, componentName, location, propFullName) {
+    var componentNameSafe = componentName || '<<anonymous>>';
+    var propFullNameSafe = propFullName || propName;
+
+    if (typeof props[propName] !== 'undefined') {
+      return new Error("The ".concat(location, " `").concat(propFullNameSafe, "` of ") + "`".concat(componentNameSafe, "` is deprecated. ").concat(reason));
+    }
+
+    return null;
+  };
+}
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/utils/focusVisible.js":
 /*!******************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/utils/focusVisible.js ***!
@@ -37381,6 +37350,66 @@ function getScrollbarSize() {
   document.body.removeChild(scrollDiv);
   return scrollbarSize;
 }
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/utils/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/utils/index.js ***!
+  \***********************************************************/
+/*! exports provided: capitalize, deprecatedPropType, isMuiElement, ownerDocument, ownerWindow, requirePropFactory, setRef, unsupportedProp, useEventCallback, useForkRef, useControlled, useIsFocusVisible */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _capitalize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "capitalize", function() { return _capitalize__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _deprecatedPropType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deprecatedPropType */ "./node_modules/@material-ui/core/esm/utils/deprecatedPropType.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "deprecatedPropType", function() { return _deprecatedPropType__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _isMuiElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./isMuiElement */ "./node_modules/@material-ui/core/esm/utils/isMuiElement.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isMuiElement", function() { return _isMuiElement__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _ownerDocument__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ownerDocument */ "./node_modules/@material-ui/core/esm/utils/ownerDocument.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ownerDocument", function() { return _ownerDocument__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _ownerWindow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ownerWindow */ "./node_modules/@material-ui/core/esm/utils/ownerWindow.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ownerWindow", function() { return _ownerWindow__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _requirePropFactory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./requirePropFactory */ "./node_modules/@material-ui/core/esm/utils/requirePropFactory.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "requirePropFactory", function() { return _requirePropFactory__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _setRef__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setRef */ "./node_modules/@material-ui/core/esm/utils/setRef.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setRef", function() { return _setRef__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/* harmony import */ var _unsupportedProp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./unsupportedProp */ "./node_modules/@material-ui/core/esm/utils/unsupportedProp.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unsupportedProp", function() { return _unsupportedProp__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+/* harmony import */ var _useEventCallback__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./useEventCallback */ "./node_modules/@material-ui/core/esm/utils/useEventCallback.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useEventCallback", function() { return _useEventCallback__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+/* harmony import */ var _useForkRef__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./useForkRef */ "./node_modules/@material-ui/core/esm/utils/useForkRef.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useForkRef", function() { return _useForkRef__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+
+/* harmony import */ var _useControlled__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./useControlled */ "./node_modules/@material-ui/core/esm/utils/useControlled.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useControlled", function() { return _useControlled__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+
+/* harmony import */ var _focusVisible__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./focusVisible */ "./node_modules/@material-ui/core/esm/utils/focusVisible.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useIsFocusVisible", function() { return _focusVisible__WEBPACK_IMPORTED_MODULE_11__["useIsFocusVisible"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /***/ }),
 
@@ -37969,6 +37998,503 @@ function createSvgIcon(path, displayName) {
   }
 
   Component.muiName = _SvgIcon.default.muiName;
+  return Component;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/Alert/Alert.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/Alert/Alert.js ***!
+  \**********************************************************/
+/*! exports provided: styles, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+/* harmony import */ var _internal_svg_icons_SuccessOutlined__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../internal/svg-icons/SuccessOutlined */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/SuccessOutlined.js");
+/* harmony import */ var _internal_svg_icons_ReportProblemOutlined__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../internal/svg-icons/ReportProblemOutlined */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ReportProblemOutlined.js");
+/* harmony import */ var _internal_svg_icons_ErrorOutline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../internal/svg-icons/ErrorOutline */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ErrorOutline.js");
+/* harmony import */ var _internal_svg_icons_InfoOutlined__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../internal/svg-icons/InfoOutlined */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/InfoOutlined.js");
+/* harmony import */ var _internal_svg_icons_Close__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../internal/svg-icons/Close */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/Close.js");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
+/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  var getColor = theme.palette.type === 'light' ? _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["darken"] : _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["lighten"];
+  var getBackgroundColor = theme.palette.type === 'light' ? _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["lighten"] : _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["darken"];
+  return {
+    /* Styles applied to the root element. */
+    root: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, theme.typography.body2, {
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: 'transparent',
+      display: 'flex',
+      padding: '6px 16px'
+    }),
+
+    /* Styles applied to the root element if `variant="standard"` and `color="success"`. */
+    standardSuccess: {
+      color: getColor(theme.palette.success.main, 0.6),
+      backgroundColor: getBackgroundColor(theme.palette.success.main, 0.9),
+      '& $icon': {
+        color: theme.palette.success.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="standard"` and `color="info"`. */
+    standardInfo: {
+      color: getColor(theme.palette.info.main, 0.6),
+      backgroundColor: getBackgroundColor(theme.palette.info.main, 0.9),
+      '& $icon': {
+        color: theme.palette.info.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="standard"` and `color="warning"`. */
+    standardWarning: {
+      color: getColor(theme.palette.warning.main, 0.6),
+      backgroundColor: getBackgroundColor(theme.palette.warning.main, 0.9),
+      '& $icon': {
+        color: theme.palette.warning.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="standard"` and `color="error"`. */
+    standardError: {
+      color: getColor(theme.palette.error.main, 0.6),
+      backgroundColor: getBackgroundColor(theme.palette.error.main, 0.9),
+      '& $icon': {
+        color: theme.palette.error.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="outlined"` and `color="success"`. */
+    outlinedSuccess: {
+      color: getColor(theme.palette.success.main, 0.6),
+      border: "1px solid ".concat(theme.palette.success.main),
+      '& $icon': {
+        color: theme.palette.success.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="outlined"` and `color="info"`. */
+    outlinedInfo: {
+      color: getColor(theme.palette.info.main, 0.6),
+      border: "1px solid ".concat(theme.palette.info.main),
+      '& $icon': {
+        color: theme.palette.info.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="outlined"` and `color="warning"`. */
+    outlinedWarning: {
+      color: getColor(theme.palette.warning.main, 0.6),
+      border: "1px solid ".concat(theme.palette.warning.main),
+      '& $icon': {
+        color: theme.palette.warning.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="outlined"` and `color="error"`. */
+    outlinedError: {
+      color: getColor(theme.palette.error.main, 0.6),
+      border: "1px solid ".concat(theme.palette.error.main),
+      '& $icon': {
+        color: theme.palette.error.main
+      }
+    },
+
+    /* Styles applied to the root element if `variant="filled"` and `color="success"`. */
+    filledSuccess: {
+      color: '#fff',
+      fontWeight: theme.typography.fontWeightMedium,
+      backgroundColor: theme.palette.success.main
+    },
+
+    /* Styles applied to the root element if `variant="filled"` and `color="info"`. */
+    filledInfo: {
+      color: '#fff',
+      fontWeight: theme.typography.fontWeightMedium,
+      backgroundColor: theme.palette.info.main
+    },
+
+    /* Styles applied to the root element if `variant="filled"` and `color="warning"`. */
+    filledWarning: {
+      color: '#fff',
+      fontWeight: theme.typography.fontWeightMedium,
+      backgroundColor: theme.palette.warning.main
+    },
+
+    /* Styles applied to the root element if `variant="filled"` and `color="error"`. */
+    filledError: {
+      color: '#fff',
+      fontWeight: theme.typography.fontWeightMedium,
+      backgroundColor: theme.palette.error.main
+    },
+
+    /* Styles applied to the icon wrapper element. */
+    icon: {
+      marginRight: 12,
+      padding: '7px 0',
+      display: 'flex',
+      fontSize: 22,
+      opacity: 0.9
+    },
+
+    /* Styles applied to the message wrapper element. */
+    message: {
+      padding: '8px 0',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center'
+    },
+
+    /* Styles applied to the action wrapper element if `action` is provided. */
+    action: {
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: 'auto',
+      paddingLeft: 16,
+      marginRight: -8
+    }
+  };
+};
+var defaultIconMapping = {
+  success: react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_SuccessOutlined__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    fontSize: "inherit"
+  }),
+  warning: react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_ReportProblemOutlined__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    fontSize: "inherit"
+  }),
+  error: react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_ErrorOutline__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    fontSize: "inherit"
+  }),
+  info: react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_InfoOutlined__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    fontSize: "inherit"
+  })
+};
+
+var _ref = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_internal_svg_icons_Close__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  fontSize: "small"
+});
+
+var Alert = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(function Alert(props, ref) {
+  var action = props.action,
+      children = props.children,
+      classes = props.classes,
+      className = props.className,
+      _props$closeText = props.closeText,
+      closeText = _props$closeText === void 0 ? 'Close' : _props$closeText,
+      color = props.color,
+      icon = props.icon,
+      _props$iconMapping = props.iconMapping,
+      iconMapping = _props$iconMapping === void 0 ? defaultIconMapping : _props$iconMapping,
+      onClose = props.onClose,
+      _props$role = props.role,
+      role = _props$role === void 0 ? 'alert' : _props$role,
+      _props$severity = props.severity,
+      severity = _props$severity === void 0 ? 'success' : _props$severity,
+      _props$variant = props.variant,
+      variant = _props$variant === void 0 ? 'standard' : _props$variant,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(props, ["action", "children", "classes", "className", "closeText", "color", "icon", "iconMapping", "onClose", "role", "severity", "variant"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
+    role: role,
+    square: true,
+    elevation: 0,
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.root, classes["".concat(variant).concat(Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_13__["capitalize"])(color || severity))], className),
+    ref: ref
+  }, other), icon !== false ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: classes.icon
+  }, icon || iconMapping[severity] || defaultIconMapping[severity]) : null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: classes.message
+  }, children), action != null ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: classes.action
+  }, action) : null, action == null && onClose ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: classes.action
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    size: "small",
+    "aria-label": closeText,
+    title: closeText,
+    color: "inherit",
+    onClick: onClose
+  }, _ref)) : null);
+});
+ true ? Alert.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The action to display. It renders after the message, at the end of the alert.
+   */
+  action: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+
+  /**
+   * The content of the component.
+   */
+  children: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+
+  /**
+   * @ignore
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * Override the default label for the *close popup* icon button.
+   *
+   * For localization purposes, you can use the provided [translations](/guides/localization/).
+   */
+  closeText: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * The main color for the alert. Unless provided, the value is taken from the `severity` prop.
+   */
+  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['error', 'info', 'success', 'warning']),
+
+  /**
+   * Override the icon displayed before the children.
+   * Unless provided, the icon is mapped to the value of the `severity` prop.
+   */
+  icon: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+
+  /**
+   * The component maps the `severity` prop to a range of different icons,
+   * for instance success to `<SuccessOutlined>`.
+   * If you wish to change this mapping, you can provide your own.
+   * Alternatively, you can use the `icon` prop to override the icon displayed.
+   */
+  iconMapping: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
+    error: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+    info: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+    success: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+    warning: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node
+  }),
+
+  /**
+   * Callback fired when the component requests to be closed.
+   * When provided and no `action` prop is set, a close icon button is displayed that triggers the callback when clicked.
+   *
+   * @param {object} event The event source of the callback.
+   */
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * The ARIA role attribute of the element.
+   */
+  role: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * The severity of the alert. This defines the color and icon used.
+   */
+  severity: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['error', 'info', 'success', 'warning']),
+
+  /**
+   * The variant to use.
+   */
+  variant: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['filled', 'outlined', 'standard'])
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles, {
+  name: 'MuiAlert'
+})(Alert));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/Alert/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/Alert/index.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Alert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Alert */ "./node_modules/@material-ui/lab/esm/Alert/Alert.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Alert__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/Close.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/Close.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), 'Close'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ErrorOutline.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/ErrorOutline.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+}), 'ErrorOutline'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/InfoOutlined.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/InfoOutlined.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"
+}), 'InfoOutlined'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ReportProblemOutlined.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/ReportProblemOutlined.js ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
+}), 'ReportProblemOutlined'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/SuccessOutlined.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/SuccessOutlined.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createSvgIcon */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__["default"])(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
+}), 'SuccessOutlined'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/createSvgIcon.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/createSvgIcon.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createSvgIcon; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_SvgIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/SvgIcon */ "./node_modules/@material-ui/core/esm/SvgIcon/index.js");
+
+
+
+function createSvgIcon(path, displayName) {
+  var Component = react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(react__WEBPACK_IMPORTED_MODULE_1___default.a.forwardRef(function (props, ref) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_SvgIcon__WEBPACK_IMPORTED_MODULE_2__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      ref: ref
+    }, props), path);
+  }));
+
+  if (true) {
+    Component.displayName = "".concat(displayName, "Icon");
+  }
+
+  Component.muiName = _material_ui_core_SvgIcon__WEBPACK_IMPORTED_MODULE_2__["default"].muiName;
   return Component;
 }
 
@@ -57162,25 +57688,7 @@ var ___CSS_LOADER_AT_RULE_IMPORT_0___ = __webpack_require__(/*! -!../node_module
 exports = ___CSS_LOADER_API_IMPORT___(true);
 exports.i(___CSS_LOADER_AT_RULE_IMPORT_0___);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n", "",{"version":3,"sources":["App.scss","/root/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;EACE,gBAAgB,EAAA;;AAGlB;;EAEE,6GAAa,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nhtml {\n  font-size: 62.5%;\n}\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n}\n"]}]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./client/components/jsonReader.scss":
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-1!./node_modules/postcss-loader/src??ref--5-2!./node_modules/sass-loader/dist/cjs.js??ref--5-3!./client/components/jsonReader.scss ***!
-  \****************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-exports = ___CSS_LOADER_API_IMPORT___(true);
-// Module
-exports.push([module.i, ".JsonReader .JsonReader__droppable {\n  border: 1px solid #000;\n  color: #666;\n  height: 100px;\n  width: 100px; }\n  .JsonReader .JsonReader__droppable :hover {\n    color: #fff; }\n\n.JsonReader .jsonReader__message {\n  color: #c50; }\n", "",{"version":3,"sources":["/root/loggraph/client/components/jsonReader.scss"],"names":[],"mappings":"AAEA;EAIQ,sBAAsB;EACtB,WAAW;EACX,aAAa;EACb,YAAY,EAAA;EAPpB;IAUU,WAAW,EAAA;;AAVrB;EAeQ,WAAW,EAAA","file":"jsonReader.scss","sourcesContent":["@charset 'UTF-8';\n\n.JsonReader {\n  @at-root {\n    & {\n      .JsonReader__droppable {\n        border: 1px solid #000;\n        color: #666;\n        height: 100px;\n        width: 100px;\n\n        :hover {\n          color: #fff;\n        }\n      }\n\n      .jsonReader__message {\n        color: #c50;\n      }\n    }\n  }\n}\n"]}]);
+exports.push([module.i, "@charset \"UTF-8\";\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n", "",{"version":3,"sources":["App.scss","/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;EACE,gBAAgB,EAAA;;AAGlB;;EAEE,6GAAa,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nhtml {\n  font-size: 62.5%;\n}\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n}\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -57198,7 +57706,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n", "",{"version":3,"sources":["/root/loggraph/client/reset.css","reset.css"],"names":[],"mappings":"AAAA;;;;;;CCMC;ADED;;;;;;;;;;;;EAYI,SAAQ;EACR,UAAS;EACT,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B;EACI,cAAa,EAAA;;AAGjB;;EAEI,cAAa,EAAA;;AAGjB;EACI,gBAAe,EAAA;;AAGnB;EACI,YAAW,EAAA;;AAGf;;EAEI,WAAU;EACV,aAAY,EAAA;;AAGhB;EACI,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,qBAAoB,EAAA;;AAGxB,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,kBAAiB;EACjB,iBAAgB,EAAA;;AAGpB;EACI,6BAA6B,EAAA;;AAGjC;EACI,yBAAwB;EACxB,YAAW,EAAA;;AAGf;EACI,yBAAwB;EACxB,iBAAgB,EAAA;;AAGpB,4CAAA;AACA;EACI,cAAa;EACb,WAAU;EACV,SAAQ;EACR,6BAA4B;EAC5B,aAAY;EACZ,UAAS,EAAA;;AAGb;EACI,sBAAqB,EAAA","file":"reset.css","sourcesContent":["/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n    margin:0;\n    padding:0;\n    border:0;\n    outline:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\nbody {\n    line-height:1;\n}\n\narticle,aside,details,figcaption,figure,\nfooter,header,hgroup,menu,nav,section {\n    display:block;\n}\n\nnav ul {\n    list-style:none;\n}\n\nblockquote, q {\n    quotes:none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content:'';\n    content:none;\n}\n\na {\n    margin:0;\n    padding:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\n/* change colours to suit your needs */\nins {\n    background-color:#ff9;\n    color:#000;\n    text-decoration:none;\n}\n\n/* change colours to suit your needs */\nmark {\n    background-color:#ff9;\n    color:#000;\n    font-style:italic;\n    font-weight:bold;\n}\n\ndel {\n    text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n    border-bottom:1px dotted;\n    cursor:help;\n}\n\ntable {\n    border-collapse:collapse;\n    border-spacing:0;\n}\n\n/* change border colour to suit your needs */\nhr {\n    display:block;\n    height:1px;\n    border:0;  \n    border-top:1px solid #cccccc;\n    margin:1em 0;\n    padding:0;\n}\n\ninput, select {\n    vertical-align:middle;\n}\n","/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n"]}]);
+exports.push([module.i, "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n", "",{"version":3,"sources":["/loggraph/client/reset.css","reset.css"],"names":[],"mappings":"AAAA;;;;;;CCMC;ADED;;;;;;;;;;;;EAYI,SAAQ;EACR,UAAS;EACT,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B;EACI,cAAa,EAAA;;AAGjB;;EAEI,cAAa,EAAA;;AAGjB;EACI,gBAAe,EAAA;;AAGnB;EACI,YAAW,EAAA;;AAGf;;EAEI,WAAU;EACV,aAAY,EAAA;;AAGhB;EACI,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,qBAAoB,EAAA;;AAGxB,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,kBAAiB;EACjB,iBAAgB,EAAA;;AAGpB;EACI,6BAA6B,EAAA;;AAGjC;EACI,yBAAwB;EACxB,YAAW,EAAA;;AAGf;EACI,yBAAwB;EACxB,iBAAgB,EAAA;;AAGpB,4CAAA;AACA;EACI,cAAa;EACb,WAAU;EACV,SAAQ;EACR,6BAA4B;EAC5B,aAAY;EACZ,UAAS,EAAA;;AAGb;EACI,sBAAqB,EAAA","file":"reset.css","sourcesContent":["/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n    margin:0;\n    padding:0;\n    border:0;\n    outline:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\nbody {\n    line-height:1;\n}\n\narticle,aside,details,figcaption,figure,\nfooter,header,hgroup,menu,nav,section {\n    display:block;\n}\n\nnav ul {\n    list-style:none;\n}\n\nblockquote, q {\n    quotes:none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content:'';\n    content:none;\n}\n\na {\n    margin:0;\n    padding:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\n/* change colours to suit your needs */\nins {\n    background-color:#ff9;\n    color:#000;\n    text-decoration:none;\n}\n\n/* change colours to suit your needs */\nmark {\n    background-color:#ff9;\n    color:#000;\n    font-style:italic;\n    font-weight:bold;\n}\n\ndel {\n    text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n    border-bottom:1px dotted;\n    cursor:help;\n}\n\ntable {\n    border-collapse:collapse;\n    border-spacing:0;\n}\n\n/* change border colour to suit your needs */\nhr {\n    display:block;\n    height:1px;\n    border:0;  \n    border-top:1px solid #cccccc;\n    margin:1em 0;\n    padding:0;\n}\n\ninput, select {\n    vertical-align:middle;\n}\n","/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -102254,4 +102762,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?10b11e6f08c238c02bd2
+//# sourceMappingURL=bundle.js.map?ffa9ce2f88072ab2e817
