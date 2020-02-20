@@ -24,7 +24,7 @@ const Header: FC<SideMenuProps> = ({
   return (
     <Drawer variant="persistent" anchor="right" open={isOpeningSideMenu}>
       <div className={classes.sideMenu}>
-        <IconButton edge="start" onClick={closeSideMenu}>
+        <IconButton onClick={closeSideMenu}>
           <ChevronRightIcon />
         </IconButton>
         <DisplayRuleForms />
