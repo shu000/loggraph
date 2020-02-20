@@ -1004,6 +1004,10 @@ var Graph = function Graph(_ref) {
     });
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
     open: errorMessage !== '',
+    anchorOrigin: {
+      vertical: 'top',
+      horizontal: 'center'
+    },
     autoHideDuration: 2000,
     onClose: function onClose() {
       return setErrorMessage('');
@@ -102761,4 +102765,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?af90ced5e27d715f3258
+//# sourceMappingURL=bundle.js.map?090f8586eb0d6ed94a34

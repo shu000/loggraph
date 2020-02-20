@@ -99,6 +99,10 @@ const Graph: FC<GraphProps> = ({
       ))}
       <Snackbar
         open={errorMessage !== ''}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
         autoHideDuration={2000}
         onClose={() => setErrorMessage('')}
       >
