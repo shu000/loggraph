@@ -5,13 +5,13 @@ import Util from '../util/util';
 export interface DisplayRuleFormsProps {
   selectingCustomerName?: string;
   rulesCount?: number;
-  fetchRules?: (customerName: string) => void;
+  getRules?: (customerName: string) => void;
 }
 
 const DisplayRuleForms: FC<DisplayRuleFormsProps> = ({
   selectingCustomerName = '',
   rulesCount = 0,
-  fetchRules = () => {},
+  getRules: fetchRules = () => {},
 }) => {
   useEffect(() => {
     if (selectingCustomerName !== '') fetchRules(selectingCustomerName);

@@ -4,7 +4,7 @@ import CustomersForm from '../components/customersForm';
 import {
   CustomersAction,
   onChangeCustomerName,
-  fetchCustomers,
+  getCustomers,
 } from '../actions/customers';
 import { AppState } from '../reducer';
 
@@ -15,7 +15,7 @@ interface StateProps {
 
 interface DispatchProps {
   onChangeCustomerName: (customerName: string) => void;
-  fetchCustomers: () => void;
+  getCustomers: () => void;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
@@ -28,7 +28,7 @@ const mapDispatchToProps = (
 ): DispatchProps => ({
   onChangeCustomerName: customerName =>
     dispatch(onChangeCustomerName(customerName)),
-  fetchCustomers: () => dispatch(fetchCustomers()),
+  getCustomers: () => dispatch(getCustomers()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomersForm);

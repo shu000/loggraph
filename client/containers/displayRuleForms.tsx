@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { DisplayRulesAction, fetchRules } from '../actions/displayRules';
+import { DisplayRulesAction, getRules } from '../actions/displayRules';
 import DisplayRuleForms from '../components/displayRuleForms';
 import { AppState } from '../reducer';
 
@@ -10,7 +10,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  fetchRules: (customerName: string) => void;
+  getRules: (customerName: string) => void;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
@@ -21,7 +21,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<AppState, undefined, DisplayRulesAction>
 ): DispatchProps => ({
-  fetchRules: (customerName: string) => dispatch(fetchRules(customerName)),
+  getRules: (customerName: string) => dispatch(getRules(customerName)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayRuleForms);

@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
-import { getRules } from '../api/rules';
+import RulesApi from '../api/rulesApi';
 
 export const ON_CHANGE = 'ON_CHANGE';
-export const PROGRESS_RULES = 'PROGRESS_RULES';
-export const SUCCEED_RULES = 'SUCCEED_RULES';
-export const FAILURE_RULES = 'FAULURE_RULES';
+export const PROGRESS_GET_RULES = 'PROGRESS_RULES';
+export const SUCCEED_GET_RULES = 'SUCCEED_RULES';
+export const FAILURE_GET_RULES = 'FAULURE_RULES';
 
 export const onChangeSingleRule = (index: number, rule: DisplayRule) => ({
   type: ON_CHANGE as typeof ON_CHANGE,
@@ -15,35 +15,35 @@ export const onChangeSingleRule = (index: number, rule: DisplayRule) => ({
   },
 });
 
-export const progressFetchRules = () => ({
-  type: PROGRESS_RULES as typeof PROGRESS_RULES,
+export const progressGetRules = () => ({
+  type: PROGRESS_GET_RULES as typeof PROGRESS_GET_RULES,
 });
 
-export const succeedFetchRules = (result: DisplayRules) => ({
-  type: SUCCEED_RULES as typeof SUCCEED_RULES,
+export const succeedGetRules = (result: DisplayRules) => ({
+  type: SUCCEED_GET_RULES as typeof SUCCEED_GET_RULES,
   payload: { result },
 });
 
-export const failureFetchRules = (message: string) => ({
-  type: FAILURE_RULES as typeof FAILURE_RULES,
+export const failureGetRules = (message: string) => ({
+  type: FAILURE_GET_RULES as typeof FAILURE_GET_RULES,
   payload: { message },
   error: true,
 });
 
-export const fetchRules = (customerName: string) => {
+export const getRules = (customerName: string) => {
   return async (dispatch: Dispatch) => {
-    dispatch(progressFetchRules());
+    dispatch(progressGetRules());
     try {
-      const result = await getRules(customerName);
-      dispatch(succeedFetchRules(result));
+      const result = await RulesApi.getRules(customerName);
+      dispatch(succeedGetRules(result));
     } catch (error) {
-      dispatch(failureFetchRules(error.message));
+      dispatch(failureGetRules(error.message));
     }
   };
 };
 
 export type DisplayRulesAction =
   | ReturnType<typeof onChangeSingleRule>
-  | ReturnType<typeof progressFetchRules>
-  | ReturnType<typeof succeedFetchRules>
-  | ReturnType<typeof failureFetchRules>;
+  | ReturnType<typeof progressGetRules>
+  | ReturnType<typeof succeedGetRules>
+  | ReturnType<typeof failureGetRules>;

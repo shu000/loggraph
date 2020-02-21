@@ -7,7 +7,7 @@ export interface CustomersFormProps {
   selectingCustomerName?: string;
   customerNames?: string[];
   onChangeCustomerName?: (customerName: string) => void;
-  fetchCustomers?: () => void;
+  getCustomers?: () => void;
 }
 
 const useStyles = makeStyles({
@@ -21,7 +21,7 @@ const CustomersForm: FC<CustomersFormProps> = ({
   selectingCustomerName = '',
   customerNames = [],
   onChangeCustomerName = () => {},
-  fetchCustomers = () => {},
+  getCustomers: fetchCustomers = () => {},
 }) => {
   useEffect(() => {
     fetchCustomers();

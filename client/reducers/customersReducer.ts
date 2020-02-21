@@ -2,7 +2,7 @@ import { Reducer } from 'redux';
 import {
   CustomersAction,
   ON_CHANGE_CUSTOMER_NAME,
-  SUCCEED_CUSTOMERS,
+  SUCCEED_GET_CUSTOMERS,
 } from '../actions/customers';
 
 export interface CustomersState {
@@ -25,7 +25,7 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
         ...state,
         selectingCustomerName: action.payload.customerName,
       };
-    case SUCCEED_CUSTOMERS:
+    case SUCCEED_GET_CUSTOMERS:
       if (action.payload.result.length === 0) return state;
       return {
         ...state,

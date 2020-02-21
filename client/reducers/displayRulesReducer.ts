@@ -2,7 +2,7 @@ import { Reducer } from 'redux';
 import {
   DisplayRulesAction,
   ON_CHANGE,
-  SUCCEED_RULES,
+  SUCCEED_GET_RULES,
 } from '../actions/displayRules';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
@@ -55,7 +55,7 @@ const displayRulesReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
           ),
         },
       };
-    case SUCCEED_RULES:
+    case SUCCEED_GET_RULES:
       return {
         ...state,
         rules: action.payload.result,

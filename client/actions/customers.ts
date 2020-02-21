@@ -1,45 +1,45 @@
 import { Dispatch } from 'redux';
-import { getCustomers } from '../api/rules';
+import RulesApi from '../api/rulesApi';
 
 export const ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
-export const PROGRESS_CUSTOMERS = 'PROGRESS_CUSTOMERS';
-export const SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
-export const FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
+export const PROGRESS_GET_CUSTOMERS = 'PROGRESS_CUSTOMERS';
+export const SUCCEED_GET_CUSTOMERS = 'SUCCEED_CUSTOMERS';
+export const FAILURE_GET_CUSTOMERS = 'FAULURE_CUSTOMERS';
 
 export const onChangeCustomerName = (customerName: string) => ({
   type: ON_CHANGE_CUSTOMER_NAME as typeof ON_CHANGE_CUSTOMER_NAME,
   payload: { customerName },
 });
 
-export const progressFetchCustomers = () => ({
-  type: PROGRESS_CUSTOMERS as typeof PROGRESS_CUSTOMERS,
+export const progressGetCustomers = () => ({
+  type: PROGRESS_GET_CUSTOMERS as typeof PROGRESS_GET_CUSTOMERS,
 });
 
-export const succeedFetchCustomers = (result: string[]) => ({
-  type: SUCCEED_CUSTOMERS as typeof SUCCEED_CUSTOMERS,
+export const succeedGetCustomers = (result: string[]) => ({
+  type: SUCCEED_GET_CUSTOMERS as typeof SUCCEED_GET_CUSTOMERS,
   payload: { result },
 });
 
-export const failureFetchCustomers = (message: string) => ({
-  type: FAILURE_CUSTOMERS as typeof FAILURE_CUSTOMERS,
+export const failureGetCustomers = (message: string) => ({
+  type: FAILURE_GET_CUSTOMERS as typeof FAILURE_GET_CUSTOMERS,
   payload: { message },
   error: true,
 });
 
-export const fetchCustomers = () => {
+export const getCustomers = () => {
   return async (dispatch: Dispatch) => {
-    dispatch(progressFetchCustomers());
+    dispatch(progressGetCustomers());
     try {
-      const result = await getCustomers();
-      dispatch(succeedFetchCustomers(result));
+      const result = await RulesApi.getCustomers();
+      dispatch(succeedGetCustomers(result));
     } catch (error) {
-      dispatch(failureFetchCustomers(error.message));
+      dispatch(failureGetCustomers(error.message));
     }
   };
 };
 
 export type CustomersAction =
   | ReturnType<typeof onChangeCustomerName>
-  | ReturnType<typeof progressFetchCustomers>
-  | ReturnType<typeof succeedFetchCustomers>
-  | ReturnType<typeof failureFetchCustomers>;
+  | ReturnType<typeof progressGetCustomers>
+  | ReturnType<typeof succeedGetCustomers>
+  | ReturnType<typeof failureGetCustomers>;

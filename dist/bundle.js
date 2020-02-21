@@ -176,30 +176,30 @@ var onRead = function onRead(data) {
 /*!*************************************!*\
   !*** ./client/actions/customers.ts ***!
   \*************************************/
-/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_CUSTOMERS, SUCCEED_CUSTOMERS, FAILURE_CUSTOMERS, onChangeCustomerName, progressFetchCustomers, succeedFetchCustomers, failureFetchCustomers, fetchCustomers */
+/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, onChangeCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, getCustomers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CHANGE_CUSTOMER_NAME", function() { return ON_CHANGE_CUSTOMER_NAME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_CUSTOMERS", function() { return PROGRESS_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_CUSTOMERS", function() { return SUCCEED_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_CUSTOMERS", function() { return FAILURE_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_CUSTOMERS", function() { return PROGRESS_GET_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_CUSTOMERS", function() { return SUCCEED_GET_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_CUSTOMERS", function() { return FAILURE_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeCustomerName", function() { return onChangeCustomerName; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressFetchCustomers", function() { return progressFetchCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchCustomers", function() { return succeedFetchCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchCustomers", function() { return failureFetchCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCustomers", function() { return fetchCustomers; });
-/* harmony import */ var _api_rules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rules */ "./client/api/rules.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetCustomers", function() { return progressGetCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetCustomers", function() { return succeedGetCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetCustomers", function() { return failureGetCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustomers", function() { return getCustomers; });
+/* harmony import */ var _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rulesApi */ "./client/api/rulesApi.ts");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 var ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
-var PROGRESS_CUSTOMERS = 'PROGRESS_CUSTOMERS';
-var SUCCEED_CUSTOMERS = 'SUCCEED_CUSTOMERS';
-var FAILURE_CUSTOMERS = 'FAULURE_CUSTOMERS';
+var PROGRESS_GET_CUSTOMERS = 'PROGRESS_CUSTOMERS';
+var SUCCEED_GET_CUSTOMERS = 'SUCCEED_CUSTOMERS';
+var FAILURE_GET_CUSTOMERS = 'FAULURE_CUSTOMERS';
 var onChangeCustomerName = function onChangeCustomerName(customerName) {
   return {
     type: ON_CHANGE_CUSTOMER_NAME,
@@ -208,29 +208,29 @@ var onChangeCustomerName = function onChangeCustomerName(customerName) {
     }
   };
 };
-var progressFetchCustomers = function progressFetchCustomers() {
+var progressGetCustomers = function progressGetCustomers() {
   return {
-    type: PROGRESS_CUSTOMERS
+    type: PROGRESS_GET_CUSTOMERS
   };
 };
-var succeedFetchCustomers = function succeedFetchCustomers(result) {
+var succeedGetCustomers = function succeedGetCustomers(result) {
   return {
-    type: SUCCEED_CUSTOMERS,
+    type: SUCCEED_GET_CUSTOMERS,
     payload: {
       result: result
     }
   };
 };
-var failureFetchCustomers = function failureFetchCustomers(message) {
+var failureGetCustomers = function failureGetCustomers(message) {
   return {
-    type: FAILURE_CUSTOMERS,
+    type: FAILURE_GET_CUSTOMERS,
     payload: {
       message: message
     },
     error: true
   };
 };
-var fetchCustomers = function fetchCustomers() {
+var getCustomers = function getCustomers() {
   return (
     /*#__PURE__*/
     function () {
@@ -242,21 +242,21 @@ var fetchCustomers = function fetchCustomers() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                dispatch(progressFetchCustomers());
+                dispatch(progressGetCustomers());
                 _context.prev = 1;
                 _context.next = 4;
-                return Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getCustomers"])();
+                return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].getCustomers();
 
               case 4:
                 result = _context.sent;
-                dispatch(succeedFetchCustomers(result));
+                dispatch(succeedGetCustomers(result));
                 _context.next = 11;
                 break;
 
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](1);
-                dispatch(failureFetchCustomers(_context.t0.message));
+                dispatch(failureGetCustomers(_context.t0.message));
 
               case 11:
               case "end":
@@ -279,30 +279,30 @@ var fetchCustomers = function fetchCustomers() {
 /*!****************************************!*\
   !*** ./client/actions/displayRules.ts ***!
   \****************************************/
-/*! exports provided: ON_CHANGE, PROGRESS_RULES, SUCCEED_RULES, FAILURE_RULES, onChangeSingleRule, progressFetchRules, succeedFetchRules, failureFetchRules, fetchRules */
+/*! exports provided: ON_CHANGE, PROGRESS_GET_RULES, SUCCEED_GET_RULES, FAILURE_GET_RULES, onChangeSingleRule, progressGetRules, succeedGetRules, failureGetRules, getRules */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CHANGE", function() { return ON_CHANGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_RULES", function() { return PROGRESS_RULES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_RULES", function() { return SUCCEED_RULES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_RULES", function() { return FAILURE_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_RULES", function() { return PROGRESS_GET_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_RULES", function() { return SUCCEED_GET_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_RULES", function() { return FAILURE_GET_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeSingleRule", function() { return onChangeSingleRule; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressFetchRules", function() { return progressFetchRules; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedFetchRules", function() { return succeedFetchRules; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureFetchRules", function() { return failureFetchRules; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchRules", function() { return fetchRules; });
-/* harmony import */ var _api_rules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rules */ "./client/api/rules.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetRules", function() { return progressGetRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetRules", function() { return succeedGetRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetRules", function() { return failureGetRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRules", function() { return getRules; });
+/* harmony import */ var _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rulesApi */ "./client/api/rulesApi.ts");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 var ON_CHANGE = 'ON_CHANGE';
-var PROGRESS_RULES = 'PROGRESS_RULES';
-var SUCCEED_RULES = 'SUCCEED_RULES';
-var FAILURE_RULES = 'FAULURE_RULES';
+var PROGRESS_GET_RULES = 'PROGRESS_RULES';
+var SUCCEED_GET_RULES = 'SUCCEED_RULES';
+var FAILURE_GET_RULES = 'FAULURE_RULES';
 var onChangeSingleRule = function onChangeSingleRule(index, rule) {
   return {
     type: ON_CHANGE,
@@ -312,29 +312,29 @@ var onChangeSingleRule = function onChangeSingleRule(index, rule) {
     }
   };
 };
-var progressFetchRules = function progressFetchRules() {
+var progressGetRules = function progressGetRules() {
   return {
-    type: PROGRESS_RULES
+    type: PROGRESS_GET_RULES
   };
 };
-var succeedFetchRules = function succeedFetchRules(result) {
+var succeedGetRules = function succeedGetRules(result) {
   return {
-    type: SUCCEED_RULES,
+    type: SUCCEED_GET_RULES,
     payload: {
       result: result
     }
   };
 };
-var failureFetchRules = function failureFetchRules(message) {
+var failureGetRules = function failureGetRules(message) {
   return {
-    type: FAILURE_RULES,
+    type: FAILURE_GET_RULES,
     payload: {
       message: message
     },
     error: true
   };
 };
-var fetchRules = function fetchRules(customerName) {
+var getRules = function getRules(customerName) {
   return (
     /*#__PURE__*/
     function () {
@@ -346,21 +346,21 @@ var fetchRules = function fetchRules(customerName) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                dispatch(progressFetchRules());
+                dispatch(progressGetRules());
                 _context.prev = 1;
                 _context.next = 4;
-                return Object(_api_rules__WEBPACK_IMPORTED_MODULE_0__["getRules"])(customerName);
+                return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].getRules(customerName);
 
               case 4:
                 result = _context.sent;
-                dispatch(succeedFetchRules(result));
+                dispatch(succeedGetRules(result));
                 _context.next = 11;
                 break;
 
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](1);
-                dispatch(failureFetchRules(_context.t0.message));
+                dispatch(failureGetRules(_context.t0.message));
 
               case 11:
               case "end":
@@ -423,21 +423,15 @@ var API_TIMEOUT = 7000;
 
 /***/ }),
 
-/***/ "./client/api/rules.ts":
-/*!*****************************!*\
-  !*** ./client/api/rules.ts ***!
-  \*****************************/
-/*! exports provided: getCustomers, addCustomer, deleteCustomer, updateCustomer, getRules, updateRules */
+/***/ "./client/api/rulesApi.ts":
+/*!********************************!*\
+  !*** ./client/api/rulesApi.ts ***!
+  \********************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustomers", function() { return getCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addCustomer", function() { return addCustomer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCustomer", function() { return deleteCustomer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCustomer", function() { return updateCustomer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRules", function() { return getRules; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateRules", function() { return updateRules; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config */ "./client/api/config.ts");
@@ -451,275 +445,278 @@ var usersConfig = {
   baseURL: _config__WEBPACK_IMPORTED_MODULE_1__["API_ENDPOINT"],
   timeout: _config__WEBPACK_IMPORTED_MODULE_1__["API_TIMEOUT"]
 };
-var getCustomers =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
-    var instance, response;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context.next = 3;
-            return instance.get("/customers");
+var RulesApi = {
+  getCustomers: function () {
+    var _getCustomers = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee() {
+      var instance, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+              _context.next = 3;
+              return instance.get("/customers");
 
-          case 3:
-            response = _context.sent;
+            case 3:
+              response = _context.sent;
 
-            if (!(response.status !== 200)) {
-              _context.next = 6;
-              break;
-            }
+              if (!(response.status !== 200)) {
+                _context.next = 6;
+                break;
+              }
 
-            throw new Error('データを取得できませんでした');
+              throw new Error('データを取得できませんでした');
 
-          case 6:
-            console.log('GET customers');
-            console.log(response.data.result);
-            return _context.abrupt("return", response.data.result);
+            case 6:
+              console.log('GET customers');
+              console.log(response.data.result);
+              return _context.abrupt("return", response.data.result);
 
-          case 9:
-          case "end":
-            return _context.stop();
+            case 9:
+            case "end":
+              return _context.stop();
+          }
         }
-      }
-    }, _callee);
-  }));
+      }, _callee);
+    }));
 
-  return function getCustomers() {
-    return _ref.apply(this, arguments);
-  };
-}();
-var addCustomer =
-/*#__PURE__*/
-function () {
-  var _ref2 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(customerName) {
-    var instance, response;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context2.next = 3;
-            return instance.post("/customers", {
-              customerName: customerName
-            });
+    function getCustomers() {
+      return _getCustomers.apply(this, arguments);
+    }
 
-          case 3:
-            response = _context2.sent;
+    return getCustomers;
+  }(),
+  addCustomer: function () {
+    var _addCustomer = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee2(customerName) {
+      var instance, response;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+              _context2.next = 3;
+              return instance.post("/customers", {
+                customerName: customerName
+              });
 
-            if (!(response.status !== 200)) {
-              _context2.next = 6;
-              break;
-            }
+            case 3:
+              response = _context2.sent;
 
-            throw new Error('登録に失敗しました');
+              if (!(response.status !== 200)) {
+                _context2.next = 6;
+                break;
+              }
 
-          case 6:
-            console.log('POST customers');
-            console.log(response);
-            return _context2.abrupt("return", true);
+              throw new Error('登録に失敗しました');
 
-          case 9:
-          case "end":
-            return _context2.stop();
+            case 6:
+              console.log('POST customers');
+              console.log(response);
+              return _context2.abrupt("return", true);
+
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
         }
-      }
-    }, _callee2);
-  }));
+      }, _callee2);
+    }));
 
-  return function addCustomer(_x) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-var deleteCustomer =
-/*#__PURE__*/
-function () {
-  var _ref3 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee3(customerName) {
-    var instance, response;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context3.next = 3;
-            return instance["delete"]("/customers/".concat(customerName));
+    function addCustomer(_x) {
+      return _addCustomer.apply(this, arguments);
+    }
 
-          case 3:
-            response = _context3.sent;
+    return addCustomer;
+  }(),
+  deleteCustomer: function () {
+    var _deleteCustomer = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee3(customerName) {
+      var instance, response;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+              _context3.next = 3;
+              return instance["delete"]("/customers/".concat(customerName));
 
-            if (!(response.status !== 200)) {
-              _context3.next = 6;
-              break;
-            }
+            case 3:
+              response = _context3.sent;
 
-            throw new Error('削除に失敗しました');
+              if (!(response.status !== 200)) {
+                _context3.next = 6;
+                break;
+              }
 
-          case 6:
-            console.log('DELETE customers');
-            console.log(response);
-            return _context3.abrupt("return", true);
+              throw new Error('削除に失敗しました');
 
-          case 9:
-          case "end":
-            return _context3.stop();
+            case 6:
+              console.log('DELETE customers');
+              console.log(response);
+              return _context3.abrupt("return", true);
+
+            case 9:
+            case "end":
+              return _context3.stop();
+          }
         }
-      }
-    }, _callee3);
-  }));
+      }, _callee3);
+    }));
 
-  return function deleteCustomer(_x2) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-var updateCustomer =
-/*#__PURE__*/
-function () {
-  var _ref4 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(customerName, newCustomerName) {
-    var instance, response;
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
-      while (1) {
-        switch (_context4.prev = _context4.next) {
-          case 0:
-            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context4.next = 3;
-            return instance.put("/customers/".concat(customerName), {
-              newCustomerName: newCustomerName
-            });
+    function deleteCustomer(_x2) {
+      return _deleteCustomer.apply(this, arguments);
+    }
 
-          case 3:
-            response = _context4.sent;
+    return deleteCustomer;
+  }(),
+  updateCustomer: function () {
+    var _updateCustomer = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee4(customerName, newCustomerName) {
+      var instance, response;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+              _context4.next = 3;
+              return instance.put("/customers/".concat(customerName), {
+                newCustomerName: newCustomerName
+              });
 
-            if (!(response.status !== 200)) {
-              _context4.next = 6;
-              break;
-            }
+            case 3:
+              response = _context4.sent;
 
-            throw new Error('変更に失敗しました');
+              if (!(response.status !== 200)) {
+                _context4.next = 6;
+                break;
+              }
 
-          case 6:
-            console.log('PUT customers');
-            console.log(response);
-            return _context4.abrupt("return", true);
+              throw new Error('変更に失敗しました');
 
-          case 9:
-          case "end":
-            return _context4.stop();
+            case 6:
+              console.log('PUT customers');
+              console.log(response);
+              return _context4.abrupt("return", true);
+
+            case 9:
+            case "end":
+              return _context4.stop();
+          }
         }
-      }
-    }, _callee4);
-  }));
+      }, _callee4);
+    }));
 
-  return function updateCustomer(_x3, _x4) {
-    return _ref4.apply(this, arguments);
-  };
-}();
-var getRules =
-/*#__PURE__*/
-function () {
-  var _ref5 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee5(customerName) {
-    var instance, response;
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            if (!(customerName === '')) {
-              _context5.next = 2;
-              break;
-            }
+    function updateCustomer(_x3, _x4) {
+      return _updateCustomer.apply(this, arguments);
+    }
 
-            return _context5.abrupt("return", {
-              customerName: '',
-              rules: []
-            });
+    return updateCustomer;
+  }(),
+  getRules: function () {
+    var _getRules = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee5(customerName) {
+      var instance, response;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              if (!(customerName === '')) {
+                _context5.next = 2;
+                break;
+              }
 
-          case 2:
-            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context5.next = 5;
-            return instance.get("/rules/".concat(customerName));
+              return _context5.abrupt("return", {
+                customerName: '',
+                rules: []
+              });
 
-          case 5:
-            response = _context5.sent;
+            case 2:
+              instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+              _context5.next = 5;
+              return instance.get("/rules/".concat(customerName));
 
-            if (!(response.status !== 200)) {
-              _context5.next = 8;
-              break;
-            }
+            case 5:
+              response = _context5.sent;
 
-            throw new Error('データを取得できませんでした');
+              if (!(response.status !== 200)) {
+                _context5.next = 8;
+                break;
+              }
 
-          case 8:
-            console.log('GET rules');
-            console.log(response.data.result);
-            return _context5.abrupt("return", response.data.result);
+              throw new Error('データを取得できませんでした');
 
-          case 11:
-          case "end":
-            return _context5.stop();
+            case 8:
+              console.log('GET rules');
+              console.log(response.data.result);
+              return _context5.abrupt("return", response.data.result);
+
+            case 11:
+            case "end":
+              return _context5.stop();
+          }
         }
-      }
-    }, _callee5);
-  }));
+      }, _callee5);
+    }));
 
-  return function getRules(_x5) {
-    return _ref5.apply(this, arguments);
-  };
-}();
-var updateRules =
-/*#__PURE__*/
-function () {
-  var _ref6 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee6(customerName, rules) {
-    var instance, response;
-    return regeneratorRuntime.wrap(function _callee6$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context6.next = 3;
-            return instance.put("/tules/".concat(customerName), {
-              rules: rules
-            });
+    function getRules(_x5) {
+      return _getRules.apply(this, arguments);
+    }
 
-          case 3:
-            response = _context6.sent;
+    return getRules;
+  }(),
+  updateRules: function () {
+    var _updateRules = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee6(customerName, rules) {
+      var instance, response;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+              _context6.next = 3;
+              return instance.put("/tules/".concat(customerName), {
+                rules: rules
+              });
 
-            if (!(response.status !== 200)) {
-              _context6.next = 6;
-              break;
-            }
+            case 3:
+              response = _context6.sent;
 
-            throw new Error('変更に失敗しました');
+              if (!(response.status !== 200)) {
+                _context6.next = 6;
+                break;
+              }
 
-          case 6:
-            console.log('PUT rules');
-            console.log(response);
-            return _context6.abrupt("return", true);
+              throw new Error('変更に失敗しました');
 
-          case 9:
-          case "end":
-            return _context6.stop();
+            case 6:
+              console.log('PUT rules');
+              console.log(response);
+              return _context6.abrupt("return", true);
+
+            case 9:
+            case "end":
+              return _context6.stop();
+          }
         }
-      }
-    }, _callee6);
-  }));
+      }, _callee6);
+    }));
 
-  return function updateRules(_x6, _x7) {
-    return _ref6.apply(this, arguments);
-  };
-}();
+    function updateRules(_x6, _x7) {
+      return _updateRules.apply(this, arguments);
+    }
+
+    return updateRules;
+  }()
+};
+/* harmony default export */ __webpack_exports__["default"] = (RulesApi);
 
 /***/ }),
 
@@ -840,8 +837,8 @@ var CustomersForm = function CustomersForm(_ref) {
       customerNames = _ref$customerNames === void 0 ? [] : _ref$customerNames,
       _ref$onChangeCustomer = _ref.onChangeCustomerName,
       onChangeCustomerName = _ref$onChangeCustomer === void 0 ? function () {} : _ref$onChangeCustomer,
-      _ref$fetchCustomers = _ref.fetchCustomers,
-      fetchCustomers = _ref$fetchCustomers === void 0 ? function () {} : _ref$fetchCustomers;
+      _ref$getCustomers = _ref.getCustomers,
+      fetchCustomers = _ref$getCustomers === void 0 ? function () {} : _ref$getCustomers;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     fetchCustomers();
   }, []);
@@ -1046,8 +1043,8 @@ var DisplayRuleForms = function DisplayRuleForms(_ref) {
       selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
       _ref$rulesCount = _ref.rulesCount,
       rulesCount = _ref$rulesCount === void 0 ? 0 : _ref$rulesCount,
-      _ref$fetchRules = _ref.fetchRules,
-      fetchRules = _ref$fetchRules === void 0 ? function () {} : _ref$fetchRules;
+      _ref$getRules = _ref.getRules,
+      fetchRules = _ref$getRules === void 0 ? function () {} : _ref$getRules;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (selectingCustomerName !== '') fetchRules(selectingCustomerName);
   }, [selectingCustomerName]);
@@ -1550,8 +1547,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     onChangeCustomerName: function onChangeCustomerName(customerName) {
       return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["onChangeCustomerName"])(customerName));
     },
-    fetchCustomers: function fetchCustomers() {
-      return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["fetchCustomers"])());
+    getCustomers: function getCustomers() {
+      return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["getCustomers"])());
     }
   };
 };
@@ -1619,8 +1616,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchRules: function fetchRules(customerName) {
-      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["fetchRules"])(customerName));
+    getRules: function getRules(customerName) {
+      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["getRules"])(customerName));
     }
   };
 };
@@ -2596,7 +2593,7 @@ var customersReducer = function customersReducer() {
         selectingCustomerName: action.payload.customerName
       });
 
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_GET_CUSTOMERS"]:
       if (action.payload.result.length === 0) return state;
       return _objectSpread({}, state, {
         selectingCustomerName: action.payload.result[0],
@@ -2672,7 +2669,7 @@ var displayRulesReducer = function displayRulesReducer() {
         }
       });
 
-    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_RULES"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_GET_RULES"]:
       return _objectSpread({}, state, {
         rules: action.payload.result
       });
@@ -82474,4 +82471,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?6558cf4730e983b158be
+//# sourceMappingURL=bundle.js.map?b3050015dc41b7a975fc
