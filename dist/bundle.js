@@ -172,6 +172,27 @@ var onRead = function onRead(data) {
 
 /***/ }),
 
+/***/ "./client/actions/app.ts":
+/*!*******************************!*\
+  !*** ./client/actions/app.ts ***!
+  \*******************************/
+/*! exports provided: ON_CLOSE_FEEDBACK, onCloseFeedback */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CLOSE_FEEDBACK", function() { return ON_CLOSE_FEEDBACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onCloseFeedback", function() { return onCloseFeedback; });
+var ON_CLOSE_FEEDBACK = 'ON_CLOSE_FEEDBACK'; // uiステートか？
+
+var onCloseFeedback = function onCloseFeedback() {
+  return {
+    type: ON_CLOSE_FEEDBACK
+  };
+};
+
+/***/ }),
+
 /***/ "./client/actions/customers.ts":
 /*!*************************************!*\
   !*** ./client/actions/customers.ts ***!
@@ -2599,6 +2620,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_customersReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/customersReducer */ "./client/reducers/customersReducer.ts");
 /* harmony import */ var _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/displayRulesReducer */ "./client/reducers/displayRulesReducer.ts");
 /* harmony import */ var _reducers_uiReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducers/uiReducer */ "./client/reducers/uiReducer.ts");
+/* harmony import */ var _reducers_appReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reducers/appReducer */ "./client/reducers/appReducer.ts");
+
 
 
 
@@ -2608,7 +2631,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   analyticsData: _reducers_analyticsDataReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   customers: _reducers_customersReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   displayRules: _reducers_displayRulesReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  ui: _reducers_uiReducer__WEBPACK_IMPORTED_MODULE_4__["default"]
+  ui: _reducers_uiReducer__WEBPACK_IMPORTED_MODULE_4__["default"],
+  app: _reducers_appReducer__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 
 /***/ }),
@@ -2648,6 +2672,108 @@ var analyticsDataReducer = function analyticsDataReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (analyticsDataReducer);
+
+/***/ }),
+
+/***/ "./client/reducers/appReducer.ts":
+/*!***************************************!*\
+  !*** ./client/reducers/appReducer.ts ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/app */ "./client/actions/app.ts");
+/* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
+/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var initialState = {
+  isGetting: false,
+  isUpdating: false,
+  feedback: {
+    open: false,
+    isSucceed: true,
+    message: ''
+  }
+};
+
+var appReducer = function appReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_app__WEBPACK_IMPORTED_MODULE_0__["ON_CLOSE_FEEDBACK"]:
+      return _objectSpread({}, state, {
+        feedback: {
+          open: false,
+          isSucceed: true,
+          message: ''
+        }
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_GET_CUSTOMERS"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["PROGRESS_GET_RULES"]:
+      return _objectSpread({}, state, {
+        isGetting: true
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_DELETE_CUSTOMERS"]:
+      return _objectSpread({}, state, {
+        isUpdating: true
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_GET_CUSTOMERS"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["SUCCEED_GET_RULES"]:
+      return _objectSpread({}, state, {
+        isGetting: false
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_DELETE_CUSTOMERS"]:
+      return _objectSpread({}, state, {
+        isUpdating: false,
+        feedback: {
+          open: true,
+          isSucceed: true,
+          message: '削除しました'
+        }
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_GET_CUSTOMERS"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["FAILURE_GET_RULES"]:
+      return _objectSpread({}, state, {
+        isGetting: false,
+        feedback: {
+          open: true,
+          isSucceed: false,
+          message: action.payload.message
+        }
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_DELETE_CUSTOMERS"]:
+      return _objectSpread({}, state, {
+        isUpdating: false,
+        feedback: {
+          open: true,
+          isSucceed: false,
+          message: action.payload.message
+        }
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (appReducer);
 
 /***/ }),
 
@@ -82561,4 +82687,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?c7486528453043353bd1
+//# sourceMappingURL=bundle.js.map?d8293e89cee0216d6d64
