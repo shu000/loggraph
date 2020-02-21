@@ -300,11 +300,11 @@ var progressDeleteCustomers = function progressDeleteCustomers() {
     type: PROGRESS_DELETE_CUSTOMERS
   };
 };
-var succeedDeleteCustomers = function succeedDeleteCustomers(result) {
+var succeedDeleteCustomers = function succeedDeleteCustomers(deletedCustomerName) {
   return {
     type: SUCCEED_DELETE_CUSTOMERS,
     payload: {
-      result: result
+      deletedCustomerName: deletedCustomerName
     }
   };
 };
@@ -735,11 +735,27 @@ var RulesApi = {
               throw new Error('削除に失敗しました');
 
             case 6:
+              if (!(response.data.result.result.ok !== 1)) {
+                _context3.next = 8;
+                break;
+              }
+
+              throw new Error('削除に失敗しました');
+
+            case 8:
+              if (!(response.data.result.result.n < 1)) {
+                _context3.next = 10;
+                break;
+              }
+
+              throw new Error('削除対象を見つけられませんでした');
+
+            case 10:
               console.log('DELETE customers');
               console.log(response);
-              return _context3.abrupt("return", true);
+              return _context3.abrupt("return", customerName);
 
-            case 9:
+            case 13:
             case "end":
               return _context3.stop();
           }
@@ -3063,6 +3079,21 @@ var initialState = {
   customerNames: []
 };
 
+var newStateOnDeleted = function newStateOnDeleted(oldState, deletedCustomerName) {
+  if (oldState.customerNames.length === 1) return _objectSpread({}, oldState, {
+    selectingCustomerName: '',
+    customerNames: []
+  });
+  var deletedIndex = oldState.customerNames.indexOf(deletedCustomerName);
+  var nextSelectingCustomerName = oldState.customerNames[deletedIndex === 0 ? 1 : deletedIndex - 1];
+  return _objectSpread({}, oldState, {
+    selectingCustomerName: nextSelectingCustomerName,
+    customerNames: oldState.customerNames.filter(function (name) {
+      return name !== deletedCustomerName;
+    })
+  });
+};
+
 var customersReducer = function customersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -3085,6 +3116,9 @@ var customersReducer = function customersReducer() {
         selectingCustomerName: action.payload.addedCustomerName,
         customerNames: [].concat(_toConsumableArray(state.customerNames), [action.payload.addedCustomerName])
       });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_DELETE_CUSTOMERS"]:
+      return newStateOnDeleted(state, action.payload.deletedCustomerName);
 
     default:
       return state;
@@ -82986,4 +83020,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?557a2d56dac79d70112e
+//# sourceMappingURL=bundle.js.map?2a620bd965afc9c3b966

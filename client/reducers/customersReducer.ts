@@ -4,6 +4,7 @@ import {
   ON_CHANGE_CUSTOMER_NAME,
   SUCCEED_GET_CUSTOMERS,
   SUCCEED_ADD_CUSTOMERS,
+  SUCCEED_DELETE_CUSTOMERS,
 } from '../actions/customers';
 
 export interface CustomersState {
@@ -14,6 +15,30 @@ export interface CustomersState {
 const initialState: CustomersState = {
   selectingCustomerName: '',
   customerNames: [],
+};
+
+const newStateOnDeleted = (
+  oldState: CustomersState,
+  deletedCustomerName: string
+) => {
+  if (oldState.customerNames.length === 1)
+    return {
+      ...oldState,
+      selectingCustomerName: '',
+      customerNames: [],
+    };
+
+  const deletedIndex = oldState.customerNames.indexOf(deletedCustomerName);
+  const nextSelectingCustomerName =
+    oldState.customerNames[deletedIndex === 0 ? 1 : deletedIndex - 1];
+
+  return {
+    ...oldState,
+    selectingCustomerName: nextSelectingCustomerName,
+    customerNames: oldState.customerNames.filter(
+      name => name !== deletedCustomerName
+    ),
+  };
 };
 
 const customersReducer: Reducer<CustomersState, CustomersAction> = (
@@ -42,6 +67,8 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
           action.payload.addedCustomerName,
         ],
       };
+    case SUCCEED_DELETE_CUSTOMERS:
+      return newStateOnDeleted(state, action.payload.deletedCustomerName);
     default:
       return state;
   }

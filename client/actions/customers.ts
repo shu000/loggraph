@@ -51,9 +51,9 @@ export const progressDeleteCustomers = () => ({
   type: PROGRESS_DELETE_CUSTOMERS as typeof PROGRESS_DELETE_CUSTOMERS,
 });
 
-export const succeedDeleteCustomers = (result: boolean) => ({
+export const succeedDeleteCustomers = (deletedCustomerName: string) => ({
   type: SUCCEED_DELETE_CUSTOMERS as typeof SUCCEED_DELETE_CUSTOMERS,
-  payload: { result },
+  payload: { deletedCustomerName },
 });
 
 export const failureDeleteCustomers = (message: string) => ({

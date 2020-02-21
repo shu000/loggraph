@@ -41,17 +41,24 @@ const RulesApi = {
 
     return customerName;
   },
-  deleteCustomer: async (customerName: string): Promise<boolean> => {
+  deleteCustomer: async (customerName: string): Promise<string> => {
     const instance = axios.create(usersConfig);
     const response = await instance.delete(`/customers/${customerName}`);
+
     if (response.status !== 200) {
       throw new Error('削除に失敗しました');
+    }
+    if (response.data.result.result.ok !== 1) {
+      throw new Error('削除に失敗しました');
+    }
+    if (response.data.result.result.n < 1) {
+      throw new Error('削除対象を見つけられませんでした');
     }
 
     console.log('DELETE customers');
     console.log(response);
 
-    return true;
+    return customerName;
   },
   updateCustomer: async (
     customerName: string,
