@@ -4,7 +4,7 @@ import Graph from '../components/graph';
 import ParsedData from '../constants/parsedData';
 import AnalyticsData from '../constants/analyticsData';
 import { AnalyticsDataAction, onRead } from '../actions/analyticsData';
-import { AppState } from '../reducer';
+import { RootState } from '../reducer';
 
 interface StateProps {
   parsed: ParsedData;
@@ -14,7 +14,7 @@ interface DispatchProps {
   onReadJson: (data: AnalyticsData) => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   parsed: state.analyticsData.parsed,
 });
 

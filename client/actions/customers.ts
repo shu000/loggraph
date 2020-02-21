@@ -2,9 +2,12 @@ import { Dispatch } from 'redux';
 import RulesApi from '../api/rulesApi';
 
 export const ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
-export const PROGRESS_GET_CUSTOMERS = 'PROGRESS_CUSTOMERS';
-export const SUCCEED_GET_CUSTOMERS = 'SUCCEED_CUSTOMERS';
-export const FAILURE_GET_CUSTOMERS = 'FAULURE_CUSTOMERS';
+export const PROGRESS_GET_CUSTOMERS = 'PROGRESS_GET_CUSTOMERS';
+export const SUCCEED_GET_CUSTOMERS = 'SUCCEED_GET_CUSTOMERS';
+export const FAILURE_GET_CUSTOMERS = 'FAULURE_GET_CUSTOMERS';
+export const PROGRESS_DELETE_CUSTOMERS = 'PROGRESS_DELETE_CUSTOMERS';
+export const SUCCEED_DELETE_CUSTOMERS = 'SUCCEED_DELETE_CUSTOMERS';
+export const FAILURE_DELETE_CUSTOMERS = 'FAULURE_DELETE_CUSTOMERS';
 
 export const onChangeCustomerName = (customerName: string) => ({
   type: ON_CHANGE_CUSTOMER_NAME as typeof ON_CHANGE_CUSTOMER_NAME,
@@ -26,6 +29,21 @@ export const failureGetCustomers = (message: string) => ({
   error: true,
 });
 
+export const progressDeleteCustomers = () => ({
+  type: PROGRESS_DELETE_CUSTOMERS as typeof PROGRESS_DELETE_CUSTOMERS,
+});
+
+export const succeedDeleteCustomers = (result: boolean) => ({
+  type: SUCCEED_DELETE_CUSTOMERS as typeof SUCCEED_DELETE_CUSTOMERS,
+  payload: { result },
+});
+
+export const failureDeleteCustomers = (message: string) => ({
+  type: FAILURE_DELETE_CUSTOMERS as typeof FAILURE_DELETE_CUSTOMERS,
+  payload: { message },
+  error: true,
+});
+
 export const getCustomers = () => {
   return async (dispatch: Dispatch) => {
     dispatch(progressGetCustomers());
@@ -38,8 +56,23 @@ export const getCustomers = () => {
   };
 };
 
+export const deleteCustomer = (customerName: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(progressDeleteCustomers());
+    try {
+      const result = await RulesApi.deleteCustomer(customerName);
+      dispatch(succeedDeleteCustomers(result));
+    } catch (error) {
+      dispatch(failureDeleteCustomers(error.message));
+    }
+  };
+};
+
 export type CustomersAction =
   | ReturnType<typeof onChangeCustomerName>
   | ReturnType<typeof progressGetCustomers>
   | ReturnType<typeof succeedGetCustomers>
-  | ReturnType<typeof failureGetCustomers>;
+  | ReturnType<typeof failureGetCustomers>
+  | ReturnType<typeof progressDeleteCustomers>
+  | ReturnType<typeof succeedDeleteCustomers>
+  | ReturnType<typeof failureDeleteCustomers>;

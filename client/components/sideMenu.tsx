@@ -17,7 +17,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import DisplayRuleForms from '../containers/displayRuleForms';
 
 export interface SideMenuProps {
+  selectingCustomerName?: string;
   isOpeningSideMenu?: boolean;
+  deleteCustomer?: (custonerName: string) => void;
   closeSideMenu?: () => void;
 }
 
@@ -38,7 +40,9 @@ const useStyles = makeStyles({
 });
 
 const Header: FC<SideMenuProps> = ({
+  selectingCustomerName = '',
   isOpeningSideMenu = false,
+  deleteCustomer = () => {},
   closeSideMenu = () => {},
 }) => {
   const classes = useStyles();
@@ -57,19 +61,26 @@ const Header: FC<SideMenuProps> = ({
       });
     };
 
+    const handleDelete = () => {
+      handleClose();
+      deleteCustomer(selectingCustomerName);
+    };
+
     return (
       <Dialog open={localUIState.isOpeningDeleteDialog} onClose={handleClose}>
-        <DialogTitle>削除しますか？</DialogTitle>
+        <DialogTitle>「{selectingCustomerName}」を削除します</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            ＊＊を削除します。本当に削除してよろしいですか？一度削除すると戻すことはできません。
+            本当に削除してよろしいですか？一度削除すると戻すことはできません。
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={handleClose}>
             キャンセル
           </Button>
-          <Button color="secondary">削除する</Button>
+          <Button color="secondary" onClick={handleDelete}>
+            削除する
+          </Button>
         </DialogActions>
       </Dialog>
     );

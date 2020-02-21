@@ -176,7 +176,7 @@ var onRead = function onRead(data) {
 /*!*************************************!*\
   !*** ./client/actions/customers.ts ***!
   \*************************************/
-/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, onChangeCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, getCustomers */
+/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, PROGRESS_DELETE_CUSTOMERS, SUCCEED_DELETE_CUSTOMERS, FAILURE_DELETE_CUSTOMERS, onChangeCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, progressDeleteCustomers, succeedDeleteCustomers, failureDeleteCustomers, getCustomers, deleteCustomer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,11 +185,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_CUSTOMERS", function() { return PROGRESS_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_CUSTOMERS", function() { return SUCCEED_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_CUSTOMERS", function() { return FAILURE_GET_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_DELETE_CUSTOMERS", function() { return PROGRESS_DELETE_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_DELETE_CUSTOMERS", function() { return SUCCEED_DELETE_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_DELETE_CUSTOMERS", function() { return FAILURE_DELETE_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeCustomerName", function() { return onChangeCustomerName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetCustomers", function() { return progressGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetCustomers", function() { return succeedGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetCustomers", function() { return failureGetCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressDeleteCustomers", function() { return progressDeleteCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedDeleteCustomers", function() { return succeedDeleteCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureDeleteCustomers", function() { return failureDeleteCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustomers", function() { return getCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCustomer", function() { return deleteCustomer; });
 /* harmony import */ var _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rulesApi */ "./client/api/rulesApi.ts");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -197,9 +204,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
-var PROGRESS_GET_CUSTOMERS = 'PROGRESS_CUSTOMERS';
-var SUCCEED_GET_CUSTOMERS = 'SUCCEED_CUSTOMERS';
-var FAILURE_GET_CUSTOMERS = 'FAULURE_CUSTOMERS';
+var PROGRESS_GET_CUSTOMERS = 'PROGRESS_GET_CUSTOMERS';
+var SUCCEED_GET_CUSTOMERS = 'SUCCEED_GET_CUSTOMERS';
+var FAILURE_GET_CUSTOMERS = 'FAULURE_GET_CUSTOMERS';
+var PROGRESS_DELETE_CUSTOMERS = 'PROGRESS_DELETE_CUSTOMERS';
+var SUCCEED_DELETE_CUSTOMERS = 'SUCCEED_DELETE_CUSTOMERS';
+var FAILURE_DELETE_CUSTOMERS = 'FAULURE_DELETE_CUSTOMERS';
 var onChangeCustomerName = function onChangeCustomerName(customerName) {
   return {
     type: ON_CHANGE_CUSTOMER_NAME,
@@ -224,6 +234,28 @@ var succeedGetCustomers = function succeedGetCustomers(result) {
 var failureGetCustomers = function failureGetCustomers(message) {
   return {
     type: FAILURE_GET_CUSTOMERS,
+    payload: {
+      message: message
+    },
+    error: true
+  };
+};
+var progressDeleteCustomers = function progressDeleteCustomers() {
+  return {
+    type: PROGRESS_DELETE_CUSTOMERS
+  };
+};
+var succeedDeleteCustomers = function succeedDeleteCustomers(result) {
+  return {
+    type: SUCCEED_DELETE_CUSTOMERS,
+    payload: {
+      result: result
+    }
+  };
+};
+var failureDeleteCustomers = function failureDeleteCustomers(message) {
+  return {
+    type: FAILURE_DELETE_CUSTOMERS,
     payload: {
       message: message
     },
@@ -272,6 +304,48 @@ var getCustomers = function getCustomers() {
     }()
   );
 };
+var deleteCustomer = function deleteCustomer(customerName) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                dispatch(progressDeleteCustomers());
+                _context2.prev = 1;
+                _context2.next = 4;
+                return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].deleteCustomer(customerName);
+
+              case 4:
+                result = _context2.sent;
+                dispatch(succeedDeleteCustomers(result));
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](1);
+                dispatch(failureDeleteCustomers(_context2.t0.message));
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 8]]);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }()
+  );
+};
 
 /***/ }),
 
@@ -300,9 +374,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ON_CHANGE = 'ON_CHANGE';
-var PROGRESS_GET_RULES = 'PROGRESS_RULES';
-var SUCCEED_GET_RULES = 'SUCCEED_RULES';
-var FAILURE_GET_RULES = 'FAULURE_RULES';
+var PROGRESS_GET_RULES = 'PROGRESS_GET_RULES';
+var SUCCEED_GET_RULES = 'SUCCEED_GET_RULES';
+var FAILURE_GET_RULES = 'FAULURE_GET_RULES';
 var onChangeSingleRule = function onChangeSingleRule(index, rule) {
   return {
     type: ON_CHANGE,
@@ -682,7 +756,7 @@ var RulesApi = {
             case 0:
               instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
               _context6.next = 3;
-              return instance.put("/tules/".concat(customerName), {
+              return instance.put("/rules/".concat(customerName), {
                 rules: rules
               });
 
@@ -1382,8 +1456,12 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
 });
 
 var Header = function Header(_ref) {
-  var _ref$isOpeningSideMen = _ref.isOpeningSideMenu,
+  var _ref$selectingCustome = _ref.selectingCustomerName,
+      selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
+      _ref$isOpeningSideMen = _ref.isOpeningSideMenu,
       isOpeningSideMenu = _ref$isOpeningSideMen === void 0 ? false : _ref$isOpeningSideMen,
+      _ref$deleteCustomer = _ref.deleteCustomer,
+      deleteCustomer = _ref$deleteCustomer === void 0 ? function () {} : _ref$deleteCustomer,
       _ref$closeSideMenu = _ref.closeSideMenu,
       closeSideMenu = _ref$closeSideMenu === void 0 ? function () {} : _ref$closeSideMenu;
   var classes = useStyles();
@@ -1404,14 +1482,20 @@ var Header = function Header(_ref) {
       }));
     };
 
+    var handleDelete = function handleDelete() {
+      handleClose();
+      deleteCustomer(selectingCustomerName);
+    };
+
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_3__["default"], {
       open: localUIState.isOpeningDeleteDialog,
       onClose: handleClose
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u524A\u9664\u3057\u307E\u3059\u304B\uFF1F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_6__["default"], null, "\uFF0A\uFF0A\u3092\u524A\u9664\u3057\u307E\u3059\u3002\u672C\u5F53\u306B\u524A\u9664\u3057\u3066\u3088\u308D\u3057\u3044\u3067\u3059\u304B\uFF1F\u4E00\u5EA6\u524A\u9664\u3059\u308B\u3068\u623B\u3059\u3053\u3068\u306F\u3067\u304D\u307E\u305B\u3093\u3002")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u300C", selectingCustomerName, "\u300D\u3092\u524A\u9664\u3057\u307E\u3059"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_6__["default"], null, "\u672C\u5F53\u306B\u524A\u9664\u3057\u3066\u3088\u308D\u3057\u3044\u3067\u3059\u304B\uFF1F\u4E00\u5EA6\u524A\u9664\u3059\u308B\u3068\u623B\u3059\u3053\u3068\u306F\u3067\u304D\u307E\u305B\u3093\u3002")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
       color: "primary",
       onClick: handleClose
     }, "\u30AD\u30E3\u30F3\u30BB\u30EB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      color: "secondary"
+      color: "secondary",
+      onClick: handleDelete
     }, "\u524A\u9664\u3059\u308B")));
   }();
 
@@ -1704,27 +1788,33 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
-/* harmony import */ var _components_sideMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/sideMenu */ "./client/components/sideMenu.tsx");
+/* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
+/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
+/* harmony import */ var _components_sideMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/sideMenu */ "./client/components/sideMenu.tsx");
+
 
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    selectingCustomerName: state.customers.selectingCustomerName,
     isOpeningSideMenu: state.ui.isOpeningSideMenu
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    deleteCustomer: function deleteCustomer(customerName) {
+      return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_1__["deleteCustomer"])(customerName));
+    },
     closeSideMenu: function closeSideMenu() {
-      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_1__["closeSideMenu"])());
+      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_2__["closeSideMenu"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_sideMenu__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_sideMenu__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -82471,4 +82561,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?b3050015dc41b7a975fc
+//# sourceMappingURL=bundle.js.map?c7486528453043353bd1

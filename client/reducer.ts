@@ -12,4 +12,4 @@ export const rootReducer = combineReducers({
   ui: uiReducer,
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>;

@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { UiAction, openSideMenu } from '../actions/ui';
 import Header from '../components/header';
-import { AppState } from '../reducer';
+import { RootState } from '../reducer';
 
 interface StateProps {
   isOpeningSideMenu: boolean;
@@ -12,7 +12,7 @@ interface DispatchProps {
   openSideMenu: () => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   isOpeningSideMenu: state.ui.isOpeningSideMenu,
 });
 
