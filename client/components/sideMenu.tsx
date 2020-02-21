@@ -1,7 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Drawer, IconButton } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import Drawer from '@material-ui/core/Drawer';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
+import SaveIcon from '@material-ui/icons/Save';
 import DisplayRuleForms from '../containers/displayRuleForms';
 
 export interface SideMenuProps {
@@ -9,9 +21,19 @@ export interface SideMenuProps {
   closeSideMenu?: () => void;
 }
 
+interface SideMenuUIState {
+  isAnyFormChanged: boolean;
+  isEditingCustomerName: boolean;
+  isOpeningDeleteDialog: boolean;
+}
+
 const useStyles = makeStyles({
-  sideMenu: {
-    width: 420,
+  drawer: {
+    // マイナスマージン削除により、X方向のスクロールバーを消すため
+    '& .MuiGrid-spacing-xs-1': {
+      width: '100%',
+      margin: 0,
+    },
   },
 });
 
@@ -21,15 +43,117 @@ const Header: FC<SideMenuProps> = ({
 }) => {
   const classes = useStyles();
 
+  const [localUIState, setLocalUIState] = useState<SideMenuUIState>({
+    isAnyFormChanged: false,
+    isEditingCustomerName: false,
+    isOpeningDeleteDialog: false,
+  });
+
+  const DeleteDialog = (() => {
+    const handleClose = () => {
+      setLocalUIState({
+        ...localUIState,
+        isOpeningDeleteDialog: false,
+      });
+    };
+
+    return (
+      <Dialog open={localUIState.isOpeningDeleteDialog} onClose={handleClose}>
+        <DialogTitle>削除しますか？</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            ＊＊を削除します。本当に削除してよろしいですか？一度削除すると戻すことはできません。
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={handleClose}>
+            キャンセル
+          </Button>
+          <Button color="secondary">削除する</Button>
+        </DialogActions>
+      </Dialog>
+    );
+  })();
+
   return (
-    <Drawer variant="persistent" anchor="right" open={isOpeningSideMenu}>
-      <div className={classes.sideMenu}>
-        <IconButton onClick={closeSideMenu}>
-          <ChevronRightIcon />
-        </IconButton>
-        <DisplayRuleForms />
-      </div>
-    </Drawer>
+    <>
+      {DeleteDialog}
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="right"
+        open={isOpeningSideMenu}
+      >
+        <Grid container spacing={1} style={{ width: 520 }}>
+          <Grid item xs={12}>
+            <IconButton onClick={closeSideMenu}>
+              <ChevronRightIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs={1} />
+          <Grid item xs={11}>
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              disabled={!localUIState.isAnyFormChanged}
+              startIcon={<SaveIcon />}
+            >
+              変更を保存
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container justify="center" spacing={1}>
+              <Grid item xs={8}>
+                <TextField
+                  name="customerName"
+                  type="text"
+                  fullWidth
+                  disabled={!localUIState.isEditingCustomerName}
+                  autoFocus
+                  /*
+              value={editingCustomerName}
+              onChange={event => {
+                setEditingCustomerName(event.target.value);
+              }}
+              */
+                />
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton
+                  color={
+                    localUIState.isEditingCustomerName ? 'primary' : 'default'
+                  }
+                  onClick={() => {
+                    setLocalUIState({
+                      ...localUIState,
+                      isEditingCustomerName: !localUIState.isEditingCustomerName,
+                    });
+                  }}
+                >
+                  <EditIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton
+                  onClick={() => {
+                    setLocalUIState({
+                      ...localUIState,
+                      isOpeningDeleteDialog: true,
+                    });
+                  }}
+                >
+                  <DeleteForeverIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <DisplayRuleForms />
+          </Grid>
+        </Grid>
+      </Drawer>
+    </>
   );
 };
 

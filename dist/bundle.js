@@ -851,37 +851,12 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/Save */ "./node_modules/@material-ui/icons/Save.js");
-/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/Edit */ "./node_modules/@material-ui/icons/Edit.js");
-/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/DeleteForever */ "./node_modules/@material-ui/icons/DeleteForever.js");
-/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _containers_displayRuleForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/displayRuleForm */ "./client/containers/displayRuleForm.tsx");
-/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _containers_displayRuleForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../containers/displayRuleForm */ "./client/containers/displayRuleForm.tsx");
+/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
 
 
 
 
-
-
-
-
-
-/*
-const useStyles = makeStyles({
-  displayRuleForms: {
-  }
-});
-*/
 var DisplayRuleForms = function DisplayRuleForms(_ref) {
   var _ref$selectingCustome = _ref.selectingCustomerName,
       selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
@@ -889,38 +864,19 @@ var DisplayRuleForms = function DisplayRuleForms(_ref) {
       rulesCount = _ref$rulesCount === void 0 ? 0 : _ref$rulesCount,
       _ref$fetchRules = _ref.fetchRules,
       fetchRules = _ref$fetchRules === void 0 ? function () {} : _ref$fetchRules;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(selectingCustomerName),
-      _useState2 = _slicedToArray(_useState, 2),
-      editingCustomerName = _useState2[0],
-      setEditingCustomerName = _useState2[1];
-
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    setEditingCustomerName(selectingCustomerName);
     if (selectingCustomerName !== '') fetchRules(selectingCustomerName);
   }, [selectingCustomerName]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    variant: "contained",
-    color: "primary",
-    size: "small",
-    startIcon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_2___default.a, null)
-  }, "Save"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-    name: "customerName",
-    type: "text",
-    value: editingCustomerName,
-    onChange: function onChange(event) {
-      setEditingCustomerName(event.target.value);
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_3___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_4___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "DisplayRuleForms"
-  }, _util_util__WEBPACK_IMPORTED_MODULE_6__["default"].range(rulesCount).map(function (i) {
+  }, _util_util__WEBPACK_IMPORTED_MODULE_2__["default"].range(rulesCount).map(function (i) {
     return (// TODO: range(i + 1) new line
-      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
         key: i.toString(),
         index: i
       })
     );
-  })));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DisplayRuleForms);
@@ -1178,18 +1134,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
+/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
+/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js");
+/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
+/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/esm/DialogActions/index.js");
+/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Drawer */ "./node_modules/@material-ui/core/esm/Drawer/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
+/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/icons/DeleteForever */ "./node_modules/@material-ui/icons/DeleteForever.js");
+/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/icons/Edit */ "./node_modules/@material-ui/icons/Edit.js");
+/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Save */ "./node_modules/@material-ui/icons/Save.js");
+/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
-  sideMenu: {
-    width: 420
+  drawer: {
+    // マイナスマージン削除により、X方向のスクロールバーを消すため
+    '& .MuiGrid-spacing-xs-1': {
+      width: '100%',
+      margin: 0
+    }
   }
 });
 
@@ -1199,15 +1200,108 @@ var Header = function Header(_ref) {
       _ref$closeSideMenu = _ref.closeSideMenu,
       closeSideMenu = _ref$closeSideMenu === void 0 ? function () {} : _ref$closeSideMenu;
   var classes = useStyles();
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Drawer"], {
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    isAnyFormChanged: false,
+    isEditingCustomerName: false,
+    isOpeningDeleteDialog: false
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      localUIState = _useState2[0],
+      setLocalUIState = _useState2[1];
+
+  var DeleteDialog = function () {
+    var handleClose = function handleClose() {
+      setLocalUIState(_objectSpread({}, localUIState, {
+        isOpeningDeleteDialog: false
+      }));
+    };
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      open: localUIState.isOpeningDeleteDialog,
+      onClose: handleClose
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_4__["default"], null, "\u524A\u9664\u3057\u307E\u3059\u304B\uFF1F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_6__["default"], null, "\uFF0A\uFF0A\u3092\u524A\u9664\u3057\u307E\u3059\u3002\u672C\u5F53\u306B\u524A\u9664\u3057\u3066\u3088\u308D\u3057\u3044\u3067\u3059\u304B\uFF1F\u4E00\u5EA6\u524A\u9664\u3059\u308B\u3068\u623B\u3059\u3053\u3068\u306F\u3067\u304D\u307E\u305B\u3093\u3002")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      color: "primary",
+      onClick: handleClose
+    }, "\u30AD\u30E3\u30F3\u30BB\u30EB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      color: "secondary"
+    }, "\u524A\u9664\u3059\u308B")));
+  }();
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, DeleteDialog, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    className: classes.drawer,
     variant: "persistent",
     anchor: "right",
     open: isOpeningSideMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classes.sideMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["IconButton"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    container: true,
+    spacing: 1,
+    style: {
+      width: 520
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 12
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
     onClick: closeSideMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12___default.a, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 1
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 11
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    variant: "contained",
+    size: "small",
+    color: "primary",
+    disabled: !localUIState.isAnyFormChanged,
+    startIcon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15___default.a, null)
+  }, "\u5909\u66F4\u3092\u4FDD\u5B58")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 12
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    container: true,
+    justify: "center",
+    spacing: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 8
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    name: "customerName",
+    type: "text",
+    fullWidth: true,
+    disabled: !localUIState.isEditingCustomerName,
+    autoFocus: true
+    /*
+    value={editingCustomerName}
+    onChange={event => {
+    setEditingCustomerName(event.target.value);
+    }}
+    */
+
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    color: localUIState.isEditingCustomerName ? 'primary' : 'default',
+    onClick: function onClick() {
+      setLocalUIState(_objectSpread({}, localUIState, {
+        isEditingCustomerName: !localUIState.isEditingCustomerName
+      }));
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14___default.a, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    onClick: function onClick() {
+      setLocalUIState(_objectSpread({}, localUIState, {
+        isOpeningDeleteDialog: true
+      }));
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13___default.a, null))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 12
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_16__["default"], null)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
@@ -57822,7 +57916,7 @@ var ___CSS_LOADER_AT_RULE_IMPORT_0___ = __webpack_require__(/*! -!../node_module
 exports = ___CSS_LOADER_API_IMPORT___(true);
 exports.i(___CSS_LOADER_AT_RULE_IMPORT_0___);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n", "",{"version":3,"sources":["App.scss","/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;EACE,gBAAgB,EAAA;;AAGlB;;EAEE,6GAAa,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nhtml {\n  font-size: 62.5%;\n}\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n}\n"]}]);
+exports.push([module.i, "@charset \"UTF-8\";\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n", "",{"version":3,"sources":["App.scss","/root/loggraph/client/App.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACGhB;EACE,gBAAgB,EAAA;;AAGlB;;EAEE,6GAAa,EAAA","file":"App.scss","sourcesContent":["@charset \"UTF-8\";\n@import url(./reset.css);\nhtml {\n  font-size: 62.5%; }\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif; }\n","@charset 'UTF-8';\n@import \"./reset.css\";\n\nhtml {\n  font-size: 62.5%;\n}\n\nbody,\ninput {\n  font-family: \"Roboto\", \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\",\n    \"メイリオ\", \"Meiryo\", \"verdana\", sans-serif;\n}\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -57840,7 +57934,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n", "",{"version":3,"sources":["/loggraph/client/reset.css","reset.css"],"names":[],"mappings":"AAAA;;;;;;CCMC;ADED;;;;;;;;;;;;EAYI,SAAQ;EACR,UAAS;EACT,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B;EACI,cAAa,EAAA;;AAGjB;;EAEI,cAAa,EAAA;;AAGjB;EACI,gBAAe,EAAA;;AAGnB;EACI,YAAW,EAAA;;AAGf;;EAEI,WAAU;EACV,aAAY,EAAA;;AAGhB;EACI,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,qBAAoB,EAAA;;AAGxB,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,kBAAiB;EACjB,iBAAgB,EAAA;;AAGpB;EACI,6BAA6B,EAAA;;AAGjC;EACI,yBAAwB;EACxB,YAAW,EAAA;;AAGf;EACI,yBAAwB;EACxB,iBAAgB,EAAA;;AAGpB,4CAAA;AACA;EACI,cAAa;EACb,WAAU;EACV,SAAQ;EACR,6BAA4B;EAC5B,aAAY;EACZ,UAAS,EAAA;;AAGb;EACI,sBAAqB,EAAA","file":"reset.css","sourcesContent":["/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n    margin:0;\n    padding:0;\n    border:0;\n    outline:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\nbody {\n    line-height:1;\n}\n\narticle,aside,details,figcaption,figure,\nfooter,header,hgroup,menu,nav,section {\n    display:block;\n}\n\nnav ul {\n    list-style:none;\n}\n\nblockquote, q {\n    quotes:none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content:'';\n    content:none;\n}\n\na {\n    margin:0;\n    padding:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\n/* change colours to suit your needs */\nins {\n    background-color:#ff9;\n    color:#000;\n    text-decoration:none;\n}\n\n/* change colours to suit your needs */\nmark {\n    background-color:#ff9;\n    color:#000;\n    font-style:italic;\n    font-weight:bold;\n}\n\ndel {\n    text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n    border-bottom:1px dotted;\n    cursor:help;\n}\n\ntable {\n    border-collapse:collapse;\n    border-spacing:0;\n}\n\n/* change border colour to suit your needs */\nhr {\n    display:block;\n    height:1px;\n    border:0;  \n    border-top:1px solid #cccccc;\n    margin:1em 0;\n    padding:0;\n}\n\ninput, select {\n    vertical-align:middle;\n}\n","/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n"]}]);
+exports.push([module.i, "/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n", "",{"version":3,"sources":["/root/loggraph/client/reset.css","reset.css"],"names":[],"mappings":"AAAA;;;;;;CCMC;ADED;;;;;;;;;;;;EAYI,SAAQ;EACR,UAAS;EACT,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B;EACI,cAAa,EAAA;;AAGjB;;EAEI,cAAa,EAAA;;AAGjB;EACI,gBAAe,EAAA;;AAGnB;EACI,YAAW,EAAA;;AAGf;;EAEI,WAAU;EACV,aAAY,EAAA;;AAGhB;EACI,SAAQ;EACR,UAAS;EACT,eAAc;EACd,wBAAuB;EACvB,uBAAsB,EAAA;;AAG1B,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,qBAAoB,EAAA;;AAGxB,sCAAA;AACA;EACI,sBAAqB;EACrB,WAAU;EACV,kBAAiB;EACjB,iBAAgB,EAAA;;AAGpB;EACI,6BAA6B,EAAA;;AAGjC;EACI,yBAAwB;EACxB,YAAW,EAAA;;AAGf;EACI,yBAAwB;EACxB,iBAAgB,EAAA;;AAGpB,4CAAA;AACA;EACI,cAAa;EACb,WAAU;EACV,SAAQ;EACR,6BAA4B;EAC5B,aAAY;EACZ,UAAS,EAAA;;AAGb;EACI,sBAAqB,EAAA","file":"reset.css","sourcesContent":["/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n    margin:0;\n    padding:0;\n    border:0;\n    outline:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\nbody {\n    line-height:1;\n}\n\narticle,aside,details,figcaption,figure,\nfooter,header,hgroup,menu,nav,section {\n    display:block;\n}\n\nnav ul {\n    list-style:none;\n}\n\nblockquote, q {\n    quotes:none;\n}\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content:'';\n    content:none;\n}\n\na {\n    margin:0;\n    padding:0;\n    font-size:100%;\n    vertical-align:baseline;\n    background:transparent;\n}\n\n/* change colours to suit your needs */\nins {\n    background-color:#ff9;\n    color:#000;\n    text-decoration:none;\n}\n\n/* change colours to suit your needs */\nmark {\n    background-color:#ff9;\n    color:#000;\n    font-style:italic;\n    font-weight:bold;\n}\n\ndel {\n    text-decoration: line-through;\n}\n\nabbr[title], dfn[title] {\n    border-bottom:1px dotted;\n    cursor:help;\n}\n\ntable {\n    border-collapse:collapse;\n    border-spacing:0;\n}\n\n/* change border colour to suit your needs */\nhr {\n    display:block;\n    height:1px;\n    border:0;  \n    border-top:1px solid #cccccc;\n    margin:1em 0;\n    padding:0;\n}\n\ninput, select {\n    vertical-align:middle;\n}\n","/*\nhtml5doctor.com Reset Stylesheet\nv1.6.1\nLast Updated: 2010-09-17\nAuthor: Richard Clark - http://richclarkdesign.com\nTwitter: @rich_clark\n*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\nbody {\n  line-height: 1; }\n\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nnav ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\na {\n  margin: 0;\n  padding: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  background: transparent; }\n\n/* change colours to suit your needs */\nins {\n  background-color: #ff9;\n  color: #000;\n  text-decoration: none; }\n\n/* change colours to suit your needs */\nmark {\n  background-color: #ff9;\n  color: #000;\n  font-style: italic;\n  font-weight: bold; }\n\ndel {\n  text-decoration: line-through; }\n\nabbr[title], dfn[title] {\n  border-bottom: 1px dotted;\n  cursor: help; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* change border colour to suit your needs */\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #cccccc;\n  margin: 1em 0;\n  padding: 0; }\n\ninput, select {\n  vertical-align: middle; }\n"]}]);
 // Exports
 module.exports = exports;
 
@@ -102896,4 +102990,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?bfb65df9311dd753055d
+//# sourceMappingURL=bundle.js.map?11b78ae57ef0e049dfff
