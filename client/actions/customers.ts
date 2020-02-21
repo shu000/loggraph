@@ -36,9 +36,9 @@ export const progressAddCustomers = () => ({
   type: PROGRESS_ADD_CUSTOMERS as typeof PROGRESS_ADD_CUSTOMERS,
 });
 
-export const succeedAddCustomers = (result: boolean) => ({
+export const succeedAddCustomers = (addedCustomerName: string) => ({
   type: SUCCEED_ADD_CUSTOMERS as typeof SUCCEED_ADD_CUSTOMERS,
-  payload: { result },
+  payload: { addedCustomerName },
 });
 
 export const failureAddCustomers = (message: string) => ({
@@ -78,8 +78,8 @@ export const addCustomer = (customerName: string) => {
   return async (dispatch: Dispatch) => {
     dispatch(progressAddCustomers());
     try {
-      const result = await RulesApi.addCustomer(customerName);
-      dispatch(succeedAddCustomers(result));
+      const addedCustomerName = await RulesApi.addCustomer(customerName);
+      dispatch(succeedAddCustomers(addedCustomerName));
     } catch (error) {
       dispatch(failureAddCustomers(error.message));
     }

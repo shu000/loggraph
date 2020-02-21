@@ -20,7 +20,7 @@ const RulesApi = {
 
     return response.data.result;
   },
-  addCustomer: async (customerName: string): Promise<boolean> => {
+  addCustomer: async (customerName: string): Promise<string> => {
     const instance = axios.create(usersConfig);
     const response = await instance.post(`/customers`, {
       customerName,
@@ -29,10 +29,17 @@ const RulesApi = {
       throw new Error('登録に失敗しました');
     }
 
+    if (
+      response.data.result.result.ok !== 1 ||
+      response.data.result.result.n < 1
+    ) {
+      throw new Error('登録に失敗しました');
+    }
+
     console.log('POST customers');
     console.log(response);
 
-    return true;
+    return customerName;
   },
   deleteCustomer: async (customerName: string): Promise<boolean> => {
     const instance = axios.create(usersConfig);

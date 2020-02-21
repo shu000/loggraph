@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -27,6 +27,7 @@ interface SideMenuUIState {
   isAnyFormChanged: boolean;
   isEditingCustomerName: boolean;
   isOpeningDeleteDialog: boolean;
+  editingCustomerName: string;
 }
 
 const useStyles = makeStyles({
@@ -48,10 +49,19 @@ const SideMenu: FC<SideMenuProps> = ({
   const classes = useStyles();
 
   const [localUIState, setLocalUIState] = useState<SideMenuUIState>({
-    isAnyFormChanged: false,
+    isAnyFormChanged: false, // どこかのフォームが変更されてたら保存ボタンを有効にする
     isEditingCustomerName: false,
     isOpeningDeleteDialog: false,
+    editingCustomerName: selectingCustomerName,
   });
+
+  useEffect(() => {
+    setLocalUIState({
+      ...localUIState,
+      isEditingCustomerName: false,
+      editingCustomerName: selectingCustomerName,
+    });
+  }, [selectingCustomerName]);
 
   const DeleteDialog = (() => {
     const handleClose = () => {
@@ -122,12 +132,13 @@ const SideMenu: FC<SideMenuProps> = ({
                   fullWidth
                   disabled={!localUIState.isEditingCustomerName}
                   autoFocus
-                  /*
-              value={editingCustomerName}
-              onChange={event => {
-                setEditingCustomerName(event.target.value);
-              }}
-              */
+                  value={localUIState.editingCustomerName}
+                  onChange={event => {
+                    setLocalUIState({
+                      ...localUIState,
+                      editingCustomerName: event.target.value,
+                    });
+                  }}
                 />
               </Grid>
               <Grid item xs={1}>

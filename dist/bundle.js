@@ -278,11 +278,11 @@ var progressAddCustomers = function progressAddCustomers() {
     type: PROGRESS_ADD_CUSTOMERS
   };
 };
-var succeedAddCustomers = function succeedAddCustomers(result) {
+var succeedAddCustomers = function succeedAddCustomers(addedCustomerName) {
   return {
     type: SUCCEED_ADD_CUSTOMERS,
     payload: {
-      result: result
+      addedCustomerName: addedCustomerName
     }
   };
 };
@@ -366,7 +366,7 @@ var addCustomer = function addCustomer(customerName) {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var result;
+        var addedCustomerName;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -377,8 +377,8 @@ var addCustomer = function addCustomer(customerName) {
                 return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].addCustomer(customerName);
 
               case 4:
-                result = _context2.sent;
-                dispatch(succeedAddCustomers(result));
+                addedCustomerName = _context2.sent;
+                dispatch(succeedAddCustomers(addedCustomerName));
                 _context2.next = 11;
                 break;
 
@@ -685,11 +685,19 @@ var RulesApi = {
               throw new Error('登録に失敗しました');
 
             case 6:
+              if (!(response.data.result.result.ok !== 1 || response.data.result.result.n < 1)) {
+                _context2.next = 8;
+                break;
+              }
+
+              throw new Error('登録に失敗しました');
+
+            case 8:
               console.log('POST customers');
               console.log(response);
-              return _context2.abrupt("return", true);
+              return _context2.abrupt("return", customerName);
 
-            case 9:
+            case 11:
             case "end":
               return _context2.stop();
           }
@@ -1689,12 +1697,21 @@ var SideMenu = function SideMenu(_ref) {
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     isAnyFormChanged: false,
+    // どこかのフォームが変更されてたら保存ボタンを有効にする
     isEditingCustomerName: false,
-    isOpeningDeleteDialog: false
+    isOpeningDeleteDialog: false,
+    editingCustomerName: selectingCustomerName
   }),
       _useState2 = _slicedToArray(_useState, 2),
       localUIState = _useState2[0],
       setLocalUIState = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setLocalUIState(_objectSpread({}, localUIState, {
+      isEditingCustomerName: false,
+      editingCustomerName: selectingCustomerName
+    }));
+  }, [selectingCustomerName]);
 
   var DeleteDialog = function () {
     var handleClose = function handleClose() {
@@ -1763,14 +1780,13 @@ var SideMenu = function SideMenu(_ref) {
     type: "text",
     fullWidth: true,
     disabled: !localUIState.isEditingCustomerName,
-    autoFocus: true
-    /*
-    value={editingCustomerName}
-    onChange={event => {
-    setEditingCustomerName(event.target.value);
-    }}
-    */
-
+    autoFocus: true,
+    value: localUIState.editingCustomerName,
+    onChange: function onChange(event) {
+      setLocalUIState(_objectSpread({}, localUIState, {
+        editingCustomerName: event.target.value
+      }));
+    }
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
     item: true,
     xs: 1
@@ -3027,6 +3043,14 @@ var appReducer = function appReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3054,6 +3078,12 @@ var customersReducer = function customersReducer() {
       return _objectSpread({}, state, {
         selectingCustomerName: action.payload.result[0],
         customerNames: action.payload.result
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_ADD_CUSTOMERS"]:
+      return _objectSpread({}, state, {
+        selectingCustomerName: action.payload.addedCustomerName,
+        customerNames: [].concat(_toConsumableArray(state.customerNames), [action.payload.addedCustomerName])
       });
 
     default:
@@ -82956,4 +82986,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?00938e67f10b3b33bcd7
+//# sourceMappingURL=bundle.js.map?557a2d56dac79d70112e

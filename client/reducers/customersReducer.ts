@@ -3,6 +3,7 @@ import {
   CustomersAction,
   ON_CHANGE_CUSTOMER_NAME,
   SUCCEED_GET_CUSTOMERS,
+  SUCCEED_ADD_CUSTOMERS,
 } from '../actions/customers';
 
 export interface CustomersState {
@@ -31,6 +32,15 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
         ...state,
         selectingCustomerName: action.payload.result[0],
         customerNames: action.payload.result,
+      };
+    case SUCCEED_ADD_CUSTOMERS:
+      return {
+        ...state,
+        selectingCustomerName: action.payload.addedCustomerName,
+        customerNames: [
+          ...state.customerNames,
+          action.payload.addedCustomerName,
+        ],
       };
     default:
       return state;
