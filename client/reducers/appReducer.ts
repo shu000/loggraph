@@ -4,10 +4,13 @@ import {
   CustomersAction,
   PROGRESS_GET_CUSTOMERS,
   SUCCEED_GET_CUSTOMERS,
+  FAILURE_GET_CUSTOMERS,
+  PROGRESS_ADD_CUSTOMERS,
+  SUCCEED_ADD_CUSTOMERS,
+  FAILURE_ADD_CUSTOMERS,
   FAILURE_DELETE_CUSTOMERS,
   PROGRESS_DELETE_CUSTOMERS,
   SUCCEED_DELETE_CUSTOMERS,
-  FAILURE_GET_CUSTOMERS,
 } from '../actions/customers';
 import {
   DisplayRulesAction,
@@ -17,24 +20,19 @@ import {
 } from '../actions/displayRules';
 
 export interface AppState {
-  isGetting: boolean;
-  isUpdating: boolean;
-  // TODO: 分けたほうがいいかも
-  feedback: {
-    open: boolean;
-    isSucceed: boolean;
-    message: string;
-  };
+  isGetting: boolean; // 参照系APIを叩き中か否か
+  isUpdating: boolean; // 更新系APIを叩き中か否か
+  isFeedbackOpen: boolean;
+  isFeedbackSucceed: boolean;
+  feedbackMessage: string;
 }
 
 const initialState: AppState = {
   isGetting: false,
   isUpdating: false,
-  feedback: {
-    open: false,
-    isSucceed: true,
-    message: '',
-  },
+  isFeedbackOpen: false,
+  isFeedbackSucceed: true,
+  feedbackMessage: '',
 };
 
 const appReducer: Reducer<
@@ -48,11 +46,7 @@ const appReducer: Reducer<
     case ON_CLOSE_FEEDBACK:
       return {
         ...state,
-        feedback: {
-          open: false,
-          isSucceed: true,
-          message: '',
-        },
+        isFeedbackOpen: false,
       };
     case PROGRESS_GET_CUSTOMERS:
     case PROGRESS_GET_RULES:
@@ -60,6 +54,7 @@ const appReducer: Reducer<
         ...state,
         isGetting: true,
       };
+    case PROGRESS_ADD_CUSTOMERS:
     case PROGRESS_DELETE_CUSTOMERS:
       return {
         ...state,
@@ -71,36 +66,39 @@ const appReducer: Reducer<
         ...state,
         isGetting: false,
       };
+    case SUCCEED_ADD_CUSTOMERS:
+      return {
+        ...state,
+        isUpdating: false,
+        isFeedbackOpen: true,
+        isFeedbackSucceed: true,
+        feedbackMessage: '追加しました', // TODO: aciton.payloadに入れたほうがいいね。。。
+      };
     case SUCCEED_DELETE_CUSTOMERS:
       return {
         ...state,
         isUpdating: false,
-        feedback: {
-          open: true,
-          isSucceed: true,
-          message: '削除しました',
-        },
+        isFeedbackOpen: true,
+        isFeedbackSucceed: true,
+        feedbackMessage: '削除しました',
       };
     case FAILURE_GET_CUSTOMERS:
     case FAILURE_GET_RULES:
       return {
         ...state,
         isGetting: false,
-        feedback: {
-          open: true,
-          isSucceed: false,
-          message: action.payload.message,
-        },
+        isFeedbackOpen: true,
+        isFeedbackSucceed: false,
+        feedbackMessage: action.payload.message,
       };
+    case FAILURE_ADD_CUSTOMERS:
     case FAILURE_DELETE_CUSTOMERS:
       return {
         ...state,
         isUpdating: false,
-        feedback: {
-          open: true,
-          isSucceed: false,
-          message: action.payload.message,
-        },
+        isFeedbackOpen: true,
+        isFeedbackSucceed: false,
+        feedbackMessage: action.payload.message,
       };
     default:
       return state;

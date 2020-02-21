@@ -131,8 +131,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./containers/header */ "./client/containers/header.tsx");
 /* harmony import */ var _containers_graph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/graph */ "./client/containers/graph.tsx");
 /* harmony import */ var _containers_sideMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./containers/sideMenu */ "./client/containers/sideMenu.tsx");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
-/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _containers_feedback__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./containers/feedback */ "./client/containers/feedback.tsx");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./App.scss */ "./client/App.scss");
+/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -142,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "App"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_header__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_sideMenu__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_header__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_graph__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_sideMenu__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_feedback__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -1233,6 +1235,49 @@ var DisplayRuleForms = function DisplayRuleForms(_ref) {
 
 /***/ }),
 
+/***/ "./client/components/feedback.tsx":
+/*!****************************************!*\
+  !*** ./client/components/feedback.tsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/lab/Alert */ "./node_modules/@material-ui/lab/esm/Alert/index.js");
+/* harmony import */ var _material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Snackbar */ "./node_modules/@material-ui/core/esm/Snackbar/index.js");
+
+
+
+
+var Feedback = function Feedback(_ref) {
+  var _ref$open = _ref.open,
+      open = _ref$open === void 0 ? false : _ref$open,
+      _ref$isSucceed = _ref.isSucceed,
+      isSucceed = _ref$isSucceed === void 0 ? true : _ref$isSucceed,
+      _ref$message = _ref.message,
+      message = _ref$message === void 0 ? '' : _ref$message,
+      _ref$onClose = _ref.onClose,
+      onClose = _ref$onClose === void 0 ? function () {} : _ref$onClose;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    open: open,
+    anchorOrigin: {
+      vertical: 'top',
+      horizontal: 'center'
+    },
+    autoHideDuration: 2000,
+    onClose: onClose
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    severity: isSucceed ? 'success' : 'error'
+  }, message));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Feedback);
+
+/***/ }),
+
 /***/ "./client/components/graph.tsx":
 /*!*************************************!*\
   !*** ./client/components/graph.tsx ***!
@@ -1883,6 +1928,42 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_displayRuleForms__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./client/containers/feedback.tsx":
+/*!****************************************!*\
+  !*** ./client/containers/feedback.tsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/app */ "./client/actions/app.ts");
+/* harmony import */ var _components_feedback__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/feedback */ "./client/components/feedback.tsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    open: state.app.isFeedbackOpen,
+    isSucceed: state.app.isFeedbackSucceed,
+    message: state.app.feedbackMessage
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onClose: function onClose() {
+      return dispatch(Object(_actions_app__WEBPACK_IMPORTED_MODULE_1__["onCloseFeedback"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_feedback__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -2859,11 +2940,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var initialState = {
   isGetting: false,
   isUpdating: false,
-  feedback: {
-    open: false,
-    isSucceed: true,
-    message: ''
-  }
+  isFeedbackOpen: false,
+  isFeedbackSucceed: true,
+  feedbackMessage: ''
 };
 
 var appReducer = function appReducer() {
@@ -2873,11 +2952,7 @@ var appReducer = function appReducer() {
   switch (action.type) {
     case _actions_app__WEBPACK_IMPORTED_MODULE_0__["ON_CLOSE_FEEDBACK"]:
       return _objectSpread({}, state, {
-        feedback: {
-          open: false,
-          isSucceed: true,
-          message: ''
-        }
+        isFeedbackOpen: false
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_GET_CUSTOMERS"]:
@@ -2886,6 +2961,7 @@ var appReducer = function appReducer() {
         isGetting: true
       });
 
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_ADD_CUSTOMERS"]:
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_DELETE_CUSTOMERS"]:
       return _objectSpread({}, state, {
         isUpdating: true
@@ -2897,35 +2973,39 @@ var appReducer = function appReducer() {
         isGetting: false
       });
 
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_ADD_CUSTOMERS"]:
+      return _objectSpread({}, state, {
+        isUpdating: false,
+        isFeedbackOpen: true,
+        isFeedbackSucceed: true,
+        feedbackMessage: '追加しました' // TODO: aciton.payloadに入れたほうがいいね。。。
+
+      });
+
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_DELETE_CUSTOMERS"]:
       return _objectSpread({}, state, {
         isUpdating: false,
-        feedback: {
-          open: true,
-          isSucceed: true,
-          message: '削除しました'
-        }
+        isFeedbackOpen: true,
+        isFeedbackSucceed: true,
+        feedbackMessage: '削除しました'
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_GET_CUSTOMERS"]:
     case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["FAILURE_GET_RULES"]:
       return _objectSpread({}, state, {
         isGetting: false,
-        feedback: {
-          open: true,
-          isSucceed: false,
-          message: action.payload.message
-        }
+        isFeedbackOpen: true,
+        isFeedbackSucceed: false,
+        feedbackMessage: action.payload.message
       });
 
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_ADD_CUSTOMERS"]:
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_DELETE_CUSTOMERS"]:
       return _objectSpread({}, state, {
         isUpdating: false,
-        feedback: {
-          open: true,
-          isSucceed: false,
-          message: action.payload.message
-        }
+        isFeedbackOpen: true,
+        isFeedbackSucceed: false,
+        feedbackMessage: action.payload.message
       });
 
     default:
@@ -82876,4 +82956,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?d2b160ca51aee4ff0bcb
+//# sourceMappingURL=bundle.js.map?00938e67f10b3b33bcd7

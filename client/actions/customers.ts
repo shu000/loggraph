@@ -103,6 +103,9 @@ export type CustomersAction =
   | ReturnType<typeof progressGetCustomers>
   | ReturnType<typeof succeedGetCustomers>
   | ReturnType<typeof failureGetCustomers>
+  | ReturnType<typeof progressAddCustomers>
+  | ReturnType<typeof succeedAddCustomers>
+  | ReturnType<typeof failureAddCustomers>
   | ReturnType<typeof progressDeleteCustomers>
   | ReturnType<typeof succeedDeleteCustomers>
   | ReturnType<typeof failureDeleteCustomers>;
