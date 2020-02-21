@@ -7,6 +7,7 @@ const usersConfig = {
   timeout: API_TIMEOUT,
 };
 
+// TODO: rulesApi と customersApi 分けた方が一貫性あるかも
 const RulesApi = {
   getCustomers: async (): Promise<string[]> => {
     const instance = axios.create(usersConfig);
@@ -20,7 +21,7 @@ const RulesApi = {
 
     return response.data.result;
   },
-  addCustomer: async (customerName: string): Promise<boolean> => {
+  addCustomer: async (customerName: string): Promise<string> => {
     const instance = axios.create(usersConfig);
     const response = await instance.post(`/customers`, {
       customerName,
@@ -29,22 +30,36 @@ const RulesApi = {
       throw new Error('登録に失敗しました');
     }
 
+    if (
+      response.data.result.result.ok !== 1 ||
+      response.data.result.result.n < 1
+    ) {
+      throw new Error('登録に失敗しました');
+    }
+
     console.log('POST customers');
     console.log(response);
 
-    return true;
+    return customerName;
   },
-  deleteCustomer: async (customerName: string): Promise<boolean> => {
+  deleteCustomer: async (customerName: string): Promise<string> => {
     const instance = axios.create(usersConfig);
     const response = await instance.delete(`/customers/${customerName}`);
+
     if (response.status !== 200) {
       throw new Error('削除に失敗しました');
+    }
+    if (response.data.result.result.ok !== 1) {
+      throw new Error('削除に失敗しました');
+    }
+    if (response.data.result.result.n < 1) {
+      throw new Error('削除対象を見つけられませんでした');
     }
 
     console.log('DELETE customers');
     console.log(response);
 
-    return true;
+    return customerName;
   },
   updateCustomer: async (
     customerName: string,
@@ -63,12 +78,8 @@ const RulesApi = {
 
     return true;
   },
-  getRules: async (customerName: string): Promise<DisplayRules> => {
-    if (customerName === '')
-      return {
-        customerName: '',
-        rules: [],
-      };
+  getRules: async (customerName: string): Promise<DisplayRule[]> => {
+    if (customerName === '') return [];
 
     const instance = axios.create(usersConfig);
     const response = await instance.get(`/rules/${customerName}`);
@@ -79,14 +90,16 @@ const RulesApi = {
     console.log('GET rules');
     console.log(response.data.result);
 
-    return response.data.result;
+    const displayRules: DisplayRules = response.data.result;
+
+    return displayRules.rules;
   },
   updateRules: async (
     customerName: string,
     rules: DisplayRule[]
   ): Promise<boolean> => {
     const instance = axios.create(usersConfig);
-    const response = await instance.put(`/tules/${customerName}`, {
+    const response = await instance.put(`/rules/${customerName}`, {
       rules,
     });
     if (response.status !== 200) {

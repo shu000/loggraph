@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,7 +17,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import DisplayRuleForms from '../containers/displayRuleForms';
 
 export interface SideMenuProps {
+  selectingCustomerName?: string;
   isOpeningSideMenu?: boolean;
+  deleteCustomer?: (custonerName: string) => void;
   closeSideMenu?: () => void;
 }
 
@@ -25,6 +27,7 @@ interface SideMenuUIState {
   isAnyFormChanged: boolean;
   isEditingCustomerName: boolean;
   isOpeningDeleteDialog: boolean;
+  editingCustomerName: string;
 }
 
 const useStyles = makeStyles({
@@ -37,17 +40,28 @@ const useStyles = makeStyles({
   },
 });
 
-const Header: FC<SideMenuProps> = ({
+const SideMenu: FC<SideMenuProps> = ({
+  selectingCustomerName = '',
   isOpeningSideMenu = false,
+  deleteCustomer = () => {},
   closeSideMenu = () => {},
 }) => {
   const classes = useStyles();
 
   const [localUIState, setLocalUIState] = useState<SideMenuUIState>({
-    isAnyFormChanged: false,
+    isAnyFormChanged: false, // どこかのフォームが変更されてたら保存ボタンを有効にする
     isEditingCustomerName: false,
     isOpeningDeleteDialog: false,
+    editingCustomerName: selectingCustomerName,
   });
+
+  useEffect(() => {
+    setLocalUIState({
+      ...localUIState,
+      isEditingCustomerName: false,
+      editingCustomerName: selectingCustomerName,
+    });
+  }, [selectingCustomerName]);
 
   const DeleteDialog = (() => {
     const handleClose = () => {
@@ -57,19 +71,26 @@ const Header: FC<SideMenuProps> = ({
       });
     };
 
+    const handleDelete = () => {
+      handleClose();
+      deleteCustomer(selectingCustomerName);
+    };
+
     return (
       <Dialog open={localUIState.isOpeningDeleteDialog} onClose={handleClose}>
-        <DialogTitle>削除しますか？</DialogTitle>
+        <DialogTitle>「{selectingCustomerName}」を削除します</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            ＊＊を削除します。本当に削除してよろしいですか？一度削除すると戻すことはできません。
+            本当に削除してよろしいですか？一度削除すると戻すことはできません。
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={handleClose}>
             キャンセル
           </Button>
-          <Button color="secondary">削除する</Button>
+          <Button color="secondary" onClick={handleDelete}>
+            削除する
+          </Button>
         </DialogActions>
       </Dialog>
     );
@@ -111,12 +132,13 @@ const Header: FC<SideMenuProps> = ({
                   fullWidth
                   disabled={!localUIState.isEditingCustomerName}
                   autoFocus
-                  /*
-              value={editingCustomerName}
-              onChange={event => {
-                setEditingCustomerName(event.target.value);
-              }}
-              */
+                  value={localUIState.editingCustomerName}
+                  onChange={event => {
+                    setLocalUIState({
+                      ...localUIState,
+                      editingCustomerName: event.target.value,
+                    });
+                  }}
                 />
               </Grid>
               <Grid item xs={1}>
@@ -157,4 +179,4 @@ const Header: FC<SideMenuProps> = ({
   );
 };
 
-export default Header;
+export default SideMenu;

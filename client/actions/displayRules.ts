@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
-import DisplayRules, { DisplayRule } from '../constants/displayRules';
+import { DisplayRule } from '../constants/displayRules';
 import RulesApi from '../api/rulesApi';
 
 export const ON_CHANGE = 'ON_CHANGE';
-export const PROGRESS_GET_RULES = 'PROGRESS_RULES';
-export const SUCCEED_GET_RULES = 'SUCCEED_RULES';
-export const FAILURE_GET_RULES = 'FAULURE_RULES';
+export const PROGRESS_GET_RULES = 'PROGRESS_GET_RULES';
+export const SUCCEED_GET_RULES = 'SUCCEED_GET_RULES';
+export const FAILURE_GET_RULES = 'FAULURE_GET_RULES';
 
 export const onChangeSingleRule = (index: number, rule: DisplayRule) => ({
   type: ON_CHANGE as typeof ON_CHANGE,
@@ -19,9 +19,9 @@ export const progressGetRules = () => ({
   type: PROGRESS_GET_RULES as typeof PROGRESS_GET_RULES,
 });
 
-export const succeedGetRules = (result: DisplayRules) => ({
+export const succeedGetRules = (gotRules: DisplayRule[]) => ({
   type: SUCCEED_GET_RULES as typeof SUCCEED_GET_RULES,
-  payload: { result },
+  payload: { gotRules },
 });
 
 export const failureGetRules = (message: string) => ({
@@ -34,8 +34,8 @@ export const getRules = (customerName: string) => {
   return async (dispatch: Dispatch) => {
     dispatch(progressGetRules());
     try {
-      const result = await RulesApi.getRules(customerName);
-      dispatch(succeedGetRules(result));
+      const gotRules = await RulesApi.getRules(customerName);
+      dispatch(succeedGetRules(gotRules));
     } catch (error) {
       dispatch(failureGetRules(error.message));
     }

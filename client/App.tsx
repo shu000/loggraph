@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './containers/header';
 import Graph from './containers/graph';
 import SideMenu from './containers/sideMenu';
+import Feedback from './containers/feedback';
 import './App.scss';
 
 const App: React.FC = () => {
@@ -10,6 +11,7 @@ const App: React.FC = () => {
       <Header />
       <Graph />
       <SideMenu />
+      <Feedback />
     </div>
   );
 };

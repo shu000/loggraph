@@ -6,7 +6,7 @@ import {
   onChangeCustomerName,
   getCustomers,
 } from '../actions/customers';
-import { AppState } from '../reducer';
+import { RootState } from '../reducer';
 
 interface StateProps {
   selectingCustomerName: string;
@@ -18,13 +18,13 @@ interface DispatchProps {
   getCustomers: () => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   selectingCustomerName: state.customers.selectingCustomerName,
   customerNames: state.customers.customerNames,
 });
 
 const mapDispatchToProps = (
-  dispatch: ThunkDispatch<AppState, undefined, CustomersAction>
+  dispatch: ThunkDispatch<RootState, undefined, CustomersAction>
 ): DispatchProps => ({
   onChangeCustomerName: customerName =>
     dispatch(onChangeCustomerName(customerName)),

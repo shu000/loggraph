@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { DisplayRulesAction, getRules } from '../actions/displayRules';
 import DisplayRuleForms from '../components/displayRuleForms';
-import { AppState } from '../reducer';
+import { RootState } from '../reducer';
 
 interface StateProps {
   selectingCustomerName: string;
@@ -13,13 +13,13 @@ interface DispatchProps {
   getRules: (customerName: string) => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   selectingCustomerName: state.customers.selectingCustomerName,
   rulesCount: state.displayRules.rules.rules.length,
 });
 
 const mapDispatchToProps = (
-  dispatch: ThunkDispatch<AppState, undefined, DisplayRulesAction>
+  dispatch: ThunkDispatch<RootState, undefined, DisplayRulesAction>
 ): DispatchProps => ({
   getRules: (customerName: string) => dispatch(getRules(customerName)),
 });

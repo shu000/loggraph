@@ -6,7 +6,7 @@ import {
   DisplayRulesAction,
   onChangeSingleRule,
 } from '../actions/displayRules';
-import { AppState } from '../reducer';
+import { RootState } from '../reducer';
 
 interface StateProps {
   rules: DisplayRules;
@@ -16,7 +16,7 @@ interface DispatchProps {
   onChange: (index: number, rule: DisplayRule) => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   rules: state.displayRules.rules,
 });
 

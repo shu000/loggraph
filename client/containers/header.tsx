@@ -1,8 +1,9 @@
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { CustomersAction, addCustomer } from '../actions/customers';
 import { UiAction, openSideMenu } from '../actions/ui';
 import Header from '../components/header';
-import { AppState } from '../reducer';
+import { RootState } from '../reducer';
 
 interface StateProps {
   isOpeningSideMenu: boolean;
@@ -10,14 +11,18 @@ interface StateProps {
 
 interface DispatchProps {
   openSideMenu: () => void;
+  addCustomer: (customerName: string) => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   isOpeningSideMenu: state.ui.isOpeningSideMenu,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<UiAction>): DispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<RootState, undefined, CustomersAction | UiAction>
+): DispatchProps => ({
   openSideMenu: () => dispatch(openSideMenu()),
+  addCustomer: (customerName: string) => dispatch(addCustomer(customerName)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
