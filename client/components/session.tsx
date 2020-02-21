@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import { ParsedSession } from '../constants/parsedData';
 import Activity from '../containers/activity';
 

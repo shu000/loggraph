@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
 import ParsedData from '../constants/parsedData';
 import AnalyticsData from '../constants/analyticsData';
 import Session from './session';

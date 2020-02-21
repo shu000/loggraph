@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Select, MenuItem } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 export interface CustomersFormProps {
   selectingCustomerName?: string;

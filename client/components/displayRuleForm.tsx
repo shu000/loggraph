@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Radio } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Radio from '@material-ui/core/Radio';
+import TextField from '@material-ui/core/TextField';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
 
