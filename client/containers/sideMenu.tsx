@@ -1,22 +1,31 @@
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { CustomersAction, deleteCustomer } from '../actions/customers';
 import { UiAction, closeSideMenu } from '../actions/ui';
 import SideMenu from '../components/sideMenu';
-import { AppState } from '../reducer';
+import { RootState } from '../reducer';
 
 interface StateProps {
+  selectingCustomerName: string;
   isOpeningSideMenu: boolean;
 }
 
 interface DispatchProps {
+  deleteCustomer: (customerName: string) => void;
   closeSideMenu: () => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
+  selectingCustomerName: state.customers.selectingCustomerName,
   isOpeningSideMenu: state.ui.isOpeningSideMenu,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<UiAction>): DispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<RootState, undefined, CustomersAction | UiAction>
+): DispatchProps => ({
+  deleteCustomer: (customerName: string) =>
+    dispatch(deleteCustomer(customerName)),
+
   closeSideMenu: () => dispatch(closeSideMenu()),
 });
 

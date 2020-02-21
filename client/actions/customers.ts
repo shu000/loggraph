@@ -5,6 +5,9 @@ export const ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
 export const PROGRESS_GET_CUSTOMERS = 'PROGRESS_GET_CUSTOMERS';
 export const SUCCEED_GET_CUSTOMERS = 'SUCCEED_GET_CUSTOMERS';
 export const FAILURE_GET_CUSTOMERS = 'FAULURE_GET_CUSTOMERS';
+export const PROGRESS_ADD_CUSTOMERS = 'PROGRESS_ADD_CUSTOMERS';
+export const SUCCEED_ADD_CUSTOMERS = 'SUCCEED_ADD_CUSTOMERS';
+export const FAILURE_ADD_CUSTOMERS = 'FAULURE_ADD_CUSTOMERS';
 export const PROGRESS_DELETE_CUSTOMERS = 'PROGRESS_DELETE_CUSTOMERS';
 export const SUCCEED_DELETE_CUSTOMERS = 'SUCCEED_DELETE_CUSTOMERS';
 export const FAILURE_DELETE_CUSTOMERS = 'FAULURE_DELETE_CUSTOMERS';
@@ -25,6 +28,21 @@ export const succeedGetCustomers = (result: string[]) => ({
 
 export const failureGetCustomers = (message: string) => ({
   type: FAILURE_GET_CUSTOMERS as typeof FAILURE_GET_CUSTOMERS,
+  payload: { message },
+  error: true,
+});
+
+export const progressAddCustomers = () => ({
+  type: PROGRESS_ADD_CUSTOMERS as typeof PROGRESS_ADD_CUSTOMERS,
+});
+
+export const succeedAddCustomers = (result: boolean) => ({
+  type: SUCCEED_ADD_CUSTOMERS as typeof SUCCEED_ADD_CUSTOMERS,
+  payload: { result },
+});
+
+export const failureAddCustomers = (message: string) => ({
+  type: FAILURE_ADD_CUSTOMERS as typeof FAILURE_ADD_CUSTOMERS,
   payload: { message },
   error: true,
 });
@@ -52,6 +70,18 @@ export const getCustomers = () => {
       dispatch(succeedGetCustomers(result));
     } catch (error) {
       dispatch(failureGetCustomers(error.message));
+    }
+  };
+};
+
+export const addCustomer = (customerName: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(progressAddCustomers());
+    try {
+      const result = await RulesApi.addCustomer(customerName);
+      dispatch(succeedAddCustomers(result));
+    } catch (error) {
+      dispatch(failureAddCustomers(error.message));
     }
   };
 };
