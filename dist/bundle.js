@@ -199,7 +199,7 @@ var onCloseFeedback = function onCloseFeedback() {
 /*!*************************************!*\
   !*** ./client/actions/customers.ts ***!
   \*************************************/
-/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, PROGRESS_ADD_CUSTOMERS, SUCCEED_ADD_CUSTOMERS, FAILURE_ADD_CUSTOMERS, PROGRESS_DELETE_CUSTOMERS, SUCCEED_DELETE_CUSTOMERS, FAILURE_DELETE_CUSTOMERS, onChangeCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, progressAddCustomers, succeedAddCustomers, failureAddCustomers, progressDeleteCustomers, succeedDeleteCustomers, failureDeleteCustomers, getCustomers, addCustomer, deleteCustomer */
+/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, PROGRESS_ADD_CUSTOMER, SUCCEED_ADD_CUSTOMER, FAILURE_ADD_CUSTOMER, PROGRESS_DELETE_CUSTOMER, SUCCEED_DELETE_CUSTOMER, FAILURE_DELETE_CUSTOMER, onChangeCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, progressAddCustomer, succeedAddCustomer, failureAddCustomer, progressDeleteCustomer, succeedDeleteCustomer, failureDeleteCustomer, getCustomers, addCustomer, deleteCustomer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -208,22 +208,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_CUSTOMERS", function() { return PROGRESS_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_CUSTOMERS", function() { return SUCCEED_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_CUSTOMERS", function() { return FAILURE_GET_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_ADD_CUSTOMERS", function() { return PROGRESS_ADD_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_ADD_CUSTOMERS", function() { return SUCCEED_ADD_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_ADD_CUSTOMERS", function() { return FAILURE_ADD_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_DELETE_CUSTOMERS", function() { return PROGRESS_DELETE_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_DELETE_CUSTOMERS", function() { return SUCCEED_DELETE_CUSTOMERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_DELETE_CUSTOMERS", function() { return FAILURE_DELETE_CUSTOMERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_ADD_CUSTOMER", function() { return PROGRESS_ADD_CUSTOMER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_ADD_CUSTOMER", function() { return SUCCEED_ADD_CUSTOMER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_ADD_CUSTOMER", function() { return FAILURE_ADD_CUSTOMER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_DELETE_CUSTOMER", function() { return PROGRESS_DELETE_CUSTOMER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_DELETE_CUSTOMER", function() { return SUCCEED_DELETE_CUSTOMER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_DELETE_CUSTOMER", function() { return FAILURE_DELETE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeCustomerName", function() { return onChangeCustomerName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetCustomers", function() { return progressGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetCustomers", function() { return succeedGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetCustomers", function() { return failureGetCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressAddCustomers", function() { return progressAddCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedAddCustomers", function() { return succeedAddCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureAddCustomers", function() { return failureAddCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressDeleteCustomers", function() { return progressDeleteCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedDeleteCustomers", function() { return succeedDeleteCustomers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureDeleteCustomers", function() { return failureDeleteCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressAddCustomer", function() { return progressAddCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedAddCustomer", function() { return succeedAddCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureAddCustomer", function() { return failureAddCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressDeleteCustomer", function() { return progressDeleteCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedDeleteCustomer", function() { return succeedDeleteCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureDeleteCustomer", function() { return failureDeleteCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustomers", function() { return getCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addCustomer", function() { return addCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCustomer", function() { return deleteCustomer; });
@@ -237,12 +237,12 @@ var ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
 var PROGRESS_GET_CUSTOMERS = 'PROGRESS_GET_CUSTOMERS';
 var SUCCEED_GET_CUSTOMERS = 'SUCCEED_GET_CUSTOMERS';
 var FAILURE_GET_CUSTOMERS = 'FAULURE_GET_CUSTOMERS';
-var PROGRESS_ADD_CUSTOMERS = 'PROGRESS_ADD_CUSTOMERS';
-var SUCCEED_ADD_CUSTOMERS = 'SUCCEED_ADD_CUSTOMERS';
-var FAILURE_ADD_CUSTOMERS = 'FAULURE_ADD_CUSTOMERS';
-var PROGRESS_DELETE_CUSTOMERS = 'PROGRESS_DELETE_CUSTOMERS';
-var SUCCEED_DELETE_CUSTOMERS = 'SUCCEED_DELETE_CUSTOMERS';
-var FAILURE_DELETE_CUSTOMERS = 'FAULURE_DELETE_CUSTOMERS';
+var PROGRESS_ADD_CUSTOMER = 'PROGRESS_ADD_CUSTOMER';
+var SUCCEED_ADD_CUSTOMER = 'SUCCEED_ADD_CUSTOMER';
+var FAILURE_ADD_CUSTOMER = 'FAULURE_ADD_CUSTOMER';
+var PROGRESS_DELETE_CUSTOMER = 'PROGRESS_DELETE_CUSTOMER';
+var SUCCEED_DELETE_CUSTOMER = 'SUCCEED_DELETE_CUSTOMER';
+var FAILURE_DELETE_CUSTOMER = 'FAULURE_DELETE_CUSTOMER';
 var onChangeCustomerName = function onChangeCustomerName(customerName) {
   return {
     type: ON_CHANGE_CUSTOMER_NAME,
@@ -273,44 +273,44 @@ var failureGetCustomers = function failureGetCustomers(message) {
     error: true
   };
 };
-var progressAddCustomers = function progressAddCustomers() {
+var progressAddCustomer = function progressAddCustomer() {
   return {
-    type: PROGRESS_ADD_CUSTOMERS
+    type: PROGRESS_ADD_CUSTOMER
   };
 };
-var succeedAddCustomers = function succeedAddCustomers(addedCustomerName) {
+var succeedAddCustomer = function succeedAddCustomer(addedCustomerName) {
   return {
-    type: SUCCEED_ADD_CUSTOMERS,
+    type: SUCCEED_ADD_CUSTOMER,
     payload: {
       addedCustomerName: addedCustomerName
     }
   };
 };
-var failureAddCustomers = function failureAddCustomers(message) {
+var failureAddCustomer = function failureAddCustomer(message) {
   return {
-    type: FAILURE_ADD_CUSTOMERS,
+    type: FAILURE_ADD_CUSTOMER,
     payload: {
       message: message
     },
     error: true
   };
 };
-var progressDeleteCustomers = function progressDeleteCustomers() {
+var progressDeleteCustomer = function progressDeleteCustomer() {
   return {
-    type: PROGRESS_DELETE_CUSTOMERS
+    type: PROGRESS_DELETE_CUSTOMER
   };
 };
-var succeedDeleteCustomers = function succeedDeleteCustomers(deletedCustomerName) {
+var succeedDeleteCustomer = function succeedDeleteCustomer(deletedCustomerName) {
   return {
-    type: SUCCEED_DELETE_CUSTOMERS,
+    type: SUCCEED_DELETE_CUSTOMER,
     payload: {
       deletedCustomerName: deletedCustomerName
     }
   };
 };
-var failureDeleteCustomers = function failureDeleteCustomers(message) {
+var failureDeleteCustomer = function failureDeleteCustomer(message) {
   return {
-    type: FAILURE_DELETE_CUSTOMERS,
+    type: FAILURE_DELETE_CUSTOMER,
     payload: {
       message: message
     },
@@ -371,21 +371,21 @@ var addCustomer = function addCustomer(customerName) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                dispatch(progressAddCustomers());
+                dispatch(progressAddCustomer());
                 _context2.prev = 1;
                 _context2.next = 4;
                 return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].addCustomer(customerName);
 
               case 4:
                 addedCustomerName = _context2.sent;
-                dispatch(succeedAddCustomers(addedCustomerName));
+                dispatch(succeedAddCustomer(addedCustomerName));
                 _context2.next = 11;
                 break;
 
               case 8:
                 _context2.prev = 8;
                 _context2.t0 = _context2["catch"](1);
-                dispatch(failureAddCustomers(_context2.t0.message));
+                dispatch(failureAddCustomer(_context2.t0.message));
 
               case 11:
               case "end":
@@ -413,21 +413,21 @@ var deleteCustomer = function deleteCustomer(customerName) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                dispatch(progressDeleteCustomers());
+                dispatch(progressDeleteCustomer());
                 _context3.prev = 1;
                 _context3.next = 4;
                 return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].deleteCustomer(customerName);
 
               case 4:
                 result = _context3.sent;
-                dispatch(succeedDeleteCustomers(result));
+                dispatch(succeedDeleteCustomer(result));
                 _context3.next = 11;
                 break;
 
               case 8:
                 _context3.prev = 8;
                 _context3.t0 = _context3["catch"](1);
-                dispatch(failureDeleteCustomers(_context3.t0.message));
+                dispatch(failureDeleteCustomer(_context3.t0.message));
 
               case 11:
               case "end":
@@ -2993,8 +2993,8 @@ var appReducer = function appReducer() {
         isGetting: true
       });
 
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_ADD_CUSTOMERS"]:
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_DELETE_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_ADD_CUSTOMER"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_DELETE_CUSTOMER"]:
       return _objectSpread({}, state, {
         isUpdating: true
       });
@@ -3005,7 +3005,7 @@ var appReducer = function appReducer() {
         isGetting: false
       });
 
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_ADD_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_ADD_CUSTOMER"]:
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
@@ -3014,7 +3014,7 @@ var appReducer = function appReducer() {
 
       });
 
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_DELETE_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_DELETE_CUSTOMER"]:
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
@@ -3031,8 +3031,8 @@ var appReducer = function appReducer() {
         feedbackMessage: action.payload.message
       });
 
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_ADD_CUSTOMERS"]:
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_DELETE_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_ADD_CUSTOMER"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_DELETE_CUSTOMER"]:
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
@@ -3111,13 +3111,13 @@ var customersReducer = function customersReducer() {
         customerNames: action.payload.result
       });
 
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_ADD_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_ADD_CUSTOMER"]:
       return _objectSpread({}, state, {
         selectingCustomerName: action.payload.addedCustomerName,
         customerNames: [].concat(_toConsumableArray(state.customerNames), [action.payload.addedCustomerName])
       });
 
-    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_DELETE_CUSTOMERS"]:
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_DELETE_CUSTOMER"]:
       return newStateOnDeleted(state, action.payload.deletedCustomerName);
 
     default:
@@ -83020,4 +83020,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?2a620bd965afc9c3b966
+//# sourceMappingURL=bundle.js.map?0a53d3a2b2388daf6170

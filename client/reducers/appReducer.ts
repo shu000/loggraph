@@ -5,12 +5,12 @@ import {
   PROGRESS_GET_CUSTOMERS,
   SUCCEED_GET_CUSTOMERS,
   FAILURE_GET_CUSTOMERS,
-  PROGRESS_ADD_CUSTOMERS,
-  SUCCEED_ADD_CUSTOMERS,
-  FAILURE_ADD_CUSTOMERS,
-  FAILURE_DELETE_CUSTOMERS,
-  PROGRESS_DELETE_CUSTOMERS,
-  SUCCEED_DELETE_CUSTOMERS,
+  PROGRESS_ADD_CUSTOMER,
+  SUCCEED_ADD_CUSTOMER,
+  FAILURE_ADD_CUSTOMER,
+  FAILURE_DELETE_CUSTOMER,
+  PROGRESS_DELETE_CUSTOMER,
+  SUCCEED_DELETE_CUSTOMER,
 } from '../actions/customers';
 import {
   DisplayRulesAction,
@@ -54,8 +54,8 @@ const appReducer: Reducer<
         ...state,
         isGetting: true,
       };
-    case PROGRESS_ADD_CUSTOMERS:
-    case PROGRESS_DELETE_CUSTOMERS:
+    case PROGRESS_ADD_CUSTOMER:
+    case PROGRESS_DELETE_CUSTOMER:
       return {
         ...state,
         isUpdating: true,
@@ -66,7 +66,7 @@ const appReducer: Reducer<
         ...state,
         isGetting: false,
       };
-    case SUCCEED_ADD_CUSTOMERS:
+    case SUCCEED_ADD_CUSTOMER:
       return {
         ...state,
         isUpdating: false,
@@ -74,7 +74,7 @@ const appReducer: Reducer<
         isFeedbackSucceed: true,
         feedbackMessage: '追加しました', // TODO: aciton.payloadに入れたほうがいいね。。。
       };
-    case SUCCEED_DELETE_CUSTOMERS:
+    case SUCCEED_DELETE_CUSTOMER:
       return {
         ...state,
         isUpdating: false,
@@ -91,8 +91,8 @@ const appReducer: Reducer<
         isFeedbackSucceed: false,
         feedbackMessage: action.payload.message,
       };
-    case FAILURE_ADD_CUSTOMERS:
-    case FAILURE_DELETE_CUSTOMERS:
+    case FAILURE_ADD_CUSTOMER:
+    case FAILURE_DELETE_CUSTOMER:
       return {
         ...state,
         isUpdating: false,

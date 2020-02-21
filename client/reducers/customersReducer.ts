@@ -3,8 +3,8 @@ import {
   CustomersAction,
   ON_CHANGE_CUSTOMER_NAME,
   SUCCEED_GET_CUSTOMERS,
-  SUCCEED_ADD_CUSTOMERS,
-  SUCCEED_DELETE_CUSTOMERS,
+  SUCCEED_ADD_CUSTOMER,
+  SUCCEED_DELETE_CUSTOMER,
 } from '../actions/customers';
 
 export interface CustomersState {
@@ -58,7 +58,7 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
         selectingCustomerName: action.payload.result[0],
         customerNames: action.payload.result,
       };
-    case SUCCEED_ADD_CUSTOMERS:
+    case SUCCEED_ADD_CUSTOMER:
       return {
         ...state,
         selectingCustomerName: action.payload.addedCustomerName,
@@ -67,7 +67,7 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
           action.payload.addedCustomerName,
         ],
       };
-    case SUCCEED_DELETE_CUSTOMERS:
+    case SUCCEED_DELETE_CUSTOMER:
       return newStateOnDeleted(state, action.payload.deletedCustomerName);
     default:
       return state;
