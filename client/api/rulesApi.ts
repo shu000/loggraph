@@ -7,6 +7,7 @@ const usersConfig = {
   timeout: API_TIMEOUT,
 };
 
+// TODO: rulesApi と customersApi 分けた方が一貫性あるかも
 const RulesApi = {
   getCustomers: async (): Promise<string[]> => {
     const instance = axios.create(usersConfig);
@@ -77,12 +78,8 @@ const RulesApi = {
 
     return true;
   },
-  getRules: async (customerName: string): Promise<DisplayRules> => {
-    if (customerName === '')
-      return {
-        customerName: '',
-        rules: [],
-      };
+  getRules: async (customerName: string): Promise<DisplayRule[]> => {
+    if (customerName === '') return [];
 
     const instance = axios.create(usersConfig);
     const response = await instance.get(`/rules/${customerName}`);
@@ -93,7 +90,9 @@ const RulesApi = {
     console.log('GET rules');
     console.log(response.data.result);
 
-    return response.data.result;
+    const displayRules: DisplayRules = response.data.result;
+
+    return displayRules.rules;
   },
   updateRules: async (
     customerName: string,

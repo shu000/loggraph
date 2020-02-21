@@ -35,7 +35,7 @@ const mergedRules = (
     return rule;
   });
 
-  return index === merged.length - 1 ? [...merged, emptyRule] : merged;
+  return index === merged.length - 1 ? [...merged, { ...emptyRule }] : merged;
 };
 
 const displayRulesReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
@@ -58,7 +58,10 @@ const displayRulesReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
     case SUCCEED_GET_RULES:
       return {
         ...state,
-        rules: action.payload.result,
+        rules: {
+          customerName: state.rules.customerName,
+          rules: [...action.payload.gotRules, { ...emptyRule }],
+        },
       };
     default:
       return state;

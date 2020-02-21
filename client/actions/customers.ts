@@ -21,9 +21,9 @@ export const progressGetCustomers = () => ({
   type: PROGRESS_GET_CUSTOMERS as typeof PROGRESS_GET_CUSTOMERS,
 });
 
-export const succeedGetCustomers = (result: string[]) => ({
+export const succeedGetCustomers = (gotCustomerNames: string[]) => ({
   type: SUCCEED_GET_CUSTOMERS as typeof SUCCEED_GET_CUSTOMERS,
-  payload: { result },
+  payload: { gotCustomerNames },
 });
 
 export const failureGetCustomers = (message: string) => ({

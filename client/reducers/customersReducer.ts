@@ -52,11 +52,11 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
         selectingCustomerName: action.payload.customerName,
       };
     case SUCCEED_GET_CUSTOMERS:
-      if (action.payload.result.length === 0) return state;
+      if (action.payload.gotCustomerNames.length === 0) return state;
       return {
         ...state,
-        selectingCustomerName: action.payload.result[0],
-        customerNames: action.payload.result,
+        selectingCustomerName: action.payload.gotCustomerNames[0],
+        customerNames: action.payload.gotCustomerNames,
       };
     case SUCCEED_ADD_CUSTOMER:
       return {

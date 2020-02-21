@@ -256,11 +256,11 @@ var progressGetCustomers = function progressGetCustomers() {
     type: PROGRESS_GET_CUSTOMERS
   };
 };
-var succeedGetCustomers = function succeedGetCustomers(result) {
+var succeedGetCustomers = function succeedGetCustomers(gotCustomerNames) {
   return {
     type: SUCCEED_GET_CUSTOMERS,
     payload: {
-      result: result
+      gotCustomerNames: gotCustomerNames
     }
   };
 };
@@ -488,11 +488,11 @@ var progressGetRules = function progressGetRules() {
     type: PROGRESS_GET_RULES
   };
 };
-var succeedGetRules = function succeedGetRules(result) {
+var succeedGetRules = function succeedGetRules(gotRules) {
   return {
     type: SUCCEED_GET_RULES,
     payload: {
-      result: result
+      gotRules: gotRules
     }
   };
 };
@@ -512,7 +512,7 @@ var getRules = function getRules(customerName) {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch) {
-        var result;
+        var gotRules;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -523,8 +523,8 @@ var getRules = function getRules(customerName) {
                 return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].getRules(customerName);
 
               case 4:
-                result = _context.sent;
-                dispatch(succeedGetRules(result));
+                gotRules = _context.sent;
+                dispatch(succeedGetRules(gotRules));
                 _context.next = 11;
                 break;
 
@@ -615,7 +615,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var usersConfig = {
   baseURL: _config__WEBPACK_IMPORTED_MODULE_1__["API_ENDPOINT"],
   timeout: _config__WEBPACK_IMPORTED_MODULE_1__["API_TIMEOUT"]
-};
+}; // TODO: rulesApi と customersApi 分けた方が一貫性あるかも
+
 var RulesApi = {
   getCustomers: function () {
     var _getCustomers = _asyncToGenerator(
@@ -817,7 +818,7 @@ var RulesApi = {
     var _getRules = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee5(customerName) {
-      var instance, response;
+      var instance, response, displayRules;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
@@ -827,10 +828,7 @@ var RulesApi = {
                 break;
               }
 
-              return _context5.abrupt("return", {
-                customerName: '',
-                rules: []
-              });
+              return _context5.abrupt("return", []);
 
             case 2:
               instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
@@ -850,9 +848,10 @@ var RulesApi = {
             case 8:
               console.log('GET rules');
               console.log(response.data.result);
-              return _context5.abrupt("return", response.data.result);
+              displayRules = response.data.result;
+              return _context5.abrupt("return", displayRules.rules);
 
-            case 11:
+            case 12:
             case "end":
               return _context5.stop();
           }
@@ -3105,10 +3104,10 @@ var customersReducer = function customersReducer() {
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_GET_CUSTOMERS"]:
-      if (action.payload.result.length === 0) return state;
+      if (action.payload.gotCustomerNames.length === 0) return state;
       return _objectSpread({}, state, {
-        selectingCustomerName: action.payload.result[0],
-        customerNames: action.payload.result
+        selectingCustomerName: action.payload.gotCustomerNames[0],
+        customerNames: action.payload.gotCustomerNames
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_ADD_CUSTOMER"]:
@@ -3173,7 +3172,7 @@ var mergedRules = function mergedRules(rules, index, newRule) {
     if (i === index) return newRule;
     return rule;
   });
-  return index === merged.length - 1 ? [].concat(_toConsumableArray(merged), [emptyRule]) : merged;
+  return index === merged.length - 1 ? [].concat(_toConsumableArray(merged), [_objectSpread({}, emptyRule)]) : merged;
 };
 
 var displayRulesReducer = function displayRulesReducer() {
@@ -3191,7 +3190,10 @@ var displayRulesReducer = function displayRulesReducer() {
 
     case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_GET_RULES"]:
       return _objectSpread({}, state, {
-        rules: action.payload.result
+        rules: {
+          customerName: state.rules.customerName,
+          rules: [].concat(_toConsumableArray(action.payload.gotRules), [_objectSpread({}, emptyRule)])
+        }
       });
 
     default:
@@ -83020,4 +83022,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?0a53d3a2b2388daf6170
+//# sourceMappingURL=bundle.js.map?aadaf3422321de9e337f
