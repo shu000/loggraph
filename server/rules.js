@@ -75,7 +75,21 @@ const Rules = {
     } catch (error) {
       return returnError(error);
     }
-  }
+  },
+  updateCustomer: async (customerName, newCustomerName) => {
+    try {
+      const result = await DB.update(
+        { customerName: sanitize(customerName) },
+        { customerName: sanitize(newCustomerName) }
+      );
+
+      return JSON.stringify({
+        result: result
+      });
+    } catch (error) {
+      return returnError(error);
+    }
+  },
 }
 
 function returnError(error) {

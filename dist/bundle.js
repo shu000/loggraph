@@ -427,13 +427,17 @@ var API_TIMEOUT = 7000;
 /*!*****************************!*\
   !*** ./client/api/rules.ts ***!
   \*****************************/
-/*! exports provided: getCustomers, getRules */
+/*! exports provided: getCustomers, addCustomer, deleteCustomer, updateCustomer, getRules, updateRules */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCustomers", function() { return getCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addCustomer", function() { return addCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCustomer", function() { return deleteCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCustomer", function() { return updateCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRules", function() { return getRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateRules", function() { return updateRules; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config */ "./client/api/config.ts");
@@ -473,7 +477,7 @@ function () {
             throw new Error('データを取得できませんでした');
 
           case 6:
-            console.log('customer');
+            console.log('GET customers');
             console.log(response.data.result);
             return _context.abrupt("return", response.data.result);
 
@@ -489,7 +493,7 @@ function () {
     return _ref.apply(this, arguments);
   };
 }();
-var getRules =
+var addCustomer =
 /*#__PURE__*/
 function () {
   var _ref2 = _asyncToGenerator(
@@ -500,37 +504,28 @@ function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            if (!(customerName === '')) {
-              _context2.next = 2;
-              break;
-            }
-
-            return _context2.abrupt("return", {
-              customerName: '',
-              rules: []
+            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+            _context2.next = 3;
+            return instance.post("/customers", {
+              customerName: customerName
             });
 
-          case 2:
-            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
-            _context2.next = 5;
-            return instance.get("/rules/".concat(customerName));
-
-          case 5:
+          case 3:
             response = _context2.sent;
 
             if (!(response.status !== 200)) {
-              _context2.next = 8;
+              _context2.next = 6;
               break;
             }
 
-            throw new Error('データを取得できませんでした');
+            throw new Error('登録に失敗しました');
 
-          case 8:
-            console.log('rules');
-            console.log(response.data.result);
-            return _context2.abrupt("return", response.data.result);
+          case 6:
+            console.log('POST customers');
+            console.log(response);
+            return _context2.abrupt("return", true);
 
-          case 11:
+          case 9:
           case "end":
             return _context2.stop();
         }
@@ -538,8 +533,191 @@ function () {
     }, _callee2);
   }));
 
-  return function getRules(_x) {
+  return function addCustomer(_x) {
     return _ref2.apply(this, arguments);
+  };
+}();
+var deleteCustomer =
+/*#__PURE__*/
+function () {
+  var _ref3 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee3(customerName) {
+    var instance, response;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+            _context3.next = 3;
+            return instance["delete"]("/customers/".concat(customerName));
+
+          case 3:
+            response = _context3.sent;
+
+            if (!(response.status !== 200)) {
+              _context3.next = 6;
+              break;
+            }
+
+            throw new Error('削除に失敗しました');
+
+          case 6:
+            console.log('DELETE customers');
+            console.log(response);
+            return _context3.abrupt("return", true);
+
+          case 9:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function deleteCustomer(_x2) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var updateCustomer =
+/*#__PURE__*/
+function () {
+  var _ref4 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee4(customerName, newCustomerName) {
+    var instance, response;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+            _context4.next = 3;
+            return instance.put("/customers/".concat(customerName), {
+              newCustomerName: newCustomerName
+            });
+
+          case 3:
+            response = _context4.sent;
+
+            if (!(response.status !== 200)) {
+              _context4.next = 6;
+              break;
+            }
+
+            throw new Error('変更に失敗しました');
+
+          case 6:
+            console.log('PUT customers');
+            console.log(response);
+            return _context4.abrupt("return", true);
+
+          case 9:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function updateCustomer(_x3, _x4) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+var getRules =
+/*#__PURE__*/
+function () {
+  var _ref5 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee5(customerName) {
+    var instance, response;
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            if (!(customerName === '')) {
+              _context5.next = 2;
+              break;
+            }
+
+            return _context5.abrupt("return", {
+              customerName: '',
+              rules: []
+            });
+
+          case 2:
+            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+            _context5.next = 5;
+            return instance.get("/rules/".concat(customerName));
+
+          case 5:
+            response = _context5.sent;
+
+            if (!(response.status !== 200)) {
+              _context5.next = 8;
+              break;
+            }
+
+            throw new Error('データを取得できませんでした');
+
+          case 8:
+            console.log('GET rules');
+            console.log(response.data.result);
+            return _context5.abrupt("return", response.data.result);
+
+          case 11:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+
+  return function getRules(_x5) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+var updateRules =
+/*#__PURE__*/
+function () {
+  var _ref6 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee6(customerName, rules) {
+    var instance, response;
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
+            _context6.next = 3;
+            return instance.put("/tules/".concat(customerName), {
+              rules: rules
+            });
+
+          case 3:
+            response = _context6.sent;
+
+            if (!(response.status !== 200)) {
+              _context6.next = 6;
+              break;
+            }
+
+            throw new Error('変更に失敗しました');
+
+          case 6:
+            console.log('PUT rules');
+            console.log(response);
+            return _context6.abrupt("return", true);
+
+          case 9:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+
+  return function updateRules(_x6, _x7) {
+    return _ref6.apply(this, arguments);
   };
 }();
 
@@ -82296,4 +82474,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?62ee72723bd2068b8bd6
+//# sourceMappingURL=bundle.js.map?6558cf4730e983b158be
