@@ -6,6 +6,10 @@ import {
   SUCCEED_ADD_CUSTOMER,
   SUCCEED_DELETE_CUSTOMER,
 } from '../actions/customers';
+import {
+  DisplayRulesAction,
+  SUCCEED_UPDATE_RULES,
+} from '../actions/displayRules';
 
 export interface CustomersState {
   selectingCustomerName: string;
@@ -41,9 +45,12 @@ const newStateOnDeleted = (
   };
 };
 
-const customersReducer: Reducer<CustomersState, CustomersAction> = (
+const customersReducer: Reducer<
+  CustomersState,
+  CustomersAction | DisplayRulesAction
+> = (
   state: CustomersState = initialState,
-  action: CustomersAction
+  action: CustomersAction | DisplayRulesAction
 ): CustomersState => {
   switch (action.type) {
     case ON_CHANGE_CUSTOMER_NAME:
@@ -69,6 +76,11 @@ const customersReducer: Reducer<CustomersState, CustomersAction> = (
       };
     case SUCCEED_DELETE_CUSTOMER:
       return newStateOnDeleted(state, action.payload.deletedCustomerName);
+    case SUCCEED_UPDATE_RULES:
+      return {
+        ...state,
+        selectingCustomerName: action.payload.updatedRules.customerName,
+      };
     default:
       return state;
   }

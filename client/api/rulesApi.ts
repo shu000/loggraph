@@ -96,10 +96,12 @@ const RulesApi = {
   },
   updateRules: async (
     customerName: string,
+    newCustomerName: string,
     rules: DisplayRule[]
-  ): Promise<boolean> => {
+  ): Promise<DisplayRules> => {
     const instance = axios.create(usersConfig);
     const response = await instance.put(`/rules/${customerName}`, {
+      newCustomerName,
       rules,
     });
     if (response.status !== 200) {
@@ -109,7 +111,10 @@ const RulesApi = {
     console.log('PUT rules');
     console.log(response);
 
-    return true;
+    return {
+      customerName: newCustomerName,
+      rules,
+    };
   },
 };
 

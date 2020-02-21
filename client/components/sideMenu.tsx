@@ -9,11 +9,18 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteButton from './deleteButton';
 import EditableTitle from './editableTitle';
 import DisplayRuleForms from '../containers/displayRuleForms';
+import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
 export interface SideMenuProps {
   selectingCustomerName?: string;
+  rules?: DisplayRules;
   isOpeningSideMenu?: boolean;
   deleteCustomer?: (custonerName: string) => void;
+  updateRules?: (
+    customerName: string,
+    newCustomerName: string,
+    rules: DisplayRule[]
+  ) => void;
   closeSideMenu?: () => void;
 }
 
@@ -39,11 +46,19 @@ const useStyles = makeStyles({
 
 const SideMenu: FC<SideMenuProps> = ({
   selectingCustomerName = '',
+  rules = {
+    rules: [],
+  },
   isOpeningSideMenu = false,
   deleteCustomer = () => {},
+  updateRules = () => {},
   closeSideMenu = () => {},
 }) => {
   const classes = useStyles();
+
+  const onClickSave = () => {
+    updateRules(selectingCustomerName, selectingCustomerName, rules.rules);
+  };
 
   return (
     <>
@@ -69,6 +84,7 @@ const SideMenu: FC<SideMenuProps> = ({
                   color="primary"
                   // disabled={!localUIState.isAnyFormChanged}
                   startIcon={<SaveIcon />}
+                  onClick={onClickSave}
                 >
                   変更を保存
                 </Button>

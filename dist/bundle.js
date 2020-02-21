@@ -450,7 +450,7 @@ var deleteCustomer = function deleteCustomer(customerName) {
 /*!****************************************!*\
   !*** ./client/actions/displayRules.ts ***!
   \****************************************/
-/*! exports provided: ON_CHANGE, PROGRESS_GET_RULES, SUCCEED_GET_RULES, FAILURE_GET_RULES, onChangeSingleRule, progressGetRules, succeedGetRules, failureGetRules, getRules */
+/*! exports provided: ON_CHANGE, PROGRESS_GET_RULES, SUCCEED_GET_RULES, FAILURE_GET_RULES, PROGRESS_UPDATE_RULES, SUCCEED_UPDATE_RULES, FAILURE_UPDATE_RULES, onChangeSingleRule, progressGetRules, succeedGetRules, failureGetRules, progressUpdateRules, succeedUpdateRules, failureUpdateRules, getRules, updateRules */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -459,11 +459,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_RULES", function() { return PROGRESS_GET_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_RULES", function() { return SUCCEED_GET_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_RULES", function() { return FAILURE_GET_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_UPDATE_RULES", function() { return PROGRESS_UPDATE_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_UPDATE_RULES", function() { return SUCCEED_UPDATE_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_UPDATE_RULES", function() { return FAILURE_UPDATE_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeSingleRule", function() { return onChangeSingleRule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetRules", function() { return progressGetRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetRules", function() { return succeedGetRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetRules", function() { return failureGetRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressUpdateRules", function() { return progressUpdateRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedUpdateRules", function() { return succeedUpdateRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureUpdateRules", function() { return failureUpdateRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRules", function() { return getRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateRules", function() { return updateRules; });
 /* harmony import */ var _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rulesApi */ "./client/api/rulesApi.ts");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -474,6 +481,9 @@ var ON_CHANGE = 'ON_CHANGE';
 var PROGRESS_GET_RULES = 'PROGRESS_GET_RULES';
 var SUCCEED_GET_RULES = 'SUCCEED_GET_RULES';
 var FAILURE_GET_RULES = 'FAULURE_GET_RULES';
+var PROGRESS_UPDATE_RULES = 'PROGRESS_UPDATE_RULES';
+var SUCCEED_UPDATE_RULES = 'SUCCEED_UPDATE_RULES';
+var FAILURE_UPDATE_RULES = 'FAULURE_UPDATE_RULES';
 var onChangeSingleRule = function onChangeSingleRule(index, rule) {
   return {
     type: ON_CHANGE,
@@ -499,6 +509,28 @@ var succeedGetRules = function succeedGetRules(gotRules) {
 var failureGetRules = function failureGetRules(message) {
   return {
     type: FAILURE_GET_RULES,
+    payload: {
+      message: message
+    },
+    error: true
+  };
+};
+var progressUpdateRules = function progressUpdateRules() {
+  return {
+    type: PROGRESS_UPDATE_RULES
+  };
+};
+var succeedUpdateRules = function succeedUpdateRules(updatedRules) {
+  return {
+    type: SUCCEED_UPDATE_RULES,
+    payload: {
+      updatedRules: updatedRules
+    }
+  };
+};
+var failureUpdateRules = function failureUpdateRules(message) {
+  return {
+    type: FAILURE_UPDATE_RULES,
     payload: {
       message: message
     },
@@ -543,6 +575,48 @@ var getRules = function getRules(customerName) {
 
       return function (_x) {
         return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+var updateRules = function updateRules(customerName, newCustomerName, rules) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var updatedRules;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                dispatch(progressUpdateRules());
+                _context2.prev = 1;
+                _context2.next = 4;
+                return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].updateRules(customerName, newCustomerName, rules);
+
+              case 4:
+                updatedRules = _context2.sent;
+                dispatch(succeedUpdateRules(updatedRules));
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](1);
+                dispatch(failureUpdateRules(_context2.t0.message));
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 8]]);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
       };
     }()
   );
@@ -868,7 +942,7 @@ var RulesApi = {
   updateRules: function () {
     var _updateRules = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee6(customerName, rules) {
+    regeneratorRuntime.mark(function _callee6(customerName, newCustomerName, rules) {
       var instance, response;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
@@ -877,6 +951,7 @@ var RulesApi = {
               instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
               _context6.next = 3;
               return instance.put("/rules/".concat(customerName), {
+                newCustomerName: newCustomerName,
                 rules: rules
               });
 
@@ -893,7 +968,10 @@ var RulesApi = {
             case 6:
               console.log('PUT rules');
               console.log(response);
-              return _context6.abrupt("return", true);
+              return _context6.abrupt("return", {
+                customerName: newCustomerName,
+                rules: rules
+              });
 
             case 9:
             case "end":
@@ -903,7 +981,7 @@ var RulesApi = {
       }, _callee6);
     }));
 
-    function updateRules(_x6, _x7) {
+    function updateRules(_x6, _x7, _x8) {
       return _updateRules.apply(this, arguments);
     }
 
@@ -1866,13 +1944,24 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
 var SideMenu = function SideMenu(_ref) {
   var _ref$selectingCustome = _ref.selectingCustomerName,
       selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
+      _ref$rules = _ref.rules,
+      rules = _ref$rules === void 0 ? {
+    rules: []
+  } : _ref$rules,
       _ref$isOpeningSideMen = _ref.isOpeningSideMenu,
       isOpeningSideMenu = _ref$isOpeningSideMen === void 0 ? false : _ref$isOpeningSideMen,
       _ref$deleteCustomer = _ref.deleteCustomer,
       deleteCustomer = _ref$deleteCustomer === void 0 ? function () {} : _ref$deleteCustomer,
+      _ref$updateRules = _ref.updateRules,
+      updateRules = _ref$updateRules === void 0 ? function () {} : _ref$updateRules,
       _ref$closeSideMenu = _ref.closeSideMenu,
       closeSideMenu = _ref$closeSideMenu === void 0 ? function () {} : _ref$closeSideMenu;
   var classes = useStyles();
+
+  var onClickSave = function onClickSave() {
+    updateRules(selectingCustomerName, selectingCustomerName, rules.rules);
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: classes.drawer,
     variant: "persistent",
@@ -1903,7 +1992,8 @@ var SideMenu = function SideMenu(_ref) {
     size: "small",
     color: "primary" // disabled={!localUIState.isAnyFormChanged}
     ,
-    startIcon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7___default.a, null)
+    startIcon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7___default.a, null),
+    onClick: onClickSave
   }, "\u5909\u66F4\u3092\u4FDD\u5B58")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
     className: classes.whiteSpace
@@ -2179,8 +2269,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
-/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
-/* harmony import */ var _components_sideMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/sideMenu */ "./client/components/sideMenu.tsx");
+/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
+/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
+/* harmony import */ var _components_sideMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/sideMenu */ "./client/components/sideMenu.tsx");
+
 
 
 
@@ -2189,6 +2281,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     selectingCustomerName: state.customers.selectingCustomerName,
+    rules: state.displayRules.rules,
     isOpeningSideMenu: state.ui.isOpeningSideMenu
   };
 };
@@ -2198,13 +2291,16 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     deleteCustomer: function deleteCustomer(customerName) {
       return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_1__["deleteCustomer"])(customerName));
     },
+    updateRules: function updateRules(customerName, newCustomerName, rules) {
+      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["updateRules"])(customerName, newCustomerName, rules));
+    },
     closeSideMenu: function closeSideMenu() {
-      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_2__["closeSideMenu"])());
+      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_3__["closeSideMenu"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_sideMenu__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_sideMenu__WEBPACK_IMPORTED_MODULE_4__["default"]));
 
 /***/ }),
 
@@ -3155,6 +3251,7 @@ var appReducer = function appReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
+/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -3168,6 +3265,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var initialState = {
@@ -3215,6 +3313,11 @@ var customersReducer = function customersReducer() {
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_DELETE_CUSTOMER"]:
       return newStateOnDeleted(state, action.payload.deletedCustomerName);
+
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_UPDATE_RULES"]:
+      return _objectSpread({}, state, {
+        selectingCustomerName: action.payload.updatedRules.customerName
+      });
 
     default:
       return state;
@@ -3290,6 +3393,14 @@ var displayRulesReducer = function displayRulesReducer() {
         rules: {
           customerName: state.rules.customerName,
           rules: [].concat(_toConsumableArray(action.payload.gotRules), [_objectSpread({}, emptyRule)])
+        }
+      });
+
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_UPDATE_RULES"]:
+      return _objectSpread({}, state, {
+        rules: {
+          customerName: action.payload.updatedRules.customerName,
+          rules: [].concat(_toConsumableArray(action.payload.updatedRules.rules), [_objectSpread({}, emptyRule)])
         }
       });
 
@@ -83119,4 +83230,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?d8e1e043c5da787e2a78
+//# sourceMappingURL=bundle.js.map?14ddc00d394a0ec1a81d

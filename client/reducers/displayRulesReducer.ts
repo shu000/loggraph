@@ -3,6 +3,7 @@ import {
   DisplayRulesAction,
   ON_CHANGE,
   SUCCEED_GET_RULES,
+  SUCCEED_UPDATE_RULES,
 } from '../actions/displayRules';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
@@ -61,6 +62,14 @@ const displayRulesReducer: Reducer<DisplayRulesState, DisplayRulesAction> = (
         rules: {
           customerName: state.rules.customerName,
           rules: [...action.payload.gotRules, { ...emptyRule }],
+        },
+      };
+    case SUCCEED_UPDATE_RULES:
+      return {
+        ...state,
+        rules: {
+          customerName: action.payload.updatedRules.customerName,
+          rules: [...action.payload.updatedRules.rules, { ...emptyRule }],
         },
       };
     default:

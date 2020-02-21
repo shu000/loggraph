@@ -30,7 +30,7 @@ const Rules = {
       return returnError(error);
     }
   },
-  updateRules: async (customerName, rules) => {
+  updateRules: async (customerName, newCustomerName, rules) => {
     const sanitizedRules = rules.map(obj => {
       Object.keys(obj).map(key => { obj[key] = sanitize(obj[key]) });
       return obj;
@@ -39,7 +39,10 @@ const Rules = {
     try {
       const result = await DB.update(
         { customerName: sanitize(customerName) },
-        { rules: sanitizedRules }
+        {
+          customerName: sanitize(newCustomerName),
+          rules: sanitizedRules
+        }
       );
 
       return JSON.stringify({
