@@ -86,7 +86,7 @@ const RulesApi = {
     rules: DisplayRule[]
   ): Promise<boolean> => {
     const instance = axios.create(usersConfig);
-    const response = await instance.put(`/tules/${customerName}`, {
+    const response = await instance.put(`/rules/${customerName}`, {
       rules,
     });
     if (response.status !== 200) {

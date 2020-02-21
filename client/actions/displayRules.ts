@@ -3,9 +3,9 @@ import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import RulesApi from '../api/rulesApi';
 
 export const ON_CHANGE = 'ON_CHANGE';
-export const PROGRESS_GET_RULES = 'PROGRESS_RULES';
-export const SUCCEED_GET_RULES = 'SUCCEED_RULES';
-export const FAILURE_GET_RULES = 'FAULURE_RULES';
+export const PROGRESS_GET_RULES = 'PROGRESS_GET_RULES';
+export const SUCCEED_GET_RULES = 'SUCCEED_GET_RULES';
+export const FAILURE_GET_RULES = 'FAULURE_GET_RULES';
 
 export const onChangeSingleRule = (index: number, rule: DisplayRule) => ({
   type: ON_CHANGE as typeof ON_CHANGE,
