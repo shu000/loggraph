@@ -1,4 +1,8 @@
 import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Radio from '@material-ui/core/Radio';
+import TextField from '@material-ui/core/TextField';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
 
@@ -7,6 +11,18 @@ export interface DisplayRuleFormProps {
   rules?: DisplayRules;
   onChange?: (index: number, rule: DisplayRule) => void;
 }
+
+const useStyles = makeStyles({
+  radio: {
+    padding: '0 2px',
+  },
+  backgroundColorField: (props: DisplayRule) => ({
+    backgroundColor: props.backgroundColor,
+    '& input': {
+      color: Util.seeableColor(props.backgroundColor),
+    },
+  }),
+});
 
 const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
   index = 0,
@@ -20,95 +36,91 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
     return <div className="DisplayRuleForm" />;
 
   const rule = rules.rules[index];
-  // TODO: off stylelint on .tsx
-  // 以下、臨時対策でcammelCaseを避けてる
-  const background = rule.backgroundColor;
-  const seeable = Util.seeableColor;
+  const classes = useStyles(rule);
 
   return (
-    <div className="DisplayRuleForm">
-      <form>
-        <div className="DisplayRuleForm__group">
-          <input
-            className="DisplayRuleForm__pattern"
-            name="pattern"
-            type="text"
-            value={rule.pattern}
-            onChange={event => {
-              onChange(index, { ...rule, pattern: event.target.value });
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      <Grid item xs={3}>
+        <TextField
+          name="pattern"
+          type="text"
+          value={rule.pattern}
+          onChange={event => {
+            onChange(index, { ...rule, pattern: event.target.value });
+          }}
+        />
+      </Grid>
+      <Grid item xs={2} container justify="center" alignItems="center">
+        <Grid item>
+          <Radio
+            className={classes.radio}
+            name="matching"
+            checked={rule.matching === 'match'}
+            onChange={() => {
+              onChange(index, { ...rule, matching: 'match' });
             }}
           />
-        </div>
-        <div className="DisplayRuleForm__group">
-          <fieldset>
-            <input
-              className="DisplayRuleForm__matching"
-              name="matching"
-              type="radio"
-              checked={rule.matching === 'match'}
-              onChange={() => {
-                onChange(index, { ...rule, matching: 'match' });
-              }}
-            />
-            <input
-              className="DisplayRuleForm__matching"
-              name="matching"
-              type="radio"
-              checked={rule.matching === 'startsWith'}
-              onChange={() => {
-                onChange(index, { ...rule, matching: 'startsWith' });
-              }}
-            />
-            <input
-              className="DisplayRuleForm__matching"
-              name="matching"
-              type="radio"
-              checked={rule.matching === 'includes'}
-              onChange={() => {
-                onChange(index, { ...rule, matching: 'includes' });
-              }}
-            />
-          </fieldset>
-        </div>
-        <div className="DisplayRuleForm__group">
-          <input
-            className="DisplayRuleForm__title"
-            name="title"
-            type="text"
-            value={rule.title}
-            onChange={event => {
-              onChange(index, { ...rule, title: event.target.value });
+        </Grid>
+        <Grid item>
+          <Radio
+            className={classes.radio}
+            name="matching"
+            checked={rule.matching === 'startsWith'}
+            onChange={() => {
+              onChange(index, { ...rule, matching: 'startsWith' });
             }}
           />
-        </div>
-        <div className="DisplayRuleForm__group">
-          <input
-            className="DisplayRuleForm__text"
-            name="text"
-            type="text"
-            value={rule.text}
-            onChange={event => {
-              onChange(index, { ...rule, text: event.target.value });
+        </Grid>
+        <Grid item>
+          <Radio
+            className={classes.radio}
+            name="matching"
+            checked={rule.matching === 'includes'}
+            onChange={() => {
+              onChange(index, { ...rule, matching: 'includes' });
             }}
           />
-        </div>
-        <div className="DisplayRuleForm__group">
-          <input
-            className="DisplayRuleForm__backgroundColor"
-            name="backgroundColor"
-            type="text"
-            value={background}
-            style={{
-              backgroundColor: background,
-              color: seeable(background),
-            }}
-            onChange={event => {
-              onChange(index, { ...rule, backgroundColor: event.target.value });
-            }}
-          />
-        </div>
-      </form>
-    </div>
+        </Grid>
+      </Grid>
+      <Grid item xs={3}>
+        <TextField
+          fullWidth
+          name="title"
+          type="text"
+          value={rule.title}
+          onChange={event => {
+            onChange(index, { ...rule, title: event.target.value });
+          }}
+        />
+      </Grid>
+      <Grid item xs={1}>
+        <TextField
+          name="text"
+          type="text"
+          value={rule.text}
+          onChange={event => {
+            onChange(index, { ...rule, text: event.target.value });
+          }}
+        />
+      </Grid>
+      <Grid item xs={2}>
+        <TextField
+          className={classes.backgroundColorField}
+          name="backgroundColor"
+          type="text"
+          value={rule.backgroundColor}
+          onChange={event => {
+            onChange(index, { ...rule, backgroundColor: event.target.value });
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

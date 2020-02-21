@@ -1,9 +1,7 @@
 {
   "recommendations": [
-    "ms-vsliveshare.vsliveshare",
     "coenraads.bracket-pair-colorizer",
     "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
     "msjsdiag.debugger-for-chrome",
     "oderwat.indent-rainbow",
     "VisualStudioExptTeam.vscodeintellicode",

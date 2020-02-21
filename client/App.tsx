@@ -1,18 +1,15 @@
 import React from 'react';
-
-import JsonReader from './containers/jsonReader';
+import Header from './containers/header';
 import Graph from './containers/graph';
-import CustomersForm from './containers/customersForm';
-import DisplayRuleForms from './containers/displayRuleForms';
+import SideMenu from './containers/sideMenu';
 import './App.scss';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <JsonReader />
+      <Header />
       <Graph />
-      <CustomersForm />
-      <DisplayRuleForms />
+      <SideMenu />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { ParsedActivity } from '../constants/parsedData';
 import { DisplayRule } from '../constants/displayRules';
 import Util from '../util/util';
@@ -8,10 +9,34 @@ export interface ActivityProps {
   rules?: DisplayRule[];
 }
 
+const useStyles = makeStyles({
+  activity: (props: DisplayRule) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: '10px',
+    marginBottom: '10px',
+    width: '25px',
+    height: '25px',
+    borderRadius: '1px',
+    backgroundColor: props.backgroundColor,
+    color: Util.seeableColor(props.backgroundColor),
+  }),
+});
+
 const matchedRule = (
   activity: ParsedActivity,
   rules: DisplayRule[]
 ): DisplayRule => {
+  if (activity.pageURL === 'arrow')
+    return {
+      pattern: 'arrow',
+      matching: 'match',
+      title: '',
+      text: '→',
+      backgroundColor: '#ffffff',
+    };
+
   const matches = rules.filter(rule => {
     switch (rule.matching) {
       case 'match':
@@ -25,6 +50,8 @@ const matchedRule = (
 
   // 末尾寄りのルールを優先
   if (matches.length > 0) return matches[matches.length - 1];
+
+  // 一致するパターンがない場合
   return {
     pattern: '',
     matching: 'match',
@@ -43,14 +70,11 @@ const Activity: FC<ActivityProps> = ({
   rules = [],
 }) => {
   const matched = matchedRule(activity, rules);
-  // TODO: stylelint
-  const bk = matched.backgroundColor;
-  const fc = Util.seeableColor(matched.backgroundColor);
+  const classes = useStyles(matched);
 
   return (
-    <div className="Activity" style={{ backgroundColor: bk, color: fc }}>
+    <div className={classes.activity}>
       <span>{matched.text}</span>
-      <span>{activity.pageURL}</span>
     </div>
   );
 };
