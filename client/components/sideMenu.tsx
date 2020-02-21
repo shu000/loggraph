@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Header: FC<SideMenuProps> = ({
+const SideMenu: FC<SideMenuProps> = ({
   selectingCustomerName = '',
   isOpeningSideMenu = false,
   deleteCustomer = () => {},
@@ -168,4 +168,4 @@ const Header: FC<SideMenuProps> = ({
   );
 };
 
-export default Header;
+export default SideMenu;
