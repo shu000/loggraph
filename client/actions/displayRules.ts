@@ -60,18 +60,31 @@ export const getRules = (customerName: string) => {
   };
 };
 
+const removeEmptyRules = (rules: DisplayRule[]): DisplayRule[] => {
+  return rules.filter(rule => {
+    return (
+      rule.pattern !== '' ||
+      rule.title !== '' ||
+      rule.text !== '' ||
+      rule.backgroundColor !== ''
+    );
+  });
+};
+
 export const updateRules = (
   customerName: string,
   newCustomerName: string,
-  rules: DisplayRule[]
+  showingRules: DisplayRule[]
 ) => {
   return async (dispatch: Dispatch) => {
     dispatch(progressUpdateRules());
     try {
+      const newRules = removeEmptyRules(showingRules);
+
       const updatedRules = await RulesApi.updateRules(
         customerName,
         newCustomerName,
-        rules
+        newRules
       );
       dispatch(succeedUpdateRules(updatedRules));
     } catch (error) {

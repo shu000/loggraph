@@ -579,40 +579,48 @@ var getRules = function getRules(customerName) {
     }()
   );
 };
-var updateRules = function updateRules(customerName, newCustomerName, rules) {
+
+var removeEmptyRules = function removeEmptyRules(rules) {
+  return rules.filter(function (rule) {
+    return rule.pattern !== '' || rule.title !== '' || rule.text !== '' || rule.backgroundColor !== '';
+  });
+};
+
+var updateRules = function updateRules(customerName, newCustomerName, showingRules) {
   return (
     /*#__PURE__*/
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var updatedRules;
+        var newRules, updatedRules;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 dispatch(progressUpdateRules());
                 _context2.prev = 1;
-                _context2.next = 4;
-                return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].updateRules(customerName, newCustomerName, rules);
+                newRules = removeEmptyRules(showingRules);
+                _context2.next = 5;
+                return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].updateRules(customerName, newCustomerName, newRules);
 
-              case 4:
+              case 5:
                 updatedRules = _context2.sent;
                 dispatch(succeedUpdateRules(updatedRules));
-                _context2.next = 11;
+                _context2.next = 12;
                 break;
 
-              case 8:
-                _context2.prev = 8;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](1);
                 dispatch(failureUpdateRules(_context2.t0.message));
 
-              case 11:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 8]]);
+        }, _callee2, null, [[1, 9]]);
       }));
 
       return function (_x2) {
@@ -83230,4 +83238,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?14ddc00d394a0ec1a81d
+//# sourceMappingURL=bundle.js.map?be5ddca317e0ec285b26
