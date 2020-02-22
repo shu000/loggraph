@@ -17,6 +17,9 @@ import {
   PROGRESS_GET_RULES,
   SUCCEED_GET_RULES,
   FAILURE_GET_RULES,
+  PROGRESS_UPDATE_RULES,
+  SUCCEED_UPDATE_RULES,
+  FAILURE_UPDATE_RULES,
 } from '../actions/displayRules';
 
 export interface AppState {
@@ -56,6 +59,7 @@ const appReducer: Reducer<
       };
     case PROGRESS_ADD_CUSTOMER:
     case PROGRESS_DELETE_CUSTOMER:
+    case PROGRESS_UPDATE_RULES:
       return {
         ...state,
         isUpdating: true,
@@ -82,6 +86,14 @@ const appReducer: Reducer<
         isFeedbackSucceed: true,
         feedbackMessage: '削除しました',
       };
+    case SUCCEED_UPDATE_RULES:
+      return {
+        ...state,
+        isUpdating: false,
+        isFeedbackOpen: true,
+        isFeedbackSucceed: true,
+        feedbackMessage: '保存しました',
+      };
     case FAILURE_GET_CUSTOMERS:
     case FAILURE_GET_RULES:
       return {
@@ -93,6 +105,7 @@ const appReducer: Reducer<
       };
     case FAILURE_ADD_CUSTOMER:
     case FAILURE_DELETE_CUSTOMER:
+    case FAILURE_UPDATE_RULES:
       return {
         ...state,
         isUpdating: false,

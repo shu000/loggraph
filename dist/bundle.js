@@ -3195,6 +3195,7 @@ var appReducer = function appReducer() {
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_ADD_CUSTOMER"]:
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_DELETE_CUSTOMER"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["PROGRESS_UPDATE_RULES"]:
       return _objectSpread({}, state, {
         isUpdating: true
       });
@@ -3222,6 +3223,14 @@ var appReducer = function appReducer() {
         feedbackMessage: '削除しました'
       });
 
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["SUCCEED_UPDATE_RULES"]:
+      return _objectSpread({}, state, {
+        isUpdating: false,
+        isFeedbackOpen: true,
+        isFeedbackSucceed: true,
+        feedbackMessage: '保存しました'
+      });
+
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_GET_CUSTOMERS"]:
     case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["FAILURE_GET_RULES"]:
       return _objectSpread({}, state, {
@@ -3233,6 +3242,7 @@ var appReducer = function appReducer() {
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_ADD_CUSTOMER"]:
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_DELETE_CUSTOMER"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["FAILURE_UPDATE_RULES"]:
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
@@ -83238,4 +83248,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?be5ddca317e0ec285b26
+//# sourceMappingURL=bundle.js.map?8085a18207558e445c9d
