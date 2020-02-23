@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteButton from './deleteButton';
@@ -32,6 +33,11 @@ const useStyles = makeStyles({
       width: '100%',
       margin: 0,
     },
+    '& .MuiBackdrop-root': {
+      // Drawer の背景を透明にする
+      // TODO: もうちょいMaterial-UIっぽいやり方ある気がする。。
+      opacity: '0 !important',
+    },
   },
   container: {
     // サイドメニューの幅
@@ -58,17 +64,24 @@ const SideMenu: FC<SideMenuProps> = ({
 }) => {
   const classes = useStyles();
 
+  const onOpen = () => true;
+  const onClose = () => {
+    closeSideMenu();
+    return false;
+  };
+
   const onClickSave = () => {
     updateRules(selectingCustomerName, editingCustomerName, rules.rules);
   };
 
   return (
     <>
-      <Drawer
+      <SwipeableDrawer
         className={classes.drawer}
-        variant="persistent"
         anchor="right"
         open={isOpeningSideMenu}
+        onOpen={onOpen}
+        onClose={onClose}
       >
         <Grid container className={classes.container} spacing={1}>
           <Grid item xs={12}>
@@ -107,7 +120,7 @@ const SideMenu: FC<SideMenuProps> = ({
             <DisplayRuleForms />
           </Grid>
         </Grid>
-      </Drawer>
+      </SwipeableDrawer>
     </>
   );
 };
