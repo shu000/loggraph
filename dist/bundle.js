@@ -3346,12 +3346,14 @@ var initialState = {
 var newStateOnDeleted = function newStateOnDeleted(oldState, deletedCustomerName) {
   if (oldState.customerNames.length === 1) return _objectSpread({}, oldState, {
     selectingCustomerName: '',
+    editingCustomerName: '',
     customerNames: []
   });
   var deletedIndex = oldState.customerNames.indexOf(deletedCustomerName);
-  var nextSelectingCustomerName = oldState.customerNames[deletedIndex === 0 ? 1 : deletedIndex - 1];
+  var nextCustomerName = oldState.customerNames[deletedIndex === 0 ? 1 : deletedIndex - 1];
   return _objectSpread({}, oldState, {
-    selectingCustomerName: nextSelectingCustomerName,
+    selectingCustomerName: nextCustomerName,
+    editingCustomerName: nextCustomerName,
     customerNames: oldState.customerNames.filter(function (name) {
       return name !== deletedCustomerName;
     })
@@ -83319,4 +83321,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?9670f3d2b2c979ac9982
+//# sourceMappingURL=bundle.js.map?4a459a46a3d2f519a3c9
