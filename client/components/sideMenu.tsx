@@ -1,33 +1,28 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteButton from './deleteButton';
+import EditableTitle from '../containers/editableTitle';
 import DisplayRuleForms from '../containers/displayRuleForms';
+import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
 export interface SideMenuProps {
   selectingCustomerName?: string;
+  editingCustomerName?: string;
+  rules?: DisplayRules;
   isOpeningSideMenu?: boolean;
   deleteCustomer?: (custonerName: string) => void;
+  updateRules?: (
+    customerName: string,
+    newCustomerName: string,
+    rules: DisplayRule[]
+  ) => void;
   closeSideMenu?: () => void;
-}
-
-interface SideMenuUIState {
-  isAnyFormChanged: boolean;
-  isEditingCustomerName: boolean;
-  isOpeningDeleteDialog: boolean;
-  editingCustomerName: string;
 }
 
 const useStyles = makeStyles({
@@ -38,137 +33,75 @@ const useStyles = makeStyles({
       margin: 0,
     },
   },
+  container: {
+    // サイドメニューの幅
+    // 上記 width:'100%' を上書き
+    '&.MuiGrid-spacing-xs-1': {
+      width: 520,
+    },
+  },
+  whiteSpace: {
+    flexGrow: 1,
+  },
 });
 
 const SideMenu: FC<SideMenuProps> = ({
   selectingCustomerName = '',
+  editingCustomerName = '',
+  rules = {
+    rules: [],
+  },
   isOpeningSideMenu = false,
   deleteCustomer = () => {},
+  updateRules = () => {},
   closeSideMenu = () => {},
 }) => {
   const classes = useStyles();
 
-  const [localUIState, setLocalUIState] = useState<SideMenuUIState>({
-    isAnyFormChanged: false, // どこかのフォームが変更されてたら保存ボタンを有効にする
-    isEditingCustomerName: false,
-    isOpeningDeleteDialog: false,
-    editingCustomerName: selectingCustomerName,
-  });
-
-  useEffect(() => {
-    setLocalUIState({
-      ...localUIState,
-      isEditingCustomerName: false,
-      editingCustomerName: selectingCustomerName,
-    });
-  }, [selectingCustomerName]);
-
-  const DeleteDialog = (() => {
-    const handleClose = () => {
-      setLocalUIState({
-        ...localUIState,
-        isOpeningDeleteDialog: false,
-      });
-    };
-
-    const handleDelete = () => {
-      handleClose();
-      deleteCustomer(selectingCustomerName);
-    };
-
-    return (
-      <Dialog open={localUIState.isOpeningDeleteDialog} onClose={handleClose}>
-        <DialogTitle>「{selectingCustomerName}」を削除します</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            本当に削除してよろしいですか？一度削除すると戻すことはできません。
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary" onClick={handleClose}>
-            キャンセル
-          </Button>
-          <Button color="secondary" onClick={handleDelete}>
-            削除する
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  })();
+  const onClickSave = () => {
+    updateRules(selectingCustomerName, editingCustomerName, rules.rules);
+  };
 
   return (
     <>
-      {DeleteDialog}
       <Drawer
         className={classes.drawer}
         variant="persistent"
         anchor="right"
         open={isOpeningSideMenu}
       >
-        <Grid container spacing={1} style={{ width: 520 }}>
+        <Grid container className={classes.container} spacing={1}>
           <Grid item xs={12}>
             <IconButton onClick={closeSideMenu}>
               <ChevronRightIcon />
             </IconButton>
           </Grid>
-          <Grid item xs={1} />
-          <Grid item xs={11}>
-            <Button
-              variant="contained"
-              size="small"
-              color="primary"
-              disabled={!localUIState.isAnyFormChanged}
-              startIcon={<SaveIcon />}
-            >
-              変更を保存
-            </Button>
-          </Grid>
           <Grid item xs={12}>
-            <Grid container justify="center" spacing={1}>
-              <Grid item xs={8}>
-                <TextField
-                  name="customerName"
-                  type="text"
-                  fullWidth
-                  disabled={!localUIState.isEditingCustomerName}
-                  autoFocus
-                  value={localUIState.editingCustomerName}
-                  onChange={event => {
-                    setLocalUIState({
-                      ...localUIState,
-                      editingCustomerName: event.target.value,
-                    });
-                  }}
+            <Grid container>
+              <Grid item xs={1} />
+              <Grid item xs={3}>
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                  // disabled={!localUIState.isAnyFormChanged}
+                  startIcon={<SaveIcon />}
+                  onClick={onClickSave}
+                >
+                  変更を保存
+                </Button>
+              </Grid>
+              <Grid item className={classes.whiteSpace} />
+              <Grid item xs={3}>
+                <DeleteButton
+                  target={selectingCustomerName}
+                  onDelete={deleteCustomer}
                 />
               </Grid>
-              <Grid item xs={1}>
-                <IconButton
-                  color={
-                    localUIState.isEditingCustomerName ? 'primary' : 'default'
-                  }
-                  onClick={() => {
-                    setLocalUIState({
-                      ...localUIState,
-                      isEditingCustomerName: !localUIState.isEditingCustomerName,
-                    });
-                  }}
-                >
-                  <EditIcon />
-                </IconButton>
-              </Grid>
-              <Grid item xs={1}>
-                <IconButton
-                  onClick={() => {
-                    setLocalUIState({
-                      ...localUIState,
-                      isOpeningDeleteDialog: true,
-                    });
-                  }}
-                >
-                  <DeleteForeverIcon />
-                </IconButton>
-              </Grid>
             </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <EditableTitle />
           </Grid>
           <Grid item xs={12}>
             <DisplayRuleForms />

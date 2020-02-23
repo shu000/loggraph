@@ -199,28 +199,32 @@ var onCloseFeedback = function onCloseFeedback() {
 /*!*************************************!*\
   !*** ./client/actions/customers.ts ***!
   \*************************************/
-/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, PROGRESS_ADD_CUSTOMER, SUCCEED_ADD_CUSTOMER, FAILURE_ADD_CUSTOMER, PROGRESS_DELETE_CUSTOMER, SUCCEED_DELETE_CUSTOMER, FAILURE_DELETE_CUSTOMER, onChangeCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, progressAddCustomer, succeedAddCustomer, failureAddCustomer, progressDeleteCustomer, succeedDeleteCustomer, failureDeleteCustomer, getCustomers, addCustomer, deleteCustomer */
+/*! exports provided: ON_CHANGE_CUSTOMER_NAME, ON_EDIT_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, PROGRESS_ADD_CUSTOMER, SUCCEED_ADD_CUSTOMER, FAILURE_ADD_CUSTOMER, SUCCEED_UPDATE_CUSTOMER, PROGRESS_DELETE_CUSTOMER, SUCCEED_DELETE_CUSTOMER, FAILURE_DELETE_CUSTOMER, onChangeCustomerName, onEditCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, progressAddCustomer, succeedAddCustomer, failureAddCustomer, succeedUpdateCustomer, progressDeleteCustomer, succeedDeleteCustomer, failureDeleteCustomer, getCustomers, addCustomer, deleteCustomer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CHANGE_CUSTOMER_NAME", function() { return ON_CHANGE_CUSTOMER_NAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_EDIT_CUSTOMER_NAME", function() { return ON_EDIT_CUSTOMER_NAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_CUSTOMERS", function() { return PROGRESS_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_CUSTOMERS", function() { return SUCCEED_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_CUSTOMERS", function() { return FAILURE_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_ADD_CUSTOMER", function() { return PROGRESS_ADD_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_ADD_CUSTOMER", function() { return SUCCEED_ADD_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_ADD_CUSTOMER", function() { return FAILURE_ADD_CUSTOMER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_UPDATE_CUSTOMER", function() { return SUCCEED_UPDATE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_DELETE_CUSTOMER", function() { return PROGRESS_DELETE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_DELETE_CUSTOMER", function() { return SUCCEED_DELETE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_DELETE_CUSTOMER", function() { return FAILURE_DELETE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeCustomerName", function() { return onChangeCustomerName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onEditCustomerName", function() { return onEditCustomerName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetCustomers", function() { return progressGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetCustomers", function() { return succeedGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetCustomers", function() { return failureGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressAddCustomer", function() { return progressAddCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedAddCustomer", function() { return succeedAddCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureAddCustomer", function() { return failureAddCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedUpdateCustomer", function() { return succeedUpdateCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressDeleteCustomer", function() { return progressDeleteCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedDeleteCustomer", function() { return succeedDeleteCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureDeleteCustomer", function() { return failureDeleteCustomer; });
@@ -234,12 +238,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
+var ON_EDIT_CUSTOMER_NAME = 'ON_EDIT_CUSTOMER_NAME';
 var PROGRESS_GET_CUSTOMERS = 'PROGRESS_GET_CUSTOMERS';
 var SUCCEED_GET_CUSTOMERS = 'SUCCEED_GET_CUSTOMERS';
 var FAILURE_GET_CUSTOMERS = 'FAULURE_GET_CUSTOMERS';
 var PROGRESS_ADD_CUSTOMER = 'PROGRESS_ADD_CUSTOMER';
 var SUCCEED_ADD_CUSTOMER = 'SUCCEED_ADD_CUSTOMER';
 var FAILURE_ADD_CUSTOMER = 'FAULURE_ADD_CUSTOMER';
+var SUCCEED_UPDATE_CUSTOMER = 'SUCCEED_UPDATE_CUSTOMER';
 var PROGRESS_DELETE_CUSTOMER = 'PROGRESS_DELETE_CUSTOMER';
 var SUCCEED_DELETE_CUSTOMER = 'SUCCEED_DELETE_CUSTOMER';
 var FAILURE_DELETE_CUSTOMER = 'FAULURE_DELETE_CUSTOMER';
@@ -248,6 +254,14 @@ var onChangeCustomerName = function onChangeCustomerName(customerName) {
     type: ON_CHANGE_CUSTOMER_NAME,
     payload: {
       customerName: customerName
+    }
+  };
+};
+var onEditCustomerName = function onEditCustomerName(edittedCustomerName) {
+  return {
+    type: ON_EDIT_CUSTOMER_NAME,
+    payload: {
+      edittedCustomerName: edittedCustomerName
     }
   };
 };
@@ -293,6 +307,15 @@ var failureAddCustomer = function failureAddCustomer(message) {
       message: message
     },
     error: true
+  };
+};
+var succeedUpdateCustomer = function succeedUpdateCustomer(oldCustomerName, newCustomerName) {
+  return {
+    type: SUCCEED_UPDATE_CUSTOMER,
+    payload: {
+      oldCustomerName: oldCustomerName,
+      newCustomerName: newCustomerName
+    }
   };
 };
 var progressDeleteCustomer = function progressDeleteCustomer() {
@@ -450,7 +473,7 @@ var deleteCustomer = function deleteCustomer(customerName) {
 /*!****************************************!*\
   !*** ./client/actions/displayRules.ts ***!
   \****************************************/
-/*! exports provided: ON_CHANGE, PROGRESS_GET_RULES, SUCCEED_GET_RULES, FAILURE_GET_RULES, onChangeSingleRule, progressGetRules, succeedGetRules, failureGetRules, getRules */
+/*! exports provided: ON_CHANGE, PROGRESS_GET_RULES, SUCCEED_GET_RULES, FAILURE_GET_RULES, PROGRESS_UPDATE_RULES, SUCCEED_UPDATE_RULES, FAILURE_UPDATE_RULES, onChangeSingleRule, progressGetRules, succeedGetRules, failureGetRules, progressUpdateRules, succeedUpdateRules, failureUpdateRules, getRules, updateRules */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -459,21 +482,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_RULES", function() { return PROGRESS_GET_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_RULES", function() { return SUCCEED_GET_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_RULES", function() { return FAILURE_GET_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_UPDATE_RULES", function() { return PROGRESS_UPDATE_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_UPDATE_RULES", function() { return SUCCEED_UPDATE_RULES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_UPDATE_RULES", function() { return FAILURE_UPDATE_RULES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeSingleRule", function() { return onChangeSingleRule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetRules", function() { return progressGetRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetRules", function() { return succeedGetRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetRules", function() { return failureGetRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressUpdateRules", function() { return progressUpdateRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedUpdateRules", function() { return succeedUpdateRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureUpdateRules", function() { return failureUpdateRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRules", function() { return getRules; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateRules", function() { return updateRules; });
 /* harmony import */ var _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rulesApi */ "./client/api/rulesApi.ts");
+/* harmony import */ var _customers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./customers */ "./client/actions/customers.ts");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 var ON_CHANGE = 'ON_CHANGE';
 var PROGRESS_GET_RULES = 'PROGRESS_GET_RULES';
 var SUCCEED_GET_RULES = 'SUCCEED_GET_RULES';
 var FAILURE_GET_RULES = 'FAULURE_GET_RULES';
+var PROGRESS_UPDATE_RULES = 'PROGRESS_UPDATE_RULES';
+var SUCCEED_UPDATE_RULES = 'SUCCEED_UPDATE_RULES';
+var FAILURE_UPDATE_RULES = 'FAULURE_UPDATE_RULES';
 var onChangeSingleRule = function onChangeSingleRule(index, rule) {
   return {
     type: ON_CHANGE,
@@ -499,6 +534,28 @@ var succeedGetRules = function succeedGetRules(gotRules) {
 var failureGetRules = function failureGetRules(message) {
   return {
     type: FAILURE_GET_RULES,
+    payload: {
+      message: message
+    },
+    error: true
+  };
+};
+var progressUpdateRules = function progressUpdateRules() {
+  return {
+    type: PROGRESS_UPDATE_RULES
+  };
+};
+var succeedUpdateRules = function succeedUpdateRules(updatedRules) {
+  return {
+    type: SUCCEED_UPDATE_RULES,
+    payload: {
+      updatedRules: updatedRules
+    }
+  };
+};
+var failureUpdateRules = function failureUpdateRules(message) {
+  return {
+    type: FAILURE_UPDATE_RULES,
     payload: {
       message: message
     },
@@ -543,6 +600,57 @@ var getRules = function getRules(customerName) {
 
       return function (_x) {
         return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+
+var removeEmptyRules = function removeEmptyRules(rules) {
+  return rules.filter(function (rule) {
+    return rule.pattern !== '' || rule.title !== '' || rule.text !== '' || rule.backgroundColor !== '';
+  });
+};
+
+var updateRules = function updateRules(customerName, newCustomerName, showingRules) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var newRules, updatedRules;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                dispatch(progressUpdateRules());
+                _context2.prev = 1;
+                newRules = removeEmptyRules(showingRules);
+                _context2.next = 5;
+                return _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__["default"].updateRules(customerName, newCustomerName, newRules);
+
+              case 5:
+                updatedRules = _context2.sent;
+                dispatch(succeedUpdateRules(updatedRules));
+                dispatch(Object(_customers__WEBPACK_IMPORTED_MODULE_1__["succeedUpdateCustomer"])(customerName, updatedRules.customerName));
+                _context2.next = 13;
+                break;
+
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](1);
+                dispatch(failureUpdateRules(_context2.t0.message));
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 10]]);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
       };
     }()
   );
@@ -868,7 +976,7 @@ var RulesApi = {
   updateRules: function () {
     var _updateRules = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee6(customerName, rules) {
+    regeneratorRuntime.mark(function _callee6(customerName, newCustomerName, rules) {
       var instance, response;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
@@ -877,6 +985,7 @@ var RulesApi = {
               instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(usersConfig);
               _context6.next = 3;
               return instance.put("/rules/".concat(customerName), {
+                newCustomerName: newCustomerName,
                 rules: rules
               });
 
@@ -893,7 +1002,10 @@ var RulesApi = {
             case 6:
               console.log('PUT rules');
               console.log(response);
-              return _context6.abrupt("return", true);
+              return _context6.abrupt("return", {
+                customerName: newCustomerName,
+                rules: rules
+              });
 
             case 9:
             case "end":
@@ -903,7 +1015,7 @@ var RulesApi = {
       }, _callee6);
     }));
 
-    function updateRules(_x6, _x7) {
+    function updateRules(_x6, _x7, _x8) {
       return _updateRules.apply(this, arguments);
     }
 
@@ -1052,6 +1164,88 @@ var CustomersForm = function CustomersForm(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CustomersForm);
+
+/***/ }),
+
+/***/ "./client/components/deleteButton.tsx":
+/*!********************************************!*\
+  !*** ./client/components/deleteButton.tsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
+/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/esm/DialogActions/index.js");
+/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js");
+/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
+/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
+/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/DeleteForever */ "./node_modules/@material-ui/icons/DeleteForever.js");
+/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_7__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+var DeleteButton = function DeleteButton(_ref) {
+  var _ref$target = _ref.target,
+      target = _ref$target === void 0 ? '' : _ref$target,
+      _ref$onDelete = _ref.onDelete,
+      onDelete = _ref$onDelete === void 0 ? function () {} : _ref$onDelete;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isOpenDialog = _useState2[0],
+      setIsOpenDialog = _useState2[1];
+
+  var onClick = function onClick() {
+    setIsOpenDialog(true);
+  };
+
+  var onClose = function onClose() {
+    setIsOpenDialog(false);
+  };
+
+  var onConfirm = function onConfirm() {
+    onClose();
+    onDelete(target);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    open: isOpenDialog,
+    onClose: onClose
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_6__["default"], null, "\u300C", target, "\u300D\u3092\u524A\u9664\u3057\u307E\u3059"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_5__["default"], null, "\u672C\u5F53\u306B\u524A\u9664\u3057\u3066\u3088\u308D\u3057\u3044\u3067\u3059\u304B\uFF1F\u4E00\u5EA6\u524A\u9664\u3059\u308B\u3068\u623B\u3059\u3053\u3068\u306F\u3067\u304D\u307E\u305B\u3093\u3002")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    color: "primary",
+    onClick: onClose
+  }, "\u30AD\u30E3\u30F3\u30BB\u30EB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    color: "secondary",
+    onClick: onConfirm
+  }, "\u524A\u9664\u3059\u308B"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    variant: "contained",
+    size: "small",
+    color: "secondary",
+    startIcon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_7___default.a, null),
+    onClick: onClick
+  }, "\u524A\u9664\u3059\u308B"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DeleteButton);
 
 /***/ }),
 
@@ -1255,6 +1449,96 @@ var DisplayRuleForms = function DisplayRuleForms(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DisplayRuleForms);
+
+/***/ }),
+
+/***/ "./client/components/editableTitle.tsx":
+/*!*********************************************!*\
+  !*** ./client/components/editableTitle.tsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/Edit */ "./node_modules/@material-ui/icons/Edit.js");
+/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_5__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  textField: {
+    '& input': {
+      textAlign: 'center'
+    }
+  }
+});
+
+var EditableTitle = function EditableTitle(_ref) {
+  var _ref$editingCustomerN = _ref.editingCustomerName,
+      editingCustomerName = _ref$editingCustomerN === void 0 ? '' : _ref$editingCustomerN,
+      _ref$name = _ref.name,
+      name = _ref$name === void 0 ? '' : _ref$name,
+      _ref$onEditCustomerNa = _ref.onEditCustomerName,
+      onEditCustomerName = _ref$onEditCustomerNa === void 0 ? function () {} : _ref$onEditCustomerNa;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      disabled = _useState2[0],
+      setDisabled = _useState2[1];
+
+  var classes = useStyles();
+
+  var onChangeText = function onChangeText(event) {
+    onEditCustomerName(event.target.value);
+  };
+
+  var onClickIcon = function onClickIcon() {
+    setDisabled(!disabled); // ここで .focus() したいけど setDisabled() と同期させれない。。
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    container: true,
+    justify: "center",
+    spacing: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    item: true,
+    xs: 6
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: classes.textField,
+    name: name,
+    type: "text",
+    fullWidth: true,
+    disabled: disabled,
+    value: editingCustomerName,
+    onChange: onChangeText
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    item: true,
+    xs: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    color: disabled ? 'default' : 'primary',
+    onClick: onClickIcon
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_5___default.a, null))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (EditableTitle);
 
 /***/ }),
 
@@ -1640,44 +1924,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
 /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
-/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
-/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/esm/DialogActions/index.js");
-/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js");
-/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
-/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
-/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Drawer */ "./node_modules/@material-ui/core/esm/Drawer/index.js");
-/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/icons/DeleteForever */ "./node_modules/@material-ui/icons/DeleteForever.js");
-/* harmony import */ var _material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/icons/Edit */ "./node_modules/@material-ui/icons/Edit.js");
-/* harmony import */ var _material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Save */ "./node_modules/@material-ui/icons/Save.js");
-/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
+/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Drawer */ "./node_modules/@material-ui/core/esm/Drawer/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
+/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
+/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/Save */ "./node_modules/@material-ui/icons/Save.js");
+/* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _deleteButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./deleteButton */ "./client/components/deleteButton.tsx");
+/* harmony import */ var _containers_editableTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../containers/editableTitle */ "./client/containers/editableTitle.tsx");
+/* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
 
 
 
@@ -1696,135 +1952,90 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
       width: '100%',
       margin: 0
     }
+  },
+  container: {
+    // サイドメニューの幅
+    // 上記 width:'100%' を上書き
+    '&.MuiGrid-spacing-xs-1': {
+      width: 520
+    }
+  },
+  whiteSpace: {
+    flexGrow: 1
   }
 });
 
 var SideMenu = function SideMenu(_ref) {
   var _ref$selectingCustome = _ref.selectingCustomerName,
       selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
+      _ref$editingCustomerN = _ref.editingCustomerName,
+      editingCustomerName = _ref$editingCustomerN === void 0 ? '' : _ref$editingCustomerN,
+      _ref$rules = _ref.rules,
+      rules = _ref$rules === void 0 ? {
+    rules: []
+  } : _ref$rules,
       _ref$isOpeningSideMen = _ref.isOpeningSideMenu,
       isOpeningSideMenu = _ref$isOpeningSideMen === void 0 ? false : _ref$isOpeningSideMen,
       _ref$deleteCustomer = _ref.deleteCustomer,
       deleteCustomer = _ref$deleteCustomer === void 0 ? function () {} : _ref$deleteCustomer,
+      _ref$updateRules = _ref.updateRules,
+      updateRules = _ref$updateRules === void 0 ? function () {} : _ref$updateRules,
       _ref$closeSideMenu = _ref.closeSideMenu,
       closeSideMenu = _ref$closeSideMenu === void 0 ? function () {} : _ref$closeSideMenu;
   var classes = useStyles();
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    isAnyFormChanged: false,
-    // どこかのフォームが変更されてたら保存ボタンを有効にする
-    isEditingCustomerName: false,
-    isOpeningDeleteDialog: false,
-    editingCustomerName: selectingCustomerName
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      localUIState = _useState2[0],
-      setLocalUIState = _useState2[1];
+  var onClickSave = function onClickSave() {
+    updateRules(selectingCustomerName, editingCustomerName, rules.rules);
+  };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    setLocalUIState(_objectSpread({}, localUIState, {
-      isEditingCustomerName: false,
-      editingCustomerName: selectingCustomerName
-    }));
-  }, [selectingCustomerName]);
-
-  var DeleteDialog = function () {
-    var handleClose = function handleClose() {
-      setLocalUIState(_objectSpread({}, localUIState, {
-        isOpeningDeleteDialog: false
-      }));
-    };
-
-    var handleDelete = function handleDelete() {
-      handleClose();
-      deleteCustomer(selectingCustomerName);
-    };
-
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      open: localUIState.isOpeningDeleteDialog,
-      onClose: handleClose
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u300C", selectingCustomerName, "\u300D\u3092\u524A\u9664\u3057\u307E\u3059"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_6__["default"], null, "\u672C\u5F53\u306B\u524A\u9664\u3057\u3066\u3088\u308D\u3057\u3044\u3067\u3059\u304B\uFF1F\u4E00\u5EA6\u524A\u9664\u3059\u308B\u3068\u623B\u3059\u3053\u3068\u306F\u3067\u304D\u307E\u305B\u3093\u3002")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      color: "primary",
-      onClick: handleClose
-    }, "\u30AD\u30E3\u30F3\u30BB\u30EB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      color: "secondary",
-      onClick: handleDelete
-    }, "\u524A\u9664\u3059\u308B")));
-  }();
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, DeleteDialog, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: classes.drawer,
     variant: "persistent",
     anchor: "right",
     open: isOpeningSideMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     container: true,
-    spacing: 1,
-    style: {
-      width: 520
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    className: classes.container,
+    spacing: 1
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
     xs: 12
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: closeSideMenu
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_12___default.a, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_6___default.a, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    item: true,
+    xs: 12
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    container: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
     xs: 1
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
-    xs: 11
+    xs: 3
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "contained",
     size: "small",
-    color: "primary",
-    disabled: !localUIState.isAnyFormChanged,
-    startIcon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_15___default.a, null)
-  }, "\u5909\u66F4\u3092\u4FDD\u5B58")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    color: "primary" // disabled={!localUIState.isAnyFormChanged}
+    ,
+    startIcon: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7___default.a, null),
+    onClick: onClickSave
+  }, "\u5909\u66F4\u3092\u4FDD\u5B58")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    item: true,
+    className: classes.whiteSpace
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    item: true,
+    xs: 3
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_deleteButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    target: selectingCustomerName,
+    onDelete: deleteCustomer
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
     xs: 12
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    container: true,
-    justify: "center",
-    spacing: 1
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    item: true,
-    xs: 8
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    name: "customerName",
-    type: "text",
-    fullWidth: true,
-    disabled: !localUIState.isEditingCustomerName,
-    autoFocus: true,
-    value: localUIState.editingCustomerName,
-    onChange: function onChange(event) {
-      setLocalUIState(_objectSpread({}, localUIState, {
-        editingCustomerName: event.target.value
-      }));
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    item: true,
-    xs: 1
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    color: localUIState.isEditingCustomerName ? 'primary' : 'default',
-    onClick: function onClick() {
-      setLocalUIState(_objectSpread({}, localUIState, {
-        isEditingCustomerName: !localUIState.isEditingCustomerName
-      }));
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_14___default.a, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    item: true,
-    xs: 1
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    onClick: function onClick() {
-      setLocalUIState(_objectSpread({}, localUIState, {
-        isOpeningDeleteDialog: true
-      }));
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_DeleteForever__WEBPACK_IMPORTED_MODULE_13___default.a, null))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_editableTitle__WEBPACK_IMPORTED_MODULE_9__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
     xs: 12
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_16__["default"], null)))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_10__["default"], null)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SideMenu);
@@ -1962,6 +2173,40 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./client/containers/editableTitle.tsx":
+/*!*********************************************!*\
+  !*** ./client/containers/editableTitle.tsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_editableTitle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/editableTitle */ "./client/components/editableTitle.tsx");
+/* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    editingCustomerName: state.customers.editingCustomerName
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onEditCustomerName: function onEditCustomerName(edittedCustomerName) {
+      return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["onEditCustomerName"])(edittedCustomerName));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_editableTitle__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./client/containers/feedback.tsx":
 /*!****************************************!*\
   !*** ./client/containers/feedback.tsx ***!
@@ -1981,7 +2226,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     open: state.app.isFeedbackOpen,
-    isSucceed: state.app.isFeedbackSucceed,
+    isSucceed: state.app.isSucceed,
     message: state.app.feedbackMessage
   };
 };
@@ -2082,8 +2327,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
-/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
-/* harmony import */ var _components_sideMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/sideMenu */ "./client/components/sideMenu.tsx");
+/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
+/* harmony import */ var _actions_ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/ui */ "./client/actions/ui.ts");
+/* harmony import */ var _components_sideMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/sideMenu */ "./client/components/sideMenu.tsx");
+
 
 
 
@@ -2092,6 +2339,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     selectingCustomerName: state.customers.selectingCustomerName,
+    editingCustomerName: state.customers.editingCustomerName,
+    rules: state.displayRules.rules,
     isOpeningSideMenu: state.ui.isOpeningSideMenu
   };
 };
@@ -2101,13 +2350,16 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     deleteCustomer: function deleteCustomer(customerName) {
       return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_1__["deleteCustomer"])(customerName));
     },
+    updateRules: function updateRules(customerName, newCustomerName, rules) {
+      return dispatch(Object(_actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["updateRules"])(customerName, newCustomerName, rules));
+    },
     closeSideMenu: function closeSideMenu() {
-      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_2__["closeSideMenu"])());
+      return dispatch(Object(_actions_ui__WEBPACK_IMPORTED_MODULE_3__["closeSideMenu"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_sideMenu__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_sideMenu__WEBPACK_IMPORTED_MODULE_4__["default"]));
 
 /***/ }),
 
@@ -2972,7 +3224,7 @@ var initialState = {
   isGetting: false,
   isUpdating: false,
   isFeedbackOpen: false,
-  isFeedbackSucceed: true,
+  isSucceed: true,
   feedbackMessage: ''
 };
 
@@ -2994,6 +3246,7 @@ var appReducer = function appReducer() {
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_ADD_CUSTOMER"]:
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["PROGRESS_DELETE_CUSTOMER"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["PROGRESS_UPDATE_RULES"]:
       return _objectSpread({}, state, {
         isUpdating: true
       });
@@ -3008,7 +3261,7 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '追加しました' // TODO: aciton.payloadに入れたほうがいいね。。。
 
       });
@@ -3017,8 +3270,16 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '削除しました'
+      });
+
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["SUCCEED_UPDATE_RULES"]:
+      return _objectSpread({}, state, {
+        isUpdating: false,
+        isFeedbackOpen: true,
+        isSucceed: true,
+        feedbackMessage: '保存しました'
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_GET_CUSTOMERS"]:
@@ -3026,16 +3287,17 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isGetting: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: false,
+        isSucceed: false,
         feedbackMessage: action.payload.message
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_ADD_CUSTOMER"]:
     case _actions_customers__WEBPACK_IMPORTED_MODULE_1__["FAILURE_DELETE_CUSTOMER"]:
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_2__["FAILURE_UPDATE_RULES"]:
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: false,
+        isSucceed: false,
         feedbackMessage: action.payload.message
       });
 
@@ -3058,6 +3320,7 @@ var appReducer = function appReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
+/* harmony import */ var _actions_displayRules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/displayRules */ "./client/actions/displayRules.ts");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -3073,8 +3336,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
 var initialState = {
   selectingCustomerName: '',
+  editingCustomerName: '',
   customerNames: []
 };
 
@@ -3100,24 +3365,48 @@ var customersReducer = function customersReducer() {
   switch (action.type) {
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["ON_CHANGE_CUSTOMER_NAME"]:
       return _objectSpread({}, state, {
-        selectingCustomerName: action.payload.customerName
+        selectingCustomerName: action.payload.customerName,
+        editingCustomerName: action.payload.customerName
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["ON_EDIT_CUSTOMER_NAME"]:
+      return _objectSpread({}, state, {
+        editingCustomerName: action.payload.edittedCustomerName
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_GET_CUSTOMERS"]:
       if (action.payload.gotCustomerNames.length === 0) return state;
       return _objectSpread({}, state, {
         selectingCustomerName: action.payload.gotCustomerNames[0],
+        editingCustomerName: action.payload.gotCustomerNames[0],
         customerNames: action.payload.gotCustomerNames
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_ADD_CUSTOMER"]:
       return _objectSpread({}, state, {
         selectingCustomerName: action.payload.addedCustomerName,
+        editingCustomerName: action.payload.addedCustomerName,
         customerNames: [].concat(_toConsumableArray(state.customerNames), [action.payload.addedCustomerName])
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_UPDATE_CUSTOMER"]:
+      return _objectSpread({}, state, {
+        selectingCustomerName: action.payload.newCustomerName,
+        editingCustomerName: action.payload.newCustomerName,
+        customerNames: state.customerNames.map(function (name) {
+          if (name === action.payload.oldCustomerName) return action.payload.newCustomerName;
+          return name;
+        })
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_DELETE_CUSTOMER"]:
       return newStateOnDeleted(state, action.payload.deletedCustomerName);
+
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_UPDATE_RULES"]:
+      return _objectSpread({}, state, {
+        selectingCustomerName: action.payload.updatedRules.customerName,
+        editingCustomerName: action.payload.updatedRules.customerName
+      });
 
     default:
       return state;
@@ -3193,6 +3482,14 @@ var displayRulesReducer = function displayRulesReducer() {
         rules: {
           customerName: state.rules.customerName,
           rules: [].concat(_toConsumableArray(action.payload.gotRules), [_objectSpread({}, emptyRule)])
+        }
+      });
+
+    case _actions_displayRules__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_UPDATE_RULES"]:
+      return _objectSpread({}, state, {
+        rules: {
+          customerName: action.payload.updatedRules.customerName,
+          rules: [].concat(_toConsumableArray(action.payload.updatedRules.rules), [_objectSpread({}, emptyRule)])
         }
       });
 
@@ -83022,4 +83319,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?aadaf3422321de9e337f
+//# sourceMappingURL=bundle.js.map?9670f3d2b2c979ac9982
