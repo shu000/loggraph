@@ -13,8 +13,10 @@ export interface GraphProps {
 
 const useStyles = makeStyles({
   graph: {
+    padding: '10px',
     width: '100%',
     height: '100%',
+    boxSizing: 'border-box',
   },
   dragOver: {
     backgroundColor: '#c0c0c0',

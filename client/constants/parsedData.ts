@@ -4,6 +4,7 @@ export default interface ParsedData {
 
 export interface ParsedDate {
   date: string;
+  predictedDevice: string;
   sessions: ParsedSession[];
 }
 

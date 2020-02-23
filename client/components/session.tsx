@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Box from '@material-ui/core/Box';
+import { Typography } from '@material-ui/core';
 import { ParsedSession } from '../constants/parsedData';
 import Activity from '../containers/activity';
 
@@ -15,9 +16,10 @@ const Session: FC<SessionProps> = ({
   },
 }) => (
   <div className="Session">
-    <p>{session.device}</p>
-    <p>{session.channel}</p>
     <Box display="flex" flexDirection="row" flexWrap="wrap">
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Typography variant="body1">{`（${session.channel}）`}</Typography>
+      </Box>
       {session.activities.map((activity, i) => (
         <Activity key={i.toString()} activity={activity} />
       ))}

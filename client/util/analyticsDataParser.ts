@@ -40,6 +40,13 @@ const translateDevice = (deviceCategory: string): string => {
 export const parse = (original: AnalyticsData): ParsedData => ({
   dates: original.dates.reverse().map(date => ({
     date: translateDate(date.date),
+    // predictedDevice
+    // 同日内の最初のセッションのデバイスをdateのデバイスと判断する
+    // クロスデバイスでセッション取るのあんまりやってないからそれでいいとのこと
+    predictedDevice:
+      date.sessions.length === 0
+        ? ''
+        : translateDevice(date.sessions[0].deviceCategory),
     sessions: date.sessions.map(session => ({
       device: translateDevice(session.deviceCategory),
       channel: translateChannel(session.channel),
