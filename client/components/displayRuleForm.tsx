@@ -50,6 +50,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
         <TextField
           name="pattern"
           type="text"
+          fullWidth
           value={rule.pattern}
           onChange={event => {
             onChange(index, { ...rule, pattern: event.target.value });
@@ -103,6 +104,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
         <TextField
           name="text"
           type="text"
+          fullWidth
           value={rule.text}
           onChange={event => {
             onChange(index, { ...rule, text: event.target.value });
@@ -114,6 +116,7 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           className={classes.backgroundColorField}
           name="backgroundColor"
           type="text"
+          fullWidth
           value={rule.backgroundColor}
           onChange={event => {
             onChange(index, { ...rule, backgroundColor: event.target.value });
