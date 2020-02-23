@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Graph from '../components/graph';
-import ParsedData from '../constants/parsedData';
 import AnalyticsData from '../constants/analyticsData';
+import ParsedData from '../constants/parsedData';
 import { AnalyticsDataAction, onRead } from '../actions/analyticsData';
 import { RootState } from '../reducer';
 

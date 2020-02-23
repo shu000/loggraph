@@ -9,16 +9,14 @@ export interface SessionProps {
 
 const Session: FC<SessionProps> = ({
   session = {
-    date: '',
     device: '',
     channel: '',
     activities: [],
   },
 }) => (
   <div className="Session">
-    <span>{`${session.date} `}</span>
-    <span>{`${session.device} `}</span>
-    <span>{session.channel}</span>
+    <p>{session.device}</p>
+    <p>{session.channel}</p>
     <Box display="flex" flexDirection="row" flexWrap="wrap">
       {session.activities.map((activity, i) => (
         <Activity key={i.toString()} activity={activity} />

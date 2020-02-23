@@ -1,9 +1,13 @@
 export default interface ParsedData {
+  dates: ParsedDate[];
+}
+
+export interface ParsedDate {
+  date: string;
   sessions: ParsedSession[];
 }
 
 export interface ParsedSession {
-  date: string;
   device: string;
   channel: string;
   activities: ParsedActivity[];

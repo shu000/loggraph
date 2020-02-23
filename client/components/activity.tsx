@@ -24,11 +24,8 @@ const useStyles = makeStyles({
   }),
 });
 
-const matchedRule = (
-  activity: ParsedActivity,
-  rules: DisplayRule[]
-): DisplayRule => {
-  if (activity.pageURL === 'arrow')
+const matchedRule = (pageURL: string, rules: DisplayRule[]): DisplayRule => {
+  if (pageURL === 'arrow')
     return {
       pattern: 'arrow',
       matching: 'match',
@@ -40,11 +37,11 @@ const matchedRule = (
   const matches = rules.filter(rule => {
     switch (rule.matching) {
       case 'match':
-        return activity.pageURL === rule.pattern;
+        return pageURL === rule.pattern;
       case 'startsWith':
-        return activity.pageURL.startsWith(rule.pattern);
+        return pageURL.startsWith(rule.pattern);
       default:
-        return activity.pageURL.includes(rule.pattern);
+        return pageURL.includes(rule.pattern);
     }
   });
 
@@ -69,7 +66,7 @@ const Activity: FC<ActivityProps> = ({
   },
   rules = [],
 }) => {
-  const matched = matchedRule(activity, rules);
+  const matched = matchedRule(activity.pageURL, rules);
   const classes = useStyles(matched);
 
   return (
