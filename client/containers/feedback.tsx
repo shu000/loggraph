@@ -16,7 +16,7 @@ interface DispatchProps {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   open: state.app.isFeedbackOpen,
-  isSucceed: state.app.isFeedbackSucceed,
+  isSucceed: state.app.isSucceed,
   message: state.app.feedbackMessage,
 });
 

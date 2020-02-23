@@ -26,7 +26,7 @@ export interface AppState {
   isGetting: boolean; // 参照系APIを叩き中か否か
   isUpdating: boolean; // 更新系APIを叩き中か否か
   isFeedbackOpen: boolean;
-  isFeedbackSucceed: boolean;
+  isSucceed: boolean;
   feedbackMessage: string;
 }
 
@@ -34,7 +34,7 @@ const initialState: AppState = {
   isGetting: false,
   isUpdating: false,
   isFeedbackOpen: false,
-  isFeedbackSucceed: true,
+  isSucceed: true,
   feedbackMessage: '',
 };
 
@@ -75,7 +75,7 @@ const appReducer: Reducer<
         ...state,
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '追加しました', // TODO: aciton.payloadに入れたほうがいいね。。。
       };
     case SUCCEED_DELETE_CUSTOMER:
@@ -83,7 +83,7 @@ const appReducer: Reducer<
         ...state,
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '削除しました',
       };
     case SUCCEED_UPDATE_RULES:
@@ -91,7 +91,7 @@ const appReducer: Reducer<
         ...state,
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '保存しました',
       };
     case FAILURE_GET_CUSTOMERS:
@@ -100,7 +100,7 @@ const appReducer: Reducer<
         ...state,
         isGetting: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: false,
+        isSucceed: false,
         feedbackMessage: action.payload.message,
       };
     case FAILURE_ADD_CUSTOMER:
@@ -110,7 +110,7 @@ const appReducer: Reducer<
         ...state,
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: false,
+        isSucceed: false,
         feedbackMessage: action.payload.message,
       };
     default:

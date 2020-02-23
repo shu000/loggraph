@@ -2176,7 +2176,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     open: state.app.isFeedbackOpen,
-    isSucceed: state.app.isFeedbackSucceed,
+    isSucceed: state.app.isSucceed,
     message: state.app.feedbackMessage
   };
 };
@@ -3173,7 +3173,7 @@ var initialState = {
   isGetting: false,
   isUpdating: false,
   isFeedbackOpen: false,
-  isFeedbackSucceed: true,
+  isSucceed: true,
   feedbackMessage: ''
 };
 
@@ -3210,7 +3210,7 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '追加しました' // TODO: aciton.payloadに入れたほうがいいね。。。
 
       });
@@ -3219,7 +3219,7 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '削除しました'
       });
 
@@ -3227,7 +3227,7 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: true,
+        isSucceed: true,
         feedbackMessage: '保存しました'
       });
 
@@ -3236,7 +3236,7 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isGetting: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: false,
+        isSucceed: false,
         feedbackMessage: action.payload.message
       });
 
@@ -3246,7 +3246,7 @@ var appReducer = function appReducer() {
       return _objectSpread({}, state, {
         isUpdating: false,
         isFeedbackOpen: true,
-        isFeedbackSucceed: false,
+        isSucceed: false,
         feedbackMessage: action.payload.message
       });
 
@@ -83248,4 +83248,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?8085a18207558e445c9d
+//# sourceMappingURL=bundle.js.map?4a1457c6c94b55b862cf
