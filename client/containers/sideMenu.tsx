@@ -9,6 +9,7 @@ import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
 interface StateProps {
   selectingCustomerName: string;
+  editingCustomerName: string;
   rules: DisplayRules;
   isOpeningSideMenu: boolean;
 }
@@ -25,6 +26,7 @@ interface DispatchProps {
 
 const mapStateToProps = (state: RootState): StateProps => ({
   selectingCustomerName: state.customers.selectingCustomerName,
+  editingCustomerName: state.customers.editingCustomerName,
   rules: state.displayRules.rules,
   isOpeningSideMenu: state.ui.isOpeningSideMenu,
 });

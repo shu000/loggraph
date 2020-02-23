@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -6,9 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
 
 export interface EditableTitleProps {
-  defaultTitle?: string;
+  editingCustomerName?: string;
   name?: string;
-  onChange?: (changed: string) => {};
+  onEditCustomerName?: (editted: string) => void;
 }
 
 const useStyles = makeStyles({
@@ -20,23 +20,16 @@ const useStyles = makeStyles({
 });
 
 const EditableTitle: FC<EditableTitleProps> = ({
-  defaultTitle = '',
+  editingCustomerName = '',
   name = '',
-  onChange = () => {},
+  onEditCustomerName = () => {},
 }) => {
   const [disabled, setDisabled] = useState(true);
-  const [editingTitle, setEditingTitle] = useState(defaultTitle);
-
-  useEffect(() => {
-    setEditingTitle(defaultTitle);
-  }, [defaultTitle]);
 
   const classes = useStyles();
 
   const onChangeText = (event: any) => {
-    const changed = event.target.value;
-    setEditingTitle(changed);
-    onChange(changed);
+    onEditCustomerName(event.target.value);
   };
 
   const onClickIcon = () => {
@@ -53,7 +46,7 @@ const EditableTitle: FC<EditableTitleProps> = ({
           type="text"
           fullWidth
           disabled={disabled}
-          value={editingTitle}
+          value={editingCustomerName}
           onChange={onChangeText}
         />
       </Grid>

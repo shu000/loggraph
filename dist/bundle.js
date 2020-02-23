@@ -199,28 +199,32 @@ var onCloseFeedback = function onCloseFeedback() {
 /*!*************************************!*\
   !*** ./client/actions/customers.ts ***!
   \*************************************/
-/*! exports provided: ON_CHANGE_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, PROGRESS_ADD_CUSTOMER, SUCCEED_ADD_CUSTOMER, FAILURE_ADD_CUSTOMER, PROGRESS_DELETE_CUSTOMER, SUCCEED_DELETE_CUSTOMER, FAILURE_DELETE_CUSTOMER, onChangeCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, progressAddCustomer, succeedAddCustomer, failureAddCustomer, progressDeleteCustomer, succeedDeleteCustomer, failureDeleteCustomer, getCustomers, addCustomer, deleteCustomer */
+/*! exports provided: ON_CHANGE_CUSTOMER_NAME, ON_EDIT_CUSTOMER_NAME, PROGRESS_GET_CUSTOMERS, SUCCEED_GET_CUSTOMERS, FAILURE_GET_CUSTOMERS, PROGRESS_ADD_CUSTOMER, SUCCEED_ADD_CUSTOMER, FAILURE_ADD_CUSTOMER, SUCCEED_UPDATE_CUSTOMER, PROGRESS_DELETE_CUSTOMER, SUCCEED_DELETE_CUSTOMER, FAILURE_DELETE_CUSTOMER, onChangeCustomerName, onEditCustomerName, progressGetCustomers, succeedGetCustomers, failureGetCustomers, progressAddCustomer, succeedAddCustomer, failureAddCustomer, succeedUpdateCustomer, progressDeleteCustomer, succeedDeleteCustomer, failureDeleteCustomer, getCustomers, addCustomer, deleteCustomer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_CHANGE_CUSTOMER_NAME", function() { return ON_CHANGE_CUSTOMER_NAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ON_EDIT_CUSTOMER_NAME", function() { return ON_EDIT_CUSTOMER_NAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_GET_CUSTOMERS", function() { return PROGRESS_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_GET_CUSTOMERS", function() { return SUCCEED_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_GET_CUSTOMERS", function() { return FAILURE_GET_CUSTOMERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_ADD_CUSTOMER", function() { return PROGRESS_ADD_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_ADD_CUSTOMER", function() { return SUCCEED_ADD_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_ADD_CUSTOMER", function() { return FAILURE_ADD_CUSTOMER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_UPDATE_CUSTOMER", function() { return SUCCEED_UPDATE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROGRESS_DELETE_CUSTOMER", function() { return PROGRESS_DELETE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUCCEED_DELETE_CUSTOMER", function() { return SUCCEED_DELETE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAILURE_DELETE_CUSTOMER", function() { return FAILURE_DELETE_CUSTOMER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onChangeCustomerName", function() { return onChangeCustomerName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onEditCustomerName", function() { return onEditCustomerName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressGetCustomers", function() { return progressGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedGetCustomers", function() { return succeedGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureGetCustomers", function() { return failureGetCustomers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressAddCustomer", function() { return progressAddCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedAddCustomer", function() { return succeedAddCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureAddCustomer", function() { return failureAddCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedUpdateCustomer", function() { return succeedUpdateCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressDeleteCustomer", function() { return progressDeleteCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "succeedDeleteCustomer", function() { return succeedDeleteCustomer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "failureDeleteCustomer", function() { return failureDeleteCustomer; });
@@ -234,12 +238,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ON_CHANGE_CUSTOMER_NAME = 'ON_CHANGE_CUSTOMER_NAME';
+var ON_EDIT_CUSTOMER_NAME = 'ON_EDIT_CUSTOMER_NAME';
 var PROGRESS_GET_CUSTOMERS = 'PROGRESS_GET_CUSTOMERS';
 var SUCCEED_GET_CUSTOMERS = 'SUCCEED_GET_CUSTOMERS';
 var FAILURE_GET_CUSTOMERS = 'FAULURE_GET_CUSTOMERS';
 var PROGRESS_ADD_CUSTOMER = 'PROGRESS_ADD_CUSTOMER';
 var SUCCEED_ADD_CUSTOMER = 'SUCCEED_ADD_CUSTOMER';
 var FAILURE_ADD_CUSTOMER = 'FAULURE_ADD_CUSTOMER';
+var SUCCEED_UPDATE_CUSTOMER = 'SUCCEED_UPDATE_CUSTOMER';
 var PROGRESS_DELETE_CUSTOMER = 'PROGRESS_DELETE_CUSTOMER';
 var SUCCEED_DELETE_CUSTOMER = 'SUCCEED_DELETE_CUSTOMER';
 var FAILURE_DELETE_CUSTOMER = 'FAULURE_DELETE_CUSTOMER';
@@ -248,6 +254,14 @@ var onChangeCustomerName = function onChangeCustomerName(customerName) {
     type: ON_CHANGE_CUSTOMER_NAME,
     payload: {
       customerName: customerName
+    }
+  };
+};
+var onEditCustomerName = function onEditCustomerName(edittedCustomerName) {
+  return {
+    type: ON_EDIT_CUSTOMER_NAME,
+    payload: {
+      edittedCustomerName: edittedCustomerName
     }
   };
 };
@@ -293,6 +307,15 @@ var failureAddCustomer = function failureAddCustomer(message) {
       message: message
     },
     error: true
+  };
+};
+var succeedUpdateCustomer = function succeedUpdateCustomer(oldCustomerName, newCustomerName) {
+  return {
+    type: SUCCEED_UPDATE_CUSTOMER,
+    payload: {
+      oldCustomerName: oldCustomerName,
+      newCustomerName: newCustomerName
+    }
   };
 };
 var progressDeleteCustomer = function progressDeleteCustomer() {
@@ -472,9 +495,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRules", function() { return getRules; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateRules", function() { return updateRules; });
 /* harmony import */ var _api_rulesApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/rulesApi */ "./client/api/rulesApi.ts");
+/* harmony import */ var _customers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./customers */ "./client/actions/customers.ts");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 var ON_CHANGE = 'ON_CHANGE';
@@ -607,20 +632,21 @@ var updateRules = function updateRules(customerName, newCustomerName, showingRul
               case 5:
                 updatedRules = _context2.sent;
                 dispatch(succeedUpdateRules(updatedRules));
-                _context2.next = 12;
+                dispatch(Object(_customers__WEBPACK_IMPORTED_MODULE_1__["succeedUpdateCustomer"])(customerName, updatedRules.customerName));
+                _context2.next = 13;
                 break;
 
-              case 9:
-                _context2.prev = 9;
+              case 10:
+                _context2.prev = 10;
                 _context2.t0 = _context2["catch"](1);
                 dispatch(failureUpdateRules(_context2.t0.message));
 
-              case 12:
+              case 13:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 9]]);
+        }, _callee2, null, [[1, 10]]);
       }));
 
       return function (_x2) {
@@ -1466,32 +1492,22 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
 });
 
 var EditableTitle = function EditableTitle(_ref) {
-  var _ref$defaultTitle = _ref.defaultTitle,
-      defaultTitle = _ref$defaultTitle === void 0 ? '' : _ref$defaultTitle,
+  var _ref$editingCustomerN = _ref.editingCustomerName,
+      editingCustomerName = _ref$editingCustomerN === void 0 ? '' : _ref$editingCustomerN,
       _ref$name = _ref.name,
       name = _ref$name === void 0 ? '' : _ref$name,
-      _ref$onChange = _ref.onChange,
-      onChange = _ref$onChange === void 0 ? function () {} : _ref$onChange;
+      _ref$onEditCustomerNa = _ref.onEditCustomerName,
+      onEditCustomerName = _ref$onEditCustomerNa === void 0 ? function () {} : _ref$onEditCustomerNa;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
       disabled = _useState2[0],
       setDisabled = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(defaultTitle),
-      _useState4 = _slicedToArray(_useState3, 2),
-      editingTitle = _useState4[0],
-      setEditingTitle = _useState4[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    setEditingTitle(defaultTitle);
-  }, [defaultTitle]);
   var classes = useStyles();
 
   var onChangeText = function onChangeText(event) {
-    var changed = event.target.value;
-    setEditingTitle(changed);
-    onChange(changed);
+    onEditCustomerName(event.target.value);
   };
 
   var onClickIcon = function onClickIcon() {
@@ -1511,7 +1527,7 @@ var EditableTitle = function EditableTitle(_ref) {
     type: "text",
     fullWidth: true,
     disabled: disabled,
-    value: editingTitle,
+    value: editingCustomerName,
     onChange: onChangeText
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
     item: true,
@@ -1916,7 +1932,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/Save */ "./node_modules/@material-ui/icons/Save.js");
 /* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _deleteButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./deleteButton */ "./client/components/deleteButton.tsx");
-/* harmony import */ var _editableTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./editableTitle */ "./client/components/editableTitle.tsx");
+/* harmony import */ var _containers_editableTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../containers/editableTitle */ "./client/containers/editableTitle.tsx");
 /* harmony import */ var _containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../containers/displayRuleForms */ "./client/containers/displayRuleForms.tsx");
 
 
@@ -1952,6 +1968,8 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
 var SideMenu = function SideMenu(_ref) {
   var _ref$selectingCustome = _ref.selectingCustomerName,
       selectingCustomerName = _ref$selectingCustome === void 0 ? '' : _ref$selectingCustome,
+      _ref$editingCustomerN = _ref.editingCustomerName,
+      editingCustomerName = _ref$editingCustomerN === void 0 ? '' : _ref$editingCustomerN,
       _ref$rules = _ref.rules,
       rules = _ref$rules === void 0 ? {
     rules: []
@@ -1967,7 +1985,7 @@ var SideMenu = function SideMenu(_ref) {
   var classes = useStyles();
 
   var onClickSave = function onClickSave() {
-    updateRules(selectingCustomerName, selectingCustomerName, rules.rules);
+    updateRules(selectingCustomerName, editingCustomerName, rules.rules);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2014,9 +2032,7 @@ var SideMenu = function SideMenu(_ref) {
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
     xs: 12
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_editableTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    defaultTitle: selectingCustomerName
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_editableTitle__WEBPACK_IMPORTED_MODULE_9__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: true,
     xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_displayRuleForms__WEBPACK_IMPORTED_MODULE_10__["default"], null)))));
@@ -2157,6 +2173,40 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./client/containers/editableTitle.tsx":
+/*!*********************************************!*\
+  !*** ./client/containers/editableTitle.tsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_editableTitle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/editableTitle */ "./client/components/editableTitle.tsx");
+/* harmony import */ var _actions_customers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/customers */ "./client/actions/customers.ts");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    editingCustomerName: state.customers.editingCustomerName
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onEditCustomerName: function onEditCustomerName(edittedCustomerName) {
+      return dispatch(Object(_actions_customers__WEBPACK_IMPORTED_MODULE_2__["onEditCustomerName"])(edittedCustomerName));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_components_editableTitle__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./client/containers/feedback.tsx":
 /*!****************************************!*\
   !*** ./client/containers/feedback.tsx ***!
@@ -2289,6 +2339,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     selectingCustomerName: state.customers.selectingCustomerName,
+    editingCustomerName: state.customers.editingCustomerName,
     rules: state.displayRules.rules,
     isOpeningSideMenu: state.ui.isOpeningSideMenu
   };
@@ -3288,6 +3339,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   selectingCustomerName: '',
+  editingCustomerName: '',
   customerNames: []
 };
 
@@ -3313,20 +3365,38 @@ var customersReducer = function customersReducer() {
   switch (action.type) {
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["ON_CHANGE_CUSTOMER_NAME"]:
       return _objectSpread({}, state, {
-        selectingCustomerName: action.payload.customerName
+        selectingCustomerName: action.payload.customerName,
+        editingCustomerName: action.payload.customerName
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["ON_EDIT_CUSTOMER_NAME"]:
+      return _objectSpread({}, state, {
+        editingCustomerName: action.payload.edittedCustomerName
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_GET_CUSTOMERS"]:
       if (action.payload.gotCustomerNames.length === 0) return state;
       return _objectSpread({}, state, {
         selectingCustomerName: action.payload.gotCustomerNames[0],
+        editingCustomerName: action.payload.gotCustomerNames[0],
         customerNames: action.payload.gotCustomerNames
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_ADD_CUSTOMER"]:
       return _objectSpread({}, state, {
         selectingCustomerName: action.payload.addedCustomerName,
+        editingCustomerName: action.payload.addedCustomerName,
         customerNames: [].concat(_toConsumableArray(state.customerNames), [action.payload.addedCustomerName])
+      });
+
+    case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_UPDATE_CUSTOMER"]:
+      return _objectSpread({}, state, {
+        selectingCustomerName: action.payload.newCustomerName,
+        editingCustomerName: action.payload.newCustomerName,
+        customerNames: state.customerNames.map(function (name) {
+          if (name === action.payload.oldCustomerName) return action.payload.newCustomerName;
+          return name;
+        })
       });
 
     case _actions_customers__WEBPACK_IMPORTED_MODULE_0__["SUCCEED_DELETE_CUSTOMER"]:
@@ -3334,7 +3404,8 @@ var customersReducer = function customersReducer() {
 
     case _actions_displayRules__WEBPACK_IMPORTED_MODULE_1__["SUCCEED_UPDATE_RULES"]:
       return _objectSpread({}, state, {
-        selectingCustomerName: action.payload.updatedRules.customerName
+        selectingCustomerName: action.payload.updatedRules.customerName,
+        editingCustomerName: action.payload.updatedRules.customerName
       });
 
     default:
@@ -83248,4 +83319,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?4a1457c6c94b55b862cf
+//# sourceMappingURL=bundle.js.map?9670f3d2b2c979ac9982

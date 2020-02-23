@@ -7,12 +7,13 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteButton from './deleteButton';
-import EditableTitle from './editableTitle';
+import EditableTitle from '../containers/editableTitle';
 import DisplayRuleForms from '../containers/displayRuleForms';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 
 export interface SideMenuProps {
   selectingCustomerName?: string;
+  editingCustomerName?: string;
   rules?: DisplayRules;
   isOpeningSideMenu?: boolean;
   deleteCustomer?: (custonerName: string) => void;
@@ -46,6 +47,7 @@ const useStyles = makeStyles({
 
 const SideMenu: FC<SideMenuProps> = ({
   selectingCustomerName = '',
+  editingCustomerName = '',
   rules = {
     rules: [],
   },
@@ -57,7 +59,7 @@ const SideMenu: FC<SideMenuProps> = ({
   const classes = useStyles();
 
   const onClickSave = () => {
-    updateRules(selectingCustomerName, selectingCustomerName, rules.rules);
+    updateRules(selectingCustomerName, editingCustomerName, rules.rules);
   };
 
   return (
@@ -99,7 +101,7 @@ const SideMenu: FC<SideMenuProps> = ({
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <EditableTitle defaultTitle={selectingCustomerName} />
+            <EditableTitle />
           </Grid>
           <Grid item xs={12}>
             <DisplayRuleForms />

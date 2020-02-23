@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import DisplayRules, { DisplayRule } from '../constants/displayRules';
 import RulesApi from '../api/rulesApi';
+import { succeedUpdateCustomer, SUCCEED_UPDATE_CUSTOMER } from './customers';
 
 export const ON_CHANGE = 'ON_CHANGE';
 export const PROGRESS_GET_RULES = 'PROGRESS_GET_RULES';
@@ -87,6 +88,7 @@ export const updateRules = (
         newRules
       );
       dispatch(succeedUpdateRules(updatedRules));
+      dispatch(succeedUpdateCustomer(customerName, updatedRules.customerName));
     } catch (error) {
       dispatch(failureUpdateRules(error.message));
     }
