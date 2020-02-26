@@ -17,7 +17,7 @@ const Date: FC<DateProps> = ({
 }) => (
   <div className="Session">
     <Typography variant="h5">{`${date.date} ${date.predictedDevice}`}</Typography>
-    <Box display="flex" flexDirection="row" flexWrap="wrap">
+    <Box display="flex" flexDirection="column">
       {date.sessions.map((session, i) => (
         <Session key={i.toString()} session={session} />
       ))}
