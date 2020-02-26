@@ -1940,7 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
   channelBox: {
-    width: '75px',
+    width: '60px',
     height: '25px'
   }
 });
@@ -3550,7 +3550,7 @@ var translateChannel = function translateChannel(channel) {
       return '検索';
 
     case 'Direct':
-      return '直接訪問';
+      return '直接';
 
     case 'Referral':
       return '参照';
@@ -83376,4 +83376,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?acdb0a679b96fb958f62
+//# sourceMappingURL=bundle.js.map?4b8dcd18d8a8694f1b0f

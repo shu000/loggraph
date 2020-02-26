@@ -18,7 +18,7 @@ const translateChannel = (channel: string): string => {
     case 'Organic Search':
       return '検索';
     case 'Direct':
-      return '直接訪問';
+      return '直接';
     case 'Referral':
       return '参照';
     default:

@@ -11,7 +11,7 @@ export interface SessionProps {
 
 const useStyles = makeStyles({
   channelBox: {
-    width: '75px',
+    width: '60px',
     height: '25px',
   },
 });
