@@ -58,6 +58,12 @@ const SideMenu: FC<SideMenuProps> = ({
 }) => {
   const classes = useStyles();
 
+  const onOpen = () => true;
+  const onClose = () => {
+    closeSideMenu();
+    return false;
+  };
+
   const onClickSave = () => {
     updateRules(selectingCustomerName, editingCustomerName, rules.rules);
   };
@@ -66,8 +72,8 @@ const SideMenu: FC<SideMenuProps> = ({
     <>
       <Drawer
         className={classes.drawer}
-        variant="persistent"
         anchor="right"
+        variant="persistent"
         open={isOpeningSideMenu}
       >
         <Grid container className={classes.container} spacing={1}>

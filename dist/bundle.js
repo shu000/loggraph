@@ -1059,8 +1059,8 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
   }
 });
 
-var matchedRule = function matchedRule(activity, rules) {
-  if (activity.pageURL === 'arrow') return {
+var matchedRule = function matchedRule(pageURL, rules) {
+  if (pageURL === 'arrow') return {
     pattern: 'arrow',
     matching: 'match',
     title: '',
@@ -1070,13 +1070,13 @@ var matchedRule = function matchedRule(activity, rules) {
   var matches = rules.filter(function (rule) {
     switch (rule.matching) {
       case 'match':
-        return activity.pageURL === rule.pattern;
+        return pageURL === rule.pattern;
 
       case 'startsWith':
-        return activity.pageURL.startsWith(rule.pattern);
+        return pageURL.startsWith(rule.pattern);
 
       default:
-        return activity.pageURL.includes(rule.pattern);
+        return pageURL.includes(rule.pattern);
     }
   }); // 末尾寄りのルールを優先
 
@@ -1100,7 +1100,7 @@ var Activity = function Activity(_ref) {
   } : _ref$activity,
       _ref$rules = _ref.rules,
       rules = _ref$rules === void 0 ? [] : _ref$rules;
-  var matched = matchedRule(activity, rules);
+  var matched = matchedRule(activity.pageURL, rules);
   var classes = useStyles(matched);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.activity
@@ -1164,6 +1164,51 @@ var CustomersForm = function CustomersForm(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CustomersForm);
+
+/***/ }),
+
+/***/ "./client/components/date.tsx":
+/*!************************************!*\
+  !*** ./client/components/date.tsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session */ "./client/components/session.tsx");
+
+
+
+
+
+var Date = function Date(_ref) {
+  var _ref$date = _ref.date,
+      date = _ref$date === void 0 ? {
+    date: '',
+    predictedDevice: '',
+    sessions: []
+  } : _ref$date;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Session"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    variant: "h5"
+  }, "".concat(date.date, " ").concat(date.predictedDevice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    display: "flex",
+    flexDirection: "column"
+  }, date.sessions.map(function (session, i) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: i.toString(),
+      session: session
+    });
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Date);
 
 /***/ }),
 
@@ -1319,6 +1364,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "pattern",
     type: "text",
+    fullWidth: true,
     value: rule.pattern,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
@@ -1383,6 +1429,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "text",
     type: "text",
+    fullWidth: true,
     value: rule.text,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
@@ -1396,6 +1443,7 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     className: classes.backgroundColorField,
     name: "backgroundColor",
     type: "text",
+    fullWidth: true,
     value: rule.backgroundColor,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
@@ -1599,7 +1647,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
 /* harmony import */ var _material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/lab/Alert */ "./node_modules/@material-ui/lab/esm/Alert/index.js");
 /* harmony import */ var _material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Snackbar */ "./node_modules/@material-ui/core/esm/Snackbar/index.js");
-/* harmony import */ var _session__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session */ "./client/components/session.tsx");
+/* harmony import */ var _date__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./date */ "./client/components/date.tsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1615,8 +1663,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
   graph: {
+    padding: '10px',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    boxSizing: 'border-box'
   },
   dragOver: {
     backgroundColor: '#c0c0c0'
@@ -1664,7 +1714,7 @@ var _onDrop = function onDrop(event) {
 var Graph = function Graph(_ref) {
   var _ref$parsed = _ref.parsed,
       parsed = _ref$parsed === void 0 ? {
-    sessions: []
+    dates: []
   } : _ref$parsed,
       _ref$onReadJson = _ref.onReadJson,
       onReadJson = _ref$onReadJson === void 0 ? function () {} : _ref$onReadJson;
@@ -1699,10 +1749,10 @@ var Graph = function Graph(_ref) {
         setErrorMessage(error.message);
       });
     }
-  }, parsed.sessions.map(function (session, i) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, parsed.dates.map(function (date, i) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_date__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: i.toString(),
-      session: session
+      date: date
     });
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     open: errorMessage !== '',
@@ -1879,28 +1929,45 @@ var Header = function Header(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
-/* harmony import */ var _containers_activity__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../containers/activity */ "./client/containers/activity.tsx");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _containers_activity__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/activity */ "./client/containers/activity.tsx");
 
 
 
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  channelBox: {
+    width: '60px',
+    height: '25px'
+  }
+});
 
 var Session = function Session(_ref) {
   var _ref$session = _ref.session,
       session = _ref$session === void 0 ? {
-    date: '',
     device: '',
     channel: '',
     activities: []
   } : _ref$session;
+  var classes = useStyles();
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Session"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(session.date, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(session.device, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, session.channel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_2__["default"], {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap"
-  }, session.activities.map(function (activity, i) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_activity__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: classes.channelBox,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    variant: "body1"
+  }, "\uFF08".concat(session.channel, "\uFF09"))), session.activities.map(function (activity, i) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_activity__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: i.toString(),
       activity: activity
     });
@@ -1984,14 +2051,23 @@ var SideMenu = function SideMenu(_ref) {
       closeSideMenu = _ref$closeSideMenu === void 0 ? function () {} : _ref$closeSideMenu;
   var classes = useStyles();
 
+  var onOpen = function onOpen() {
+    return true;
+  };
+
+  var onClose = function onClose() {
+    closeSideMenu();
+    return false;
+  };
+
   var onClickSave = function onClickSave() {
     updateRules(selectingCustomerName, editingCustomerName, rules.rules);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: classes.drawer,
-    variant: "persistent",
     anchor: "right",
+    variant: "persistent",
     open: isOpeningSideMenu
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
     container: true,
@@ -3022,113 +3098,6 @@ react_dom__WEBPACK_IMPORTED_MODULE_210___default.a.render(react__WEBPACK_IMPORTE
 
 /***/ }),
 
-/***/ "./client/modules/analyticsDataParser.ts":
-/*!***********************************************!*\
-  !*** ./client/modules/analyticsDataParser.ts ***!
-  \***********************************************/
-/*! exports provided: parseAnalyticsData */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseAnalyticsData", function() { return parseAnalyticsData; });
-// "mm dd, yyyy" => "mm/dd(day)"
-var parseDateString = function parseDateString(dateString) {
-  var splitted = dateString.replace(',', '').split(' ');
-  var year = parseInt(splitted[2], 10);
-  var month = parseInt(splitted[0], 10);
-  var date = parseInt(splitted[1], 10);
-  var day = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)'][new Date(year, month, date).getDay()];
-  return "".concat(month, "/").concat(date).concat(day);
-};
-
-var transferChannel = function transferChannel(channel) {
-  switch (channel) {
-    case 'Organic Search':
-      return '検索';
-
-    case 'Direct':
-      return '直接訪問';
-
-    case 'Referral':
-      return '参照';
-
-    default:
-      return 'その他';
-  }
-};
-
-var transferDevice = function transferDevice(deviceCategory) {
-  switch (deviceCategory) {
-    case 'tablet':
-      return 'TB';
-
-    case 'mobile':
-      return 'SP';
-
-    default:
-      return 'PC';
-  }
-};
-
-var parseSession = function parseSession(dateString, session) {
-  return {
-    date: dateString,
-    device: transferDevice(session.deviceCategory),
-    channel: transferChannel(session.channel),
-    activities: []
-  };
-};
-
-var parseActivity = function parseActivity(activity) {
-  return {
-    time: activity.time,
-    // Note: details が常に length === 1 なのか不明
-    pageTitle: activity.details[0]['ページのタイトル'][0],
-    pageURL: activity.details[0]['ページの URL'][0]
-  };
-};
-
-var parseAnalyticsData = function parseAnalyticsData(data) {
-  console.log(data);
-  var parsed = {
-    sessions: []
-  };
-  var arrowActivity = {
-    time: '',
-    pageTitle: '',
-    pageURL: 'arrow'
-  };
-  data.dates.forEach(function (date) {
-    // parseSessions
-    date.sessions.forEach(function (session) {
-      var dateString = parseDateString(date.date);
-      var len = parsed.sessions.length;
-      var lastDate = len > 0 ? parsed.sessions[0].date : '';
-
-      if (lastDate === dateString) {
-        // 同じ日のセッションなら矢印を入れる
-        parsed.sessions[0].activities.unshift(arrowActivity);
-      } else {
-        // 別の日のセッションなら、パースして格納する
-        // デバイスと流入経路はパース済のデータから流用する
-        var firstSessionAtTheDate = date.sessions[date.sessions.length - 1];
-        parsed.sessions.unshift(parseSession(dateString, firstSessionAtTheDate));
-      } // parseActivities
-
-
-      session.activities.forEach(function (activity) {
-        // "GOAL" は直後のページが完了ページなので表示しなくて良い
-        if (activity.type !== 'PAGEVIEW') return;
-        parsed.sessions[0].activities.unshift(parseActivity(activity));
-      });
-    });
-  });
-  return parsed;
-};
-
-/***/ }),
-
 /***/ "./client/reducer.ts":
 /*!***************************!*\
   !*** ./client/reducer.ts ***!
@@ -3171,12 +3140,18 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_analyticsData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/analyticsData */ "./client/actions/analyticsData.ts");
-/* harmony import */ var _modules_analyticsDataParser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/analyticsDataParser */ "./client/modules/analyticsDataParser.ts");
+/* harmony import */ var _util_analyticsDataParser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/analyticsDataParser */ "./client/util/analyticsDataParser.ts");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var initialState = {
   parsed: {
-    sessions: []
+    dates: []
   }
 };
 
@@ -3186,9 +3161,9 @@ var analyticsDataReducer = function analyticsDataReducer() {
 
   switch (action.type) {
     case _actions_analyticsData__WEBPACK_IMPORTED_MODULE_0__["ON_READ"]:
-      return {
-        parsed: Object(_modules_analyticsDataParser__WEBPACK_IMPORTED_MODULE_1__["parseAnalyticsData"])(action.payload.data)
-      };
+      return _objectSpread({}, state, {
+        parsed: Object(_util_analyticsDataParser__WEBPACK_IMPORTED_MODULE_1__["parse"])(action.payload.data)
+      });
 
     default:
       return state;
@@ -3346,12 +3321,14 @@ var initialState = {
 var newStateOnDeleted = function newStateOnDeleted(oldState, deletedCustomerName) {
   if (oldState.customerNames.length === 1) return _objectSpread({}, oldState, {
     selectingCustomerName: '',
+    editingCustomerName: '',
     customerNames: []
   });
   var deletedIndex = oldState.customerNames.indexOf(deletedCustomerName);
-  var nextSelectingCustomerName = oldState.customerNames[deletedIndex === 0 ? 1 : deletedIndex - 1];
+  var nextCustomerName = oldState.customerNames[deletedIndex === 0 ? 1 : deletedIndex - 1];
   return _objectSpread({}, oldState, {
-    selectingCustomerName: nextSelectingCustomerName,
+    selectingCustomerName: nextCustomerName,
+    editingCustomerName: nextCustomerName,
     customerNames: oldState.customerNames.filter(function (name) {
       return name !== deletedCustomerName;
     })
@@ -3544,6 +3521,86 @@ var uiReducer = function uiReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (uiReducer);
+
+/***/ }),
+
+/***/ "./client/util/analyticsDataParser.ts":
+/*!********************************************!*\
+  !*** ./client/util/analyticsDataParser.ts ***!
+  \********************************************/
+/*! exports provided: parse */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return parse; });
+// "mm dd, yyyy" => "mm/dd(day)"
+var translateDate = function translateDate(dateString) {
+  var splitted = dateString.replace(',', '').split(' ');
+  var year = parseInt(splitted[2], 10);
+  var month = parseInt(splitted[0], 10);
+  var date = parseInt(splitted[1], 10);
+  var day = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)'][new Date(year, month, date).getDay()];
+  return "".concat(month, "/").concat(date).concat(day);
+};
+
+var translateChannel = function translateChannel(channel) {
+  switch (channel) {
+    case 'Organic Search':
+      return '検索';
+
+    case 'Direct':
+      return '直接';
+
+    case 'Referral':
+      return '参照';
+
+    default:
+      return 'その他';
+  }
+};
+
+var translateDevice = function translateDevice(deviceCategory) {
+  switch (deviceCategory) {
+    case 'tablet':
+      return 'TB';
+
+    case 'mobile':
+      return 'SP';
+
+    default:
+      return 'PC';
+  }
+};
+
+var parse = function parse(original) {
+  return {
+    dates: original.dates.reverse().map(function (date) {
+      return {
+        date: translateDate(date.date),
+        // predictedDevice
+        // 同日内の最初のセッションのデバイスをdateのデバイスと判断する
+        // クロスデバイスでセッション取るのあんまりやってないからそれでいいとのこと
+        predictedDevice: date.sessions.length === 0 ? '' : translateDevice(date.sessions[0].deviceCategory),
+        sessions: date.sessions.map(function (session) {
+          return {
+            device: translateDevice(session.deviceCategory),
+            channel: translateChannel(session.channel),
+            activities: session.activities.filter(function (activity) {
+              return activity.type !== 'GOAL';
+            }).map(function (activity) {
+              return {
+                time: activity.time,
+                pageTitle: activity.details[0]['ページのタイトル'][0],
+                pageURL: activity.details[0]['ページの URL'][0]
+              };
+            })
+          };
+        })
+      };
+    })
+  };
+};
 
 /***/ }),
 
@@ -83319,4 +83376,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?9670f3d2b2c979ac9982
+//# sourceMappingURL=bundle.js.map?4b8dcd18d8a8694f1b0f

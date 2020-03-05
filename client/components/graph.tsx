@@ -2,9 +2,9 @@ import React, { FC, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
-import ParsedData from '../constants/parsedData';
 import AnalyticsData from '../constants/analyticsData';
-import Session from './session';
+import ParsedData from '../constants/parsedData';
+import Date from './date';
 
 export interface GraphProps {
   parsed?: ParsedData;
@@ -13,8 +13,10 @@ export interface GraphProps {
 
 const useStyles = makeStyles({
   graph: {
+    padding: '10px',
     width: '100%',
     height: '100%',
+    boxSizing: 'border-box',
   },
   dragOver: {
     backgroundColor: '#c0c0c0',
@@ -67,7 +69,7 @@ const onDrop = (
 };
 
 const Graph: FC<GraphProps> = ({
-  parsed = { sessions: [] },
+  parsed = { dates: [] },
   onReadJson = () => {},
 }) => {
   const [isDragOver, setIsDragOver] = useState(false);
@@ -94,8 +96,8 @@ const Graph: FC<GraphProps> = ({
           });
       }}
     >
-      {parsed.sessions.map((session, i) => (
-        <Session key={i.toString()} session={session} />
+      {parsed.dates.map((date, i) => (
+        <Date key={i.toString()} date={date} />
       ))}
       <Snackbar
         open={errorMessage !== ''}

@@ -33,16 +33,18 @@ const newStateOnDeleted = (
     return {
       ...oldState,
       selectingCustomerName: '',
+      editingCustomerName: '',
       customerNames: [],
     };
 
   const deletedIndex = oldState.customerNames.indexOf(deletedCustomerName);
-  const nextSelectingCustomerName =
+  const nextCustomerName =
     oldState.customerNames[deletedIndex === 0 ? 1 : deletedIndex - 1];
 
   return {
     ...oldState,
-    selectingCustomerName: nextSelectingCustomerName,
+    selectingCustomerName: nextCustomerName,
+    editingCustomerName: nextCustomerName,
     customerNames: oldState.customerNames.filter(
       name => name !== deletedCustomerName
     ),

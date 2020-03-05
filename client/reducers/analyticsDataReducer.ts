@@ -1,14 +1,14 @@
 import { Reducer } from 'redux';
 import { AnalyticsDataAction, ON_READ } from '../actions/analyticsData';
+import { parse } from '../util/analyticsDataParser';
 import ParsedData from '../constants/parsedData';
-import { parseAnalyticsData } from '../modules/analyticsDataParser';
 
 export interface AnalyticsDataState {
   parsed: ParsedData;
 }
 
 const initialState: AnalyticsDataState = {
-  parsed: { sessions: [] },
+  parsed: { dates: [] },
 };
 
 const analyticsDataReducer: Reducer<AnalyticsDataState, AnalyticsDataAction> = (
@@ -18,7 +18,8 @@ const analyticsDataReducer: Reducer<AnalyticsDataState, AnalyticsDataAction> = (
   switch (action.type) {
     case ON_READ:
       return {
-        parsed: parseAnalyticsData(action.payload.data),
+        ...state,
+        parsed: parse(action.payload.data),
       };
     default:
       return state;
