@@ -20,7 +20,6 @@ const DisplayRuleForms: FC<DisplayRuleFormsProps> = ({
   return (
     <div className="DisplayRuleForms">
       {Util.range(rulesCount).map(i => (
-        // TODO: range(i + 1) new line
         <DisplayRuleForm key={i.toString()} index={i} />
       ))}
     </div>
