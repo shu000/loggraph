@@ -47,10 +47,11 @@ export const parse = (original: AnalyticsData): ParsedData => ({
       date.sessions.length === 0
         ? ''
         : translateDevice(date.sessions[0].deviceCategory),
-    sessions: date.sessions.map(session => ({
+    sessions: date.sessions.reverse().map(session => ({
       device: translateDevice(session.deviceCategory),
       channel: translateChannel(session.channel),
       activities: session.activities
+        .reverse()
         .filter(activity => activity.type !== 'GOAL')
         .map(activity => ({
           time: activity.time,

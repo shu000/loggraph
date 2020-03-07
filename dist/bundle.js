@@ -3735,11 +3735,11 @@ var parse = function parse(original) {
         // 同日内の最初のセッションのデバイスをdateのデバイスと判断する
         // クロスデバイスでセッション取るのあんまりやってないからそれでいいとのこと
         predictedDevice: date.sessions.length === 0 ? '' : translateDevice(date.sessions[0].deviceCategory),
-        sessions: date.sessions.map(function (session) {
+        sessions: date.sessions.reverse().map(function (session) {
           return {
             device: translateDevice(session.deviceCategory),
             channel: translateChannel(session.channel),
-            activities: session.activities.filter(function (activity) {
+            activities: session.activities.reverse().filter(function (activity) {
               return activity.type !== 'GOAL';
             }).map(function (activity) {
               return {
@@ -83529,4 +83529,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?9b04e1ab2e7616ee5c17
+//# sourceMappingURL=bundle.js.map?b0cb7f9ed2baf532bac6
