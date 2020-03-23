@@ -24,7 +24,22 @@ const useStyles = makeStyles({
   }),
 });
 
-const matchedRule = (pageURL: string, rules: DisplayRule[]): DisplayRule => {
+const useNoRuleStyle = makeStyles({
+  noRule: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: '10px',
+    marginBottom: '10px',
+    width: 'auto',
+    height: '25px',
+  },
+});
+
+const matchedRule = (
+  pageURL: string,
+  rules: DisplayRule[]
+): DisplayRule | null => {
   if (pageURL === 'arrow')
     return {
       pattern: 'arrow',
@@ -49,13 +64,7 @@ const matchedRule = (pageURL: string, rules: DisplayRule[]): DisplayRule => {
   if (matches.length > 0) return matches[matches.length - 1];
 
   // 一致するパターンがない場合
-  return {
-    pattern: '',
-    matching: 'match',
-    title: 'マッチルールなし',
-    text: '無',
-    backgroundColor: '#cccccc',
-  };
+  return null;
 };
 
 const Activity: FC<ActivityProps> = ({
@@ -67,8 +76,17 @@ const Activity: FC<ActivityProps> = ({
   rules = [],
 }) => {
   const matched = matchedRule(activity.pageURL, rules);
-  const classes = useStyles(matched);
 
+  if (matched === null) {
+    const classes = useNoRuleStyle();
+    return (
+      <div className={classes.noRule}>
+        <span>{activity.pageURL}</span>
+      </div>
+    );
+  }
+
+  const classes = useStyles(matched);
   return (
     <div className={classes.activity}>
       <span>{matched.text}</span>

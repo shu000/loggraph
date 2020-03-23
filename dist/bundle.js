@@ -1070,6 +1070,17 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
     };
   }
 });
+var useNoRuleStyle = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
+  noRule: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: '10px',
+    marginBottom: '10px',
+    width: 'auto',
+    height: '25px'
+  }
+});
 
 var matchedRule = function matchedRule(pageURL, rules) {
   if (pageURL === 'arrow') return {
@@ -1094,13 +1105,7 @@ var matchedRule = function matchedRule(pageURL, rules) {
 
   if (matches.length > 0) return matches[matches.length - 1]; // 一致するパターンがない場合
 
-  return {
-    pattern: '',
-    matching: 'match',
-    title: 'マッチルールなし',
-    text: '無',
-    backgroundColor: '#cccccc'
-  };
+  return null;
 };
 
 var Activity = function Activity(_ref) {
@@ -1113,6 +1118,15 @@ var Activity = function Activity(_ref) {
       _ref$rules = _ref.rules,
       rules = _ref$rules === void 0 ? [] : _ref$rules;
   var matched = matchedRule(activity.pageURL, rules);
+
+  if (matched === null) {
+    var _classes = useNoRuleStyle();
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: _classes.noRule
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, activity.pageURL));
+  }
+
   var classes = useStyles(matched);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.activity
@@ -83626,4 +83640,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?a7bca73eb0621ecd0d99
+//# sourceMappingURL=bundle.js.map?9efdfb8986c8952943ff
