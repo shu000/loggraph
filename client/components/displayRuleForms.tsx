@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import DisplayRuleForm from '../containers/displayRuleForm';
+import DisplayRuleFormHeader from './displayRuleFormHeader';
 import Util from '../util/util';
 
 export interface DisplayRuleFormsProps {
@@ -19,6 +20,7 @@ const DisplayRuleForms: FC<DisplayRuleFormsProps> = ({
 
   return (
     <div className="DisplayRuleForms">
+      <DisplayRuleFormHeader />
       {Util.range(rulesCount).map(i => (
         <DisplayRuleForm key={i.toString()} index={i} />
       ))}
