@@ -1354,7 +1354,8 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
   },
   backgroundColorField: function backgroundColorField(props) {
     return {
-      backgroundColor: props.backgroundColor,
+      width: '100%',
+      border: 0,
       '& input': {
         color: _util_util__WEBPACK_IMPORTED_MODULE_5__["default"].seeableColor(props.backgroundColor)
       }
@@ -1465,11 +1466,10 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
     item: true,
     xs: 2
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: classes.backgroundColorField,
     name: "backgroundColor",
-    type: "text",
-    fullWidth: true,
+    type: "color",
     value: rule.backgroundColor,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
@@ -83640,4 +83640,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?9efdfb8986c8952943ff
+//# sourceMappingURL=bundle.js.map?4079b7fa44ef75f4e892

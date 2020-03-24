@@ -17,7 +17,8 @@ const useStyles = makeStyles({
     padding: '0 5px',
   },
   backgroundColorField: (props: DisplayRule) => ({
-    backgroundColor: props.backgroundColor,
+    width: '100%',
+    border: 0,
     '& input': {
       color: Util.seeableColor(props.backgroundColor),
     },
@@ -112,11 +113,10 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
         />
       </Grid>
       <Grid item xs={2}>
-        <TextField
+        <input
           className={classes.backgroundColorField}
           name="backgroundColor"
-          type="text"
-          fullWidth
+          type="color"
           value={rule.backgroundColor}
           onChange={event => {
             onChange(index, { ...rule, backgroundColor: event.target.value });
