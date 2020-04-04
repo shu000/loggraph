@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     padding: '0 5px',
   },
   backgroundColorInput: {
-    widht: '90%',
+    width: '90%',
     border: 'none',
   },
 });
