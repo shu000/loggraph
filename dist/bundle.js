@@ -1351,7 +1351,7 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
     padding: '0 5px'
   },
   backgroundColorInput: {
-    widht: '90%',
+    width: '90%',
     border: 'none'
   }
 });
@@ -1780,7 +1780,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
   graph: {
-    padding: '10px',
+    padding: '30px 10px 10px 10px',
     width: '100%',
     height: '100%',
     boxSizing: 'border-box'
@@ -83636,4 +83636,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?8caa3f5d4fa2c565c891
+//# sourceMappingURL=bundle.js.map?4c77630aa45b0340069a
