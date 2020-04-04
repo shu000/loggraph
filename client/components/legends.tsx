@@ -9,7 +9,7 @@ export interface LegendsProps {
 
 const useStyles = makeStyles({
   legends: {
-    padding: '10px',
+    padding: '30px 10px 10px 10px',
   },
 });
 

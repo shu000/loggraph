@@ -2107,7 +2107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
   legends: {
-    padding: '10px'
+    padding: '30px 10px 10px 10px'
   }
 });
 
@@ -83636,4 +83636,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?4c77630aa45b0340069a
+//# sourceMappingURL=bundle.js.map?8758287a09dcbbd0a872
