@@ -1335,7 +1335,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
 /* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
 /* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
-/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/util */ "./client/util/util.ts");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1347,18 +1346,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])({
   radio: {
     padding: '0 5px'
   },
-  backgroundColorField: function backgroundColorField(props) {
-    return {
-      backgroundColor: props.backgroundColor,
-      '& input': {
-        color: _util_util__WEBPACK_IMPORTED_MODULE_5__["default"].seeableColor(props.backgroundColor)
-      }
-    };
+  backgroundColorInput: {
+    widht: '90%',
+    border: 'none'
   }
 });
 
@@ -1464,12 +1458,14 @@ var DisplayRuleForm = function DisplayRuleForm(_ref) {
     }
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
     item: true,
-    xs: 2
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: classes.backgroundColorField,
+    xs: 2,
+    container: true,
+    justify: "center",
+    alignItems: "center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: classes.backgroundColorInput,
     name: "backgroundColor",
-    type: "text",
-    fullWidth: true,
+    type: "color",
     value: rule.backgroundColor,
     onChange: function onChange(event) {
       _onChange(index, _objectSpread({}, rule, {
@@ -3851,7 +3847,7 @@ var parse = function parse(original) {
             device: translateDevice(session.deviceCategory),
             channel: translateChannel(session.channel),
             activities: session.activities.reverse().filter(function (activity) {
-              return activity.type !== 'GOAL';
+              return activity.type !== 'GOAL' && activity.type !== 'EVENT';
             }).map(function (activity) {
               return {
                 time: activity.time,
@@ -83640,4 +83636,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?9efdfb8986c8952943ff
+//# sourceMappingURL=bundle.js.map?8caa3f5d4fa2c565c891

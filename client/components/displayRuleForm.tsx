@@ -16,12 +16,10 @@ const useStyles = makeStyles({
   radio: {
     padding: '0 5px',
   },
-  backgroundColorField: (props: DisplayRule) => ({
-    backgroundColor: props.backgroundColor,
-    '& input': {
-      color: Util.seeableColor(props.backgroundColor),
-    },
-  }),
+  backgroundColorInput: {
+    widht: '90%',
+    border: 'none',
+  },
 });
 
 const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
@@ -111,12 +109,11 @@ const DisplayRuleForm: FC<DisplayRuleFormProps> = ({
           }}
         />
       </Grid>
-      <Grid item xs={2}>
-        <TextField
-          className={classes.backgroundColorField}
+      <Grid item xs={2} container justify="center" alignItems="center">
+        <input
+          className={classes.backgroundColorInput}
           name="backgroundColor"
-          type="text"
-          fullWidth
+          type="color"
           value={rule.backgroundColor}
           onChange={event => {
             onChange(index, { ...rule, backgroundColor: event.target.value });
