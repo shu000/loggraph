@@ -52,7 +52,9 @@ export const parse = (original: AnalyticsData): ParsedData => ({
       channel: translateChannel(session.channel),
       activities: session.activities
         .reverse()
-        .filter(activity => activity.type !== 'GOAL')
+        .filter(
+          activity => activity.type !== 'GOAL' && activity.type !== 'EVENT'
+        )
         .map(activity => ({
           time: activity.time,
           pageTitle: activity.details[0]['ページのタイトル'][0],
